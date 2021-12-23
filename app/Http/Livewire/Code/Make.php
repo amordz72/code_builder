@@ -4,15 +4,13 @@ namespace App\Http\Livewire\Code;
 
 use Illuminate\Http\Request;
 use Livewire\Component;
-use Illuminate\Support\Facades\Artisan;
-use App\Http\Requests;
-use Log;
-use Storage;
-use file;
+
 class Make extends Component
 {
 
+    public $step = 0;
     public $name;
+    public $body = '';
     protected $rules = [
 
         'name' => 'required|min:6',
@@ -27,11 +25,24 @@ class Make extends Component
             ->extends('layouts.app');
 
     }
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function submit()
     {
-        $this->validate();
 
-  
+    }
+    public function make_livewire_component()
+    {
+        $this->validate();
+        if ($this->step == 1) {
+
+            $this->body = "php artisan make:livewire " . $this->name;
+
+        }
+
     }
 
 }
