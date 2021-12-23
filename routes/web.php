@@ -23,3 +23,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::get('/post', App\Http\Livewire\Post\Index::class);
+Route::get('/make', App\Http\Livewire\Code\Make::class);
+
