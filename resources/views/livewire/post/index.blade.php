@@ -1,5 +1,12 @@
 <div class="container">
-    {{-- <h1 class="text-center">{{$title}}</h1> --}}
+    @section('title')
+    Posts
+    @endsection
+
+
+
+    <h1 class="text-center">{{$title}}</h1>
+   
     <div class="col-sm-12">
         <form wire:submit.prevent="save">
             <input type="text" wire:model="post.title">

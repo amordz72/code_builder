@@ -13,8 +13,8 @@ class Index extends Component
     {
 
         $this->message = 'Hello ' . $this->name;
-        return view('livewire.post.index')
-            ->extends('layouts.app', ['title' => 'Posts']);
+        return view('livewire.post.index', ['title' => 'Posts'])
+            ->extends('layouts.app');
     }
     protected $rules = [
 
