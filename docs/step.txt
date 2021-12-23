@@ -1,3 +1,4 @@
 livewire & ui
+livewire-ui-alpinejs
 
 
