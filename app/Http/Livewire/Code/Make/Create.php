@@ -1,19 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Code;
+namespace App\Http\Livewire\Code\Make;
 
-use Illuminate\Http\Request;
 use Livewire\Component;
 
-class Make extends Component
+class Create extends Component
 {
- public function render(Request $request)
-    {
 
-        return view('livewire.code.make', ['title' => 'Make'])
-            ->extends('layouts.app');
-
-    }
     public $use_a = false;
     public $use_i = false;
     public $use_c = false;
@@ -31,7 +24,12 @@ class Make extends Component
     protected $messages = [
         'name.required' => 'ادخل_الاسم_اولا',
     ];
-
+    public function render()
+    {
+        //Create Render method
+        return view('livewire.code.make.create', ['title' => 'Create Make'])
+            ->extends('layouts.app');
+    }
     public function set_cookie($cookie_name, $cookie_value)
     {
 
@@ -174,20 +172,19 @@ class Make extends Component
         } else if ($this->step == 3) {
 /*
 if ($this->use_i) {
-    $this->body ='';
+$this->body ='';
 } elseif ($this->use_c) {
-    $this->body ='';
+$this->body ='';
 }
 } elseif ($this->use_e) {
 
-    $this->body ='';
+$this->body ='';
 } elseif ($this->use_s) {
-    $this->body ='';
+$this->body ='';
 
 } elseif ($this->use_a) {
-    $this->body ='';
+$this->body ='';
 }*/
-
 
             $this->body =
             '
@@ -219,9 +216,9 @@ if ($this->use_i) {
 
             ';
 
-        }else if ($this->step == 4) {
+        } else if ($this->step == 4) {
 
-            $this->body ='
+            $this->body = '
 
             {{--   Index Link--}}
             <li class="nav-item">
@@ -268,8 +265,5 @@ if ($this->use_i) {
 
         }
 
-
     }
 }
-
-

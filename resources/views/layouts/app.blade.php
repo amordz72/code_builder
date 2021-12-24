@@ -45,24 +45,45 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
                         </li>
-                        <!--start dropdown links Bank -->
+                        {{-- All links--}}
+
+                        <!--start dropdown links Make -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Bank
+                                Make
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ route('code.bank.index') }}">code.bank.index</a></li>
-                                <li><a class="dropdown-item" href="{{ route('code.bank.create') }}">code.bank.create</a></li>
-                                {{-- <li><a class="dropdown-item" href="{{ route('code.bank.edit') }}">code.bank.edit</a></li>
-                                <li><a class="dropdown-item" href="{{ route('code.bank.show') }}">code.bank.show</a></li> --}}
+                                <li><a class="dropdown-item" href="{{ route('code.make.index') }}">Make All</a></li>
+                                <li><a class="dropdown-item" href="{{ route('code.make.create') }}">Make Create</a></li>
+                                <li><a class="dropdown-item" href="{{ route('code.make.edit') }}">Make Edit</a></li>
+                                <li><a class="dropdown-item" href="{{ route('code.make.show') }}">Make Show</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
-                        <!--end dropdown links Bank -->
+                        <!--end dropdown links Make -->
 
+
+
+                        <!--start dropdown links Post -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Post
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('stor.post.index') }}">Post All</a></li>
+                                <li><a class="dropdown-item" href="{{ route('stor.post.create') }}">Post Create</a></li>
+                                <li><a class="dropdown-item" href="{{ route('stor.post.edit') }}">Post Edit</a></li>
+                                <li><a class="dropdown-item" href="{{ route('stor.post.show') }}">Post Show</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <!--end dropdown links Post -->
 
                     </ul>
                     </li>
