@@ -168,7 +168,7 @@ class Make extends Component
             . ucfirst(str_replace('/', '\\', $dir)) . ucfirst($this->name) . "\Create::class)->name('" . $route_name . "create');\n";
             $this->body .= "Route::get('/" . $dir . $this->name . "/edit/{id?}', App\Http\Livewire\\" .
             ucfirst(str_replace('/', '\\', $dir)) . ucfirst($this->name) . "\Edit::class)->name('" . $route_name . "edit');\n";
-            $this->body .= "Route::get('/" . $dir . $this->name . "show/{id?}', App\Http\Livewire\\" .
+            $this->body .= "Route::get('/" . $dir . $this->name . "/show/{id?}', App\Http\Livewire\\" .
             ucfirst(str_replace('/', '\\', $dir)) . ucfirst($this->name) . "\Show::class)->name('" . $route_name . "show');\n";
 
         } else if ($this->step == 3) {
