@@ -8,6 +8,37 @@
 
         <!-- col-4 -->
         <div class="col-md-4">
+
+            @if ($step==3||$step==2)
+
+        </div>
+
+        @else
+        @endif
+        <div class="mb-2">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox"
+                wire:model='use_i' wire:change='set_cookie("use_i","{{($use_i)=='1' ? '0':'1'  }}")'>
+                <label class="form-check-label" for="inlineCheckbox1">Index</label>
+
+                {{-- <hr>
+                {{ $use_i}}
+                <hr> --}}
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" wire:model='use_c' wire:change='set_cookie("use_c","{{($use_c)=='1' ? '0':'1'  }}")'>
+                <label class="form-check-label" for="inlineCheckbox2">Create</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" wire:model='use_e' wire:change='set_cookie("use_e","{{($use_e)=='1' ? '0':'1'  }}")'>
+                <label class="form-check-label" for="inlineCheckbox2">Edit</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" wire:model='use_s' wire:change='set_cookie("use_s","{{($use_s)=='1' ? '0':'1'  }}")'>
+                <label class="form-check-label" for="inlineCheckbox2">Show</label>
+            </div>
+
+
             <!-- code :select -->
             <div class="row mb-3">
 
