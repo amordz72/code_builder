@@ -34,7 +34,6 @@ class Make extends Component
     public function set_cookie($cookie_name, $cookie_value)
     {
 
-
         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 
     }
@@ -46,7 +45,7 @@ class Make extends Component
             if ($_COOKIE['use_i'] == '1') {
                 $this->use_i = 1;
 
-            }else {
+            } else {
                 $this->use_i = 0;
             }
 
@@ -60,7 +59,7 @@ class Make extends Component
             if ($_COOKIE['use_c'] == '1') {
                 $this->use_c = 1;
 
-            }else {
+            } else {
                 $this->use_c = 0;
             }
 
@@ -73,7 +72,7 @@ class Make extends Component
             if ($_COOKIE['use_e'] == '1') {
                 $this->use_e = 1;
 
-            }else {
+            } else {
                 $this->use_e = 0;
             }
 
@@ -81,17 +80,25 @@ class Make extends Component
             $this->set_cookie("use_e", "0");
 
         }
-          if (isset($_COOKIE['use_s'])) {
+        if (isset($_COOKIE['use_s'])) {
 
             if ($_COOKIE['use_s'] == '1') {
                 $this->use_s = 1;
 
-            }else {
+            } else {
                 $this->use_s = 0;
             }
 
         } else {
             $this->set_cookie("use_s", "0");
+
+        }
+
+        if (isset($_COOKIE['name'])) {
+            $this->name = $_COOKIE['name'];
+
+        } else {
+            //  $this->set_cookie("use_s", "0");
 
         }
     }

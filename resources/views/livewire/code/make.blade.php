@@ -57,7 +57,9 @@
             <!-- name -->
             <div class="row mb-3">
                 <div class="col-sm-6">
-                    <input type="text" wire:model="name" class="form-control fw-bold" placeholder="Name">
+                    <input type="text" wire:model="name"
+                     class="form-control fw-bold" placeholder="Name"
+                     wire:change='set_cookie("name","{{ $name}}")'>
                     @error('name') <span class="error text-danger fw-bold">{{ $message }}</span> @enderror
                 </div>
                 <!-- dir -->
