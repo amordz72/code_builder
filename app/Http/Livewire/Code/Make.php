@@ -8,6 +8,7 @@ use Livewire\Component;
 class Make extends Component
 {
 
+    public $use_a = false;
     public $use_i = false;
     public $use_c = false;
     public $use_e = false;
@@ -36,6 +37,22 @@ class Make extends Component
 
         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 
+    }
+    public function set_ch($ch_name)
+    {
+        if (isset($_COOKIE[$ch_name])) {
+
+            if ($_COOKIE[$ch_name] == '1') {
+                $this->ch_name = 1;
+
+            } else {
+                $this->ch_name = 0;
+            }
+
+        } else {
+            $this->set_cookie($ch_name, "0");
+
+        }
     }
     public function mount()
     {
@@ -93,12 +110,26 @@ class Make extends Component
             $this->set_cookie("use_s", "0");
 
         }
+        if (isset($_COOKIE['use_a'])) {
+
+            if ($_COOKIE['use_a'] == '1') {
+                $this->use_a = 1;
+
+            } else {
+                $this->use_a = 0;
+            }
+
+        } else {
+            $this->set_cookie("use_a", "0");
+
+        }
 
         if (isset($_COOKIE['name'])) {
             $this->name = $_COOKIE['name'];
 
-        } else {
-            //  $this->set_cookie("use_s", "0");
+        }
+        if (isset($_COOKIE['dir'])) {
+            $this->dir = $_COOKIE['dir'];
 
         }
     }
@@ -141,6 +172,22 @@ class Make extends Component
             ucfirst(str_replace('/', '\\', $dir)) . ucfirst($this->name) . "\Show::class)->name('" . $route_name . "show');\n";
 
         } else if ($this->step == 3) {
+/*
+if ($this->use_i) {
+    $this->body ='';
+} elseif ($this->use_c) {
+    $this->body ='';
+}
+} elseif ($this->use_e) {
+
+    $this->body ='';
+} elseif ($this->use_s) {
+    $this->body ='';
+
+} elseif ($this->use_a) {
+    $this->body ='';
+}*/
+
 
             $this->body =
             '
@@ -149,61 +196,80 @@ class Make extends Component
             return view(\'livewire.' . $route_name . 'index' . '\', [\'title\' => \'All ' . ucfirst($this->name) . '\'])
            ->extends(\'layouts.app\');
 
-           // Link
-            <li class="nav-item">
-             <a class="nav-link" href="{{ route(\'' . $route_name . 'index' . '\') }}">{{ __(\'All ' . ucfirst($this->name) . '\') }}</a>
-            </li>
+
 
           //Create Render method
             return view(\'livewire.' . $route_name . 'create' . '\', [\'title\' => \'Create ' . ucfirst($this->name) . '\'])
            ->extends(\'layouts.app\');
 
-           // Link
-            <li class="nav-item">
-             <a class="nav-link" href="{{ route(\'' . $route_name . 'create' . '\') }}">{{ __(\'Create ' . ucfirst($this->name) . '\') }}</a>
-            </li>
+
 
           //Edit Render method
             return view(\'livewire.' . $route_name . 'edit' . '\', [\'title\' => \'Edit ' . ucfirst($this->name) . '\'])
            ->extends(\'layouts.app\');
 
-           // Link
-            <li class="nav-item">
-             <a class="nav-link" href="{{ route(\'' . $route_name . 'edit' . '\') }}">{{ __(\'Edit ' . ucfirst($this->name) . '\') }}</a>
-            </li>
+
 
           //Show Render method
             return view(\'livewire.' . $route_name . 'show' . '\', [\'title\' => \'Show ' . ucfirst($this->name) . '\'])
            ->extends(\'layouts.app\');
 
-           // Link
+
+
+
+            ';
+
+        }else if ($this->step == 4) {
+
+            $this->body ='
+
+            {{--   Index Link--}}
+            <li class="nav-item">
+             <a class="nav-link" href="{{ route(\'' . $route_name . 'index' . '\') }}">{{ __(\'All ' . ucfirst($this->name) . '\') }}</a>
+            </li>
+
+            {{--  Create Link--}}
+            <li class="nav-item">
+             <a class="nav-link" href="{{ route(\'' . $route_name . 'create' . '\') }}">{{ __(\'Create ' . ucfirst($this->name) . '\') }}</a>
+            </li>
+
+            {{--  Edit Link--}}
+            <li class="nav-item">
+             <a class="nav-link" href="{{ route(\'' . $route_name . 'edit' . '\') }}">{{ __(\'Edit ' . ucfirst($this->name) . '\') }}</a>
+            </li>
+
+
+            {{--Show Link  --}}
             <li class="nav-item">
              <a class="nav-link" href="{{ route(\'' . $route_name . 'show' . '\') }}">{{ __(\'Show ' . ucfirst($this->name) . '\') }}</a>
             </li>
 
-//All links
 
-<!--start dropdown links ' . ucfirst($this->name) . ' -->
-<li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    ' . ucfirst($this->name) . '
-</a>
-<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <li><a class="dropdown-item" href="{{ route(\'' . $route_name . 'index\') }}">' . ucfirst($this->name) . ' All' . '</a></li>
-    <li><a class="dropdown-item" href="{{ route(\'' . $route_name . 'create\') }}">' . ucfirst($this->name) . ' Create' . '</a></li>
-    <li><a class="dropdown-item" href="{{ route(\'' . $route_name . 'edit\') }}">' . ucfirst($this->name) . ' Edit' . '</a></li>
-    <li><a class="dropdown-item" href="{{ route(\'' . $route_name . 'show\') }}">' . ucfirst($this->name) . ' Show' . '</a></li>
-    <li>
-        <hr class="dropdown-divider">
-    </li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-</ul>
-</li>
-<!--end dropdown links ' . ucfirst($this->name) . ' -->
+            {{--  All links--}}
+
+            <!--start dropdown links ' . ucfirst($this->name) . ' -->
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                ' . ucfirst($this->name) . '
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{{ route(\'' . $route_name . 'index\') }}">' . ucfirst($this->name) . ' All' . '</a></li>
+                <li><a class="dropdown-item" href="{{ route(\'' . $route_name . 'create\') }}">' . ucfirst($this->name) . ' Create' . '</a></li>
+                <li><a class="dropdown-item" href="{{ route(\'' . $route_name . 'edit\') }}">' . ucfirst($this->name) . ' Edit' . '</a></li>
+                <li><a class="dropdown-item" href="{{ route(\'' . $route_name . 'show\') }}">' . ucfirst($this->name) . ' Show' . '</a></li>
+                <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+                </li>
+                <!--end dropdown links ' . ucfirst($this->name) . ' -->
             ';
 
         }
 
-    }
 
+    }
 }
+
+
