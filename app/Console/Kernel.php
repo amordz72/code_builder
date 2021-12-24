@@ -15,7 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Backups (to Google Drive)
+        $schedule->command('backup:clean')->dailyAt('01:30');
+        $schedule->command('backup:run --only-db')->dailyAt('01:35');
     }
 
     /**
@@ -25,7 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
