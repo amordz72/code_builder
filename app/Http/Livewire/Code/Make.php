@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Make extends Component
 {
- public function render(Request $request)
+    public function render(Request $request)
     {
 
         return view('livewire.code.make', ['title' => 'Make'])
@@ -174,20 +174,19 @@ class Make extends Component
         } else if ($this->step == 3) {
 /*
 if ($this->use_i) {
-    $this->body ='';
+$this->body ='';
 } elseif ($this->use_c) {
-    $this->body ='';
+$this->body ='';
 }
 } elseif ($this->use_e) {
 
-    $this->body ='';
+$this->body ='';
 } elseif ($this->use_s) {
-    $this->body ='';
+$this->body ='';
 
 } elseif ($this->use_a) {
-    $this->body ='';
+$this->body ='';
 }*/
-
 
             $this->body =
             '
@@ -219,9 +218,9 @@ if ($this->use_i) {
 
             ';
 
-        }else if ($this->step == 4) {
+        } else if ($this->step == 4) {
 
-            $this->body ='
+            $this->body = '
 
             {{--   Index Link--}}
             <li class="nav-item">
@@ -268,8 +267,5 @@ if ($this->use_i) {
 
         }
 
-
     }
 }
-
-
