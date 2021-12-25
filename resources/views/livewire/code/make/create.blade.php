@@ -43,7 +43,7 @@
                     <label class="form-label col-sm-3 fw-bold">Code</label>
 
                     <div class="col-sm-9 fw-bold">
-                        <select class="form-select" wire:model='step' wire:change='make'>
+                        <select class="form-select" wire:model='step' wire:change='make_livewire_component'>
                             <option selected class="fw-bold">Select Menu</option>
                             <option value="1">Create Component</option>
                             <option value="2">Route</option>
