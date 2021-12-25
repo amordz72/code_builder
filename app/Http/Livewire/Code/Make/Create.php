@@ -289,10 +289,9 @@ class Create extends Component
 
         //   $this->body = "  if (\$str == '') {\n \$str  =\$this->body ;\n\n        }";
     }
-public function clear()
-   {
- 
-    $this->body = "";
-   } 
+    public function clear()
+    {
+        $this->body = "";
+    }
 
 }
