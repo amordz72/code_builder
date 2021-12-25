@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Code\Make;
 
 use Livewire\Component;
+use Storage;
 
 class Create extends Component
 {
@@ -14,6 +15,8 @@ class Create extends Component
     public $use_s = false;
 
     public $step = 0;
+    
+    public $step_text = '';
     public $name = '';
     public $dir = '';
     public $body = '';
@@ -293,5 +296,21 @@ class Create extends Component
     {
         $this->body = "";
     }
+    public function save_file()
+    {
+    //     if ($this->step==1) {
+    //        $this->step_text='artisan make';
+    //     }
+    //    else if ($this->step==2) {
+    //        $this->step_text='Route';
+    //     }
+    //    else if ($this->step==3) {
+    //        $this->step_text='Route';
+    //     }
+
+        Storage::put($this->name ."//". $this->step. '.txt', $this->body);
+
+    }
+
 
 }

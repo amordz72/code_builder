@@ -2,3 +2,6 @@ livewire & ui
 
 php artisan migrate:fresh --seed
 
+use Storage;
+
+Storage::put('file.txt', 'Your name');

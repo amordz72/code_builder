@@ -41,9 +41,10 @@
                 <div class="row mb-3">
 
                     <label class="form-label col-sm-3 fw-bold">Code</label>
-
+           
                     <div class="col-sm-9 fw-bold">
-                        <select class="form-select" wire:model='step' wire:change='make_livewire_component'>
+                        <select class="form-select" wire:model='step'
+                         wire:change='make_livewire_component' wire:text='$step_text'>
                             <option selected class="fw-bold">Select Menu</option>
                             <option value="1">Create Component</option>
                             <option value="2">Route</option>
@@ -72,6 +73,7 @@
                 <button type="button" class="btn btn-primary" wire:click='get_str'>Get Str</button>
                 <button type="button" class="btn btn-primary" wire:click='clear()'>Clear</button>
                 <button type="button" class="btn btn-primary" onclick='copy()'>Copy</button>
+                <button type="button" class="btn btn-primary" wire:click='save_file()'>Save File</button>
 
             </div>
 

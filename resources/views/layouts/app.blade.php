@@ -64,7 +64,25 @@
                             </ul>
                         </li>
                         <!--end dropdown links Make -->
+         {{--  All links--}}
 
+            <!--start dropdown links Project -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Project
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{{ route('code.project.index') }}">Project All</a></li>
+                    <li><a class="dropdown-item" href="{{ route('code.project.create') }}">Project Create</a></li>
+                    <li><a class="dropdown-item" href="{{ route('code.project.edit') }}">Project Edit</a></li>
+                    <li><a class="dropdown-item" href="{{ route('code.project.show') }}">Project Show</a></li>
+                    <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                    </li>
+                    <!--end dropdown links Project -->
 
 
                         <!--start dropdown links Post -->
