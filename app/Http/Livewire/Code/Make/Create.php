@@ -277,5 +277,22 @@ class Create extends Component
         $this->body .= "php artisan make:model " . ucfirst($this->name) . " -a \n\n";
 
     }
+    //تحويل_من كود_الى_نص
+    public function get_str($str = '')
+    {
+        if ($str == '') {
+            $str = $this->body;
+        }
+
+        $this->body = str_replace("\$", "\\$", $str);
+        $this->body = str_replace("\n", "\\n", $this->body);
+
+        //   $this->body = "  if (\$str == '') {\n \$str  =\$this->body ;\n\n        }";
+    }
+public function clear()
+   {
+ 
+    $this->body = "";
+   } 
 
 }
