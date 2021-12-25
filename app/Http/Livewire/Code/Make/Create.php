@@ -142,6 +142,8 @@ class Create extends Component
     }
     public function make_livewire_component()
     {
+
+        $this->validate();
         $dir = '';
         $route_name = '';
         if ($this->dir != '') {
@@ -151,7 +153,7 @@ class Create extends Component
             $route_name = $this->name . ".";
 
         }
-        $this->validate();
+
         if ($this->step == 1) {
 
             $this->body = "php artisan make:livewire " . $dir . $this->name . "/index\n";
@@ -170,21 +172,21 @@ class Create extends Component
             ucfirst(str_replace('/', '\\', $dir)) . ucfirst($this->name) . "\Show::class)->name('" . $route_name . "show');\n";
 
         } else if ($this->step == 3) {
-/*
-if ($this->use_i) {
-$this->body ='';
-} elseif ($this->use_c) {
-$this->body ='';
-}
-} elseif ($this->use_e) {
+            /*
+            if ($this->use_i) {
+            $this->body ='';
+            } elseif ($this->use_c) {
+            $this->body ='';
+            }
+            } elseif ($this->use_e) {
 
-$this->body ='';
-} elseif ($this->use_s) {
-$this->body ='';
+            $this->body ='';
+            } elseif ($this->use_s) {
+            $this->body ='';
 
-} elseif ($this->use_a) {
-$this->body ='';
-}*/
+            } elseif ($this->use_a) {
+            $this->body ='';
+            }*/
 
             $this->body =
             '
@@ -266,4 +268,31 @@ $this->body ='';
         }
 
     }
+    public function make()
+    {
+
+        
+        $this->make_livewire_component();
+        $this->make_model();
+       
+
+       
+    }
+    public function make_model()
+    {
+
+        $this->validate();
+        $this->body = '';
+
+        if ($this->step == 5) {
+
+            $this->body = "php artisan make:model ".ucfirst( $this->name)." -m \n\n";
+            $this->body .= "php artisan make:model ".ucfirst( $this->name)." -mcr \n\n";
+            $this->body .= "php artisan make:model ".ucfirst( $this->name)." -mcsr \n\n";
+            $this->body .= "php artisan make:model ".ucfirst( $this->name)." -a \n\n";
+        }
+    
+    }
+
+
 }
