@@ -51,6 +51,7 @@
                             <option value="3">Extends Code</option>
                             <option value="4">Links</option>
                             <option value="5">Model</option>
+                            <option value="6">Page Title On Blade</option>
 
                         </select>
                     </div>

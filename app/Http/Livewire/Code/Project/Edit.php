@@ -8,6 +8,9 @@ class Edit extends Component
 {
     public function render()
     {
-        return view('livewire.code.project.edit');
+        //Edit Render method
+        return view('livewire.code.project.edit', ['title' => 'Edit Project'])
+        ->extends('layouts.app');
+
     }
 }

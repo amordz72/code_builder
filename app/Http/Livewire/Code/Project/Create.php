@@ -8,6 +8,8 @@ class Create extends Component
 {
     public function render()
     {
-        return view('livewire.code.project.create');
+        //Create Render method
+        return view('livewire.code.project.create', ['title' => 'Create Project'])
+        ->extends('layouts.app');
     }
 }

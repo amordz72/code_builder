@@ -8,6 +8,9 @@ class Show extends Component
 {
     public function render()
     {
-        return view('livewire.code.project.show');
+       //Show Render method
+       return view('livewire.code.project.show', ['title' => 'Show Project'])
+       ->extends('layouts.app');
+
     }
 }

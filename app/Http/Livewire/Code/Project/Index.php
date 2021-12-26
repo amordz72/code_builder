@@ -8,6 +8,8 @@ class Index extends Component
 {
     public function render()
     {
-        return view('livewire.code.project.index');
+       //Index Render method
+       return view('livewire.code.project.index', ['title' => 'All Project'])
+       ->extends('layouts.app');
     }
 }

@@ -15,7 +15,7 @@ class Create extends Component
     public $use_s = false;
 
     public $step = 0;
-    
+
     public $step_text = '';
     public $name = '';
     public $dir = '';
@@ -156,13 +156,14 @@ class Create extends Component
 
         if ($this->step == 1) {
 
+            $this->step_text = 'Make Livewire Component';
             $this->body = "php artisan make:livewire " . $dir . $this->name . "/index\n";
             $this->body .= "php artisan make:livewire " . $dir . $this->name . "/create\n";
             $this->body .= "php artisan make:livewire " . $dir . $this->name . "/edit\n";
             $this->body .= "php artisan make:livewire " . $dir . $this->name . "/show";
 
         } else if ($this->step == 2) {
-
+            $this->step_text = 'Route';
             $this->body = "Route::get('/" . $dir . $this->name . "/index', App\Http\Livewire\\" . ucfirst(str_replace('/', '\\', $dir)) . ucfirst($this->name) . "\Index::class)->name('" . $route_name . "index');\n";
             $this->body .= "Route::get('/" . $dir . $this->name . "/create', App\Http\Livewire\\"
             . ucfirst(str_replace('/', '\\', $dir)) . ucfirst($this->name) . "\Create::class)->name('" . $route_name . "create');\n";
@@ -172,6 +173,7 @@ class Create extends Component
             ucfirst(str_replace('/', '\\', $dir)) . ucfirst($this->name) . "\Show::class)->name('" . $route_name . "show');\n";
 
         } else if ($this->step == 3) {
+            $this->step_text = 'Link';
             /*
             if ($this->use_i) {
             $this->body ='';
@@ -219,7 +221,7 @@ class Create extends Component
             ';
 
         } else if ($this->step == 4) {
-
+            $this->step_text = 'Link';
             $this->body = '
 
             {{--   Index Link--}}
@@ -267,19 +269,30 @@ class Create extends Component
 
         } else if ($this->step == 5) {
             $this->make_model();
+        } else if ($this->step == 6) {
+            $this->get_page_title();
         }
 
     }
 
     public function make_model()
     {
-
+        $this->step_text = 'Make Model';
         $this->body = "php artisan make:model " . ucfirst($this->name) . " -m \n\n";
         $this->body .= "php artisan make:model " . ucfirst($this->name) . " -mcr \n\n";
         $this->body .= "php artisan make:model " . ucfirst($this->name) . " -mcsr \n\n";
         $this->body .= "php artisan make:model " . ucfirst($this->name) . " -a \n\n";
 
     }
+    public function get_page_title()
+    {
+        $this->step_text = "Page Title On Blade";
+        $this->body = "@section('title')\n    All ".ucfirst($this->name)."\n    @endsection";
+        $this->body .= "\n\n@section('title')\n    Create".ucfirst($this->name)."\n    @endsection";
+        $this->body .= "\n\n@section('title')\n    Edit".ucfirst($this->name)."\n    @endsection";
+        $this->body .= "\n\n@section('title')\n    Show".ucfirst($this->name)."\n    @endsection";
+    }
+
     //تحويل_من كود_الى_نص
     public function get_str($str = '')
     {
@@ -289,6 +302,7 @@ class Create extends Component
 
         $this->body = str_replace("\$", "\\$", $str);
         $this->body = str_replace("\n", "\\n", $this->body);
+        $this->body = "\$this->body= \"" . $this->body . "\";";
 
         //   $this->body = "  if (\$str == '') {\n \$str  =\$this->body ;\n\n        }";
     }
@@ -298,19 +312,20 @@ class Create extends Component
     }
     public function save_file()
     {
-    //     if ($this->step==1) {
-    //        $this->step_text='artisan make';
-    //     }
-    //    else if ($this->step==2) {
-    //        $this->step_text='Route';
-    //     }
-    //    else if ($this->step==3) {
-    //        $this->step_text='Route';
-    //     }
-
-        Storage::put($this->name ."//". $this->step. '.txt', $this->body);
+        /*  if ($this->step == 1) {
+        $this->step_text = 'Make Livewire Component';
+        } else if ($this->step == 2) {
+        $this->step_text = 'Route';
+        } else if ($this->step == 3) {
+        $this->step_text = 'Render';
+        } else if ($this->step == 4) {
+        $this->step_text = 'Link';
+        } else if ($this->step == 5) {
+        $this->step_text = 'Make Model';
+        }
+         */
+        Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
 
     }
-
 
 }
