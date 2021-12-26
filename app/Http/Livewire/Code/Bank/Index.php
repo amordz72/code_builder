@@ -2,35 +2,69 @@
 
 namespace App\Http\Livewire\Code\Bank;
 
-use Livewire\Component;
 use App\Models\Bank;
+use App\Models\Lang;
+use Livewire\Component;
+
 class Index extends Component
 {
     public $is_new = true;
+    public $is_new_lang = false;
     public $hidden_id = 0;
-    public $banks = array();
+    public $all_banks = array();
+    public $langs = array();
     public $title = '';
     public $body = '';
     public $notes = '';
     public $lang_id = 0;
+    public $name_lang = '';
+
+    protected $listeners = ['launchHqModal', 'save_lang'];
+
+    public function launchHqModal()
+    {
+        $this->dispatchBrowserEvent('launch-hq-modal');
+
+        $this->emit('launch-hq-modal');
+
+        $this->is_new_lang = true;
+
+    }
+
+    public function save_lang()
+    {
+        $this->validateOnly("name_lang");
+        Lang::create([
+            "name" => $this->name_lang,
+
+        ]);
+        $this->name_lang = '';
+        $this->is_new_lang = false;
+    }
 
     protected $rules = [
 
+       
+        'lang_id' => 'required',
         'title' => 'required|min:2|unique:banks,title',
         'body' => 'required|min:2',
 
     ];
-    protected $messages = [
-        'title.required' => 'This Row Is Required',
+    // protected $messages = [
+    //     'title.required' => 'This Row Is Required',
 
-        'title.unique' => 'This Row Is Doplicated',
-    ];
+    //     'title.unique' => 'This Row Is Doplicated',
+    // ];
 
     public function render()
     {
-          //Index Render method
-          return view('livewire.code.bank.index', ['title' => 'All Bank'])
-          ->extends('layouts.app');
+        $this->langs = Lang::all();
+        //Index Render method
+        return view('livewire.code.bank.index', [
+            'banks' => Bank::paginate(5),
+
+            'title' => 'All Bank'])
+            ->extends('layouts.app');
 
     }
 
@@ -46,7 +80,10 @@ class Index extends Component
         ]);
         $this->clear();
     }
-
+    public function model_lang()
+    {
+        $this->is_new_lang = true;
+    }
     public function clear()
     {
         $this->new = true;
@@ -57,6 +94,5 @@ class Index extends Component
         $this->lang_id = 0;
 
     }
-
 
 }
