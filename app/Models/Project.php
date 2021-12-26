@@ -10,15 +10,13 @@ class Project extends Model
     use HasFactory;
 
 
+    protected $fillable = [
+        'name',
+        'db',
+        'url',
+    ];
 
-
-
-
-    /**
-     * Get all of the comments for the Project
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+  
     public function tbls(): HasMany
     {
         return $this->hasMany(Tbl::class, 'project_id', 'id');
