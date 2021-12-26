@@ -8,18 +8,18 @@ use Livewire\Component;
 class Create extends Component
 {
 
-    public $project=array();
-       
+    public $project = array();
+
     public $name = '';
     public $db = '';
     public $url = '';
     public function render()
     {
-        $project=Project::paginate(5);
+        $project = Project::paginate(5);
         //Create Render method
         return view('livewire.code.project.create', [
             'projects' => Project::paginate(5),
-            ])
+        ])
             ->extends('layouts.app');
     }
 
@@ -62,18 +62,25 @@ class Create extends Component
 
     public function edit($id)
     {
+        $this->hidden_id = $id;
+        $pr = Project::find($this->hidden_id);
+        $this->name =  $pr->name;
+        $this->db =  $pr->db;
+        $this->url =  $pr->url;
+
+        
 
     }
 
-    public function update($id)
+    public function update()
     {
-     $pr=   Project::find($id);
+        $pr = Project::find($this->hidden_id);
         $this->clear();
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-        $pr=   Project::find($id)->delete();
+        $pr = Project::find($this->hidden_id)->delete();
         $this->clear();
     }
     public function clear()

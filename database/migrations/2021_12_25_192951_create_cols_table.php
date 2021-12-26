@@ -17,7 +17,7 @@ class CreateColsTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('tbl_id')->constrained("tbls", "id")
-                ->onDelete(null);
+            ->onDelete('cascade');
 
           
             $table->timestamps();

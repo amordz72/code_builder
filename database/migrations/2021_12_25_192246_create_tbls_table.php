@@ -17,7 +17,7 @@ class CreateTblsTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('project_id')->constrained("projects", "id")
-                ->onDelete(null);
+            ->onDelete('cascade');
 
             $table->timestamps();
         });
