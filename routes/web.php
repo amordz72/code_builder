@@ -29,4 +29,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/stor/post/edit/{id?}', App\Http\Livewire\Stor\Post\Edit::class)->name('stor.post.edit');
     Route::get('/stor/post/show/{id?}', App\Http\Livewire\Stor\Post\Show::class)->name('stor.post.show');
 
+
+    Route::get('/code/bank/index', App\Http\Livewire\Code\Bank\Index::class)->name('code.bank.index');
+
+
 });
