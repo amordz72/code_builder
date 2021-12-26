@@ -64,26 +64,46 @@
                             </ul>
                         </li>
                         <!--end dropdown links Make -->
-         {{--  All links--}}
+                        {{-- All links--}}
 
-            <!--start dropdown links Project -->
+                        <!--start dropdown links Project -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Project
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('code.project.index') }}">Project All</a></li>
+                                <li><a class="dropdown-item" href="{{ route('code.project.create') }}">Project Create</a></li>
+                                <li><a class="dropdown-item" href="{{ route('code.project.edit') }}">Project Edit</a></li>
+                                <li><a class="dropdown-item" href="{{ route('code.project.show') }}">Project Show</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <!--end dropdown links Project -->
+
+
+                                    {{--  All links--}}
+
+            <!--start dropdown links Bank -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Project
+                    Bank
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{{ route('code.project.index') }}">Project All</a></li>
-                    <li><a class="dropdown-item" href="{{ route('code.project.create') }}">Project Create</a></li>
-                    <li><a class="dropdown-item" href="{{ route('code.project.edit') }}">Project Edit</a></li>
-                    <li><a class="dropdown-item" href="{{ route('code.project.show') }}">Project Show</a></li>
+                    <li><a class="dropdown-item" href="{{ route('code.bank.index') }}">Bank All</a></li>
+                    <li><a class="dropdown-item" href="{{ route('code.bank.create') }}">Bank Create</a></li>
+                    {{-- <li><a class="dropdown-item" href="{{ route('code.bank.edit') }}">Bank Edit</a></li>
+                    <li><a class="dropdown-item" href="{{ route('code.bank.show') }}">Bank Show</a></li> --}}
                     <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                     </li>
-                    <!--end dropdown links Project -->
-
+                    <!--end dropdown links Bank -->
 
                         <!--start dropdown links Post -->
                         <li class="nav-item dropdown">

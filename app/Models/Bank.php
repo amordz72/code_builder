@@ -11,6 +11,7 @@ class Bank extends Model
     protected $fillable = [
         'title',
         'body',
+        'lang_id',
         'notes',
     ];
 }

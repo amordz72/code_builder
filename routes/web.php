@@ -31,6 +31,5 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/code/bank/index', App\Http\Livewire\Code\Bank\Index::class)->name('code.bank.index');
-
-
+    Route::get('/code/bank/create', App\Http\Livewire\Code\Bank\Create::class)->name('code.bank.create');
 });
