@@ -58,12 +58,12 @@ class Index extends Component
            Lang::create([
             "name" => $this->name_lang,
 
-        ]);  
+        ]);
         $this->name_lang = '';
         }
-     
-     
-        
+
+
+
         $this->is_new_lang = false;
     }
 
@@ -109,29 +109,30 @@ class Index extends Component
         $this->body = $b->body;
         $this->notes = $b->notes;
         $this->is_new =false;
+        $this->is_new_lang =false;
 
     }
     public function update()
     {
 
-   
+
         $b = Bank::find( $this->hidden_id);
       $b->lang_id  =  $this->lang_id;
       $b->title   = $this->title;
-      $b->body  = $this->body; 
+      $b->body  = $this->body;
    $b->notes    =   $this->notes;
    $b->save();
         $this->clear() ;
-        
+
     }
     public function destroy()
     {
 
-   
+
        Bank::find( $this->hidden_id)->delete();
-     
+
         $this->clear() ;
-        
+
     }
 
 }
