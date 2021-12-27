@@ -18,7 +18,12 @@ class Index extends Component
     public $notes = '';
     public $lang_id = 0;
     public $name_lang = '';
+    protected $rules = [
 
+        'title' => 'required|min:2|unique:banks,title',
+        'body' => 'required|min:2',
+
+    ];
     protected $listeners = ['launchHqModal', 'save_lang'];
 
     public function launchHqModal()
@@ -31,42 +36,42 @@ class Index extends Component
 
     }
 
-    public function save_lang()
-    {
-        $this->validateOnly("name_lang");
-        Lang::create([
-            "name" => $this->name_lang,
-
-        ]);
-        $this->name_lang = '';
-        $this->is_new_lang = false;
-    }
-
-    protected $rules = [
-
-       
-        'lang_id' => 'required',
-        'title' => 'required|min:2|unique:banks,title',
-        'body' => 'required|min:2',
-
-    ];
-    // protected $messages = [
-    //     'title.required' => 'This Row Is Required',
-
-    //     'title.unique' => 'This Row Is Doplicated',
-    // ];
-
     public function render()
     {
         $this->langs = Lang::all();
         //Index Render method
         return view('livewire.code.bank.index', [
-            'banks' => Bank::paginate(5),
+            'banks' => Bank::with('lang')->paginate(5),
 
             'title' => 'All Bank'])
             ->extends('layouts.app');
 
     }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+    public function save_lang()
+    {
+        if ($this->name_lang!='') {
+           Lang::create([
+            "name" => $this->name_lang,
+
+        ]);  
+        $this->name_lang = '';
+        }
+     
+     
+        
+        $this->is_new_lang = false;
+    }
+
+    // protected $messages = [
+    //     'title.required' => 'This Row Is Required',
+
+    //     'title.unique' => 'This Row Is Doplicated',
+    // ];
 
     public function store()
     {
@@ -93,6 +98,40 @@ class Index extends Component
         $this->notes = '';
         $this->lang_id = 0;
 
+    }
+    public function edit($item)
+    {
+
+        $this->hidden_id = $item;
+        $b = Bank::find($item);
+        $this->lang_id = $b->lang_id;
+        $this->title = $b->title;
+        $this->body = $b->body;
+        $this->notes = $b->notes;
+        $this->is_new =false;
+
+    }
+    public function update()
+    {
+
+   
+        $b = Bank::find( $this->hidden_id);
+      $b->lang_id  =  $this->lang_id;
+      $b->title   = $this->title;
+      $b->body  = $this->body; 
+   $b->notes    =   $this->notes;
+   $b->save();
+        $this->clear() ;
+        
+    }
+    public function destroy()
+    {
+
+   
+       Bank::find( $this->hidden_id)->delete();
+     
+        $this->clear() ;
+        
     }
 
 }

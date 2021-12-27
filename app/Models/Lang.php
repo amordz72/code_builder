@@ -12,7 +12,10 @@ class Lang extends Model
 
 
     protected $fillable = [
+  
         'name',
        
     ];
+
+   
 }

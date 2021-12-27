@@ -1,11 +1,11 @@
-<div class="container row">
+<div class="container ">
 
     @section('title')
     Create Bank Code
     @endsection
-
+<div class="row">
     <div class="col-md-4">
-        <div>
+        <div class="row">
             <input type="hidden" wire:model='hidden_id'>
         </div>
 
@@ -62,7 +62,11 @@
             <div class="row mb-3">
                 <label class="col-sm-3 form-label">Body :</label>
                 <div class="col-sm-9">
-                    <input type="text" wire:model="body" class="form-control fw-bold" placeholder="body">
+                    <div class="form-floating">
+                        <textarea class="form-control" wire:model="body" style="height: 150px"></textarea>
+
+                    </div>
+
                     @error('body') <span class="error text-danger fw-bold">{{ $message }}</span> @enderror
                 </div>
             </div>
@@ -70,23 +74,25 @@
             <div class="row mb-3">
                 <label class="col-sm-3 form-label">Notes :</label>
                 <div class="col-sm-9">
+                    <div class="form-floating">
+                        <textarea class="form-control" wire:model="notes" style="height: 100px"></textarea>
 
-                    <input type="text" wire:model="notes" class="form-control fw-bold" placeholder="notes">
+                    </div>
                     @error('notes') <span class="error text-danger fw-bold">{{ $message }}</span> @enderror
                 </div>
 
             </div>
 
             <div class="row ">
-              @if ($is_new )
-                      <button type="button" class="btn btn-success col-3 me-1" wire:click='store'>Save</button>
-               
-              @else
-                  <button type="button" class="btn btn-warning col-3 me-1" wire:click='update'>Update</button>
+                @if ($is_new )
+                <button type="button" class="btn btn-success col-3 me-1" wire:click='store'>Save</button>
+
+                @else
+                <button type="button" class="btn btn-warning col-3 me-1" wire:click='update'>Update</button>
                 <button type="button" class="btn btn-danger col-3 me-1" wire:click='destroy'>Delete</button>
-  
-              @endif
-           
+
+                @endif
+
             </div>
         </div>
 
@@ -109,7 +115,7 @@
                     <tr>
                         <th scope="row">{{ $item->id }}</th>
                         <td>{{ $item->title }}</td>
-                        <td>{{ $item->lang_id }}</td>
+                        <td>{{ $item->lang->name }}</td>
 
                         <td>
                             <button class="btn btn-warning btn-sm" wire:click='edit({{  $item->id }})'>Edit</button>
@@ -128,7 +134,7 @@
             </div>
         </div>
 
-
+</div>
 
 
 

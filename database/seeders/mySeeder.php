@@ -34,8 +34,26 @@ class mySeeder extends Seeder
             "name" => 'name',
             "email" => 'dzamor72@gmail.com',
             'password' => Hash::make('12345678'),
-          
+          ]);
+      
+        \App\Models\Lang::create([
+            "name" => 'Laravel',  ]);
+           \App\Models\Lang::create([
+            "name" => 'Php',  ]); 
+           \App\Models\Lang::create([
+            "name" => 'Js',  ]); 
+           \App\Models\Lang::create([
+            "name" => 'Vue Js',  ]); 
+           \App\Models\Lang::create([
+            "name" => 'Css',  ]); 
+       
+            \App\Models\Lang::create([
+            "name" => 'Bootstrap',  ]); 
+           \App\Models\Lang::create([
+            "name" => 'Html',  ]); 
+           \App\Models\Lang::create([
+            "name" => 'Livewire',  ]); 
            
-        ]);
+        
     }
 }

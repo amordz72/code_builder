@@ -13,5 +13,14 @@ class Bank extends Model
         'body',
         'lang_id',
         'notes',
+        'tag"',
     ];
+
+    public function Lang()
+    {
+        return $this->hasOne(Lang::class, 'id','lang_id');
+    }
+
+
+    
 }
