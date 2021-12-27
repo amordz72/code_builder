@@ -22,6 +22,7 @@ class Index extends Component
 
         'title' => 'required|min:2|unique:banks,title',
         'body' => 'required|min:2',
+        'lang_id' => 'required|numeric|gt:0',
 
     ];
     protected $listeners = ['launchHqModal', 'save_lang'];
@@ -54,15 +55,13 @@ class Index extends Component
     }
     public function save_lang()
     {
-        if ($this->name_lang!='') {
-           Lang::create([
-            "name" => $this->name_lang,
+        if ($this->name_lang != '') {
+            Lang::create([
+                "name" => $this->name_lang,
 
-        ]);
-        $this->name_lang = '';
+            ]);
+            $this->name_lang = '';
         }
-
-
 
         $this->is_new_lang = false;
     }
@@ -91,7 +90,8 @@ class Index extends Component
     }
     public function clear()
     {
-        $this->new = true;
+        $this->is_new = true;
+        $this->is_new_lang = false;
         $this->hidden_id = 0;
         $this->title = '';
         $this->body = '';
@@ -108,30 +108,28 @@ class Index extends Component
         $this->title = $b->title;
         $this->body = $b->body;
         $this->notes = $b->notes;
-        $this->is_new =false;
-        $this->is_new_lang =false;
+        $this->is_new = false;
+        $this->is_new_lang = false;
 
     }
     public function update()
     {
 
-
-        $b = Bank::find( $this->hidden_id);
-      $b->lang_id  =  $this->lang_id;
-      $b->title   = $this->title;
-      $b->body  = $this->body;
-   $b->notes    =   $this->notes;
-   $b->save();
-        $this->clear() ;
+        $b = Bank::find($this->hidden_id);
+        $b->lang_id = $this->lang_id;
+        $b->title = $this->title;
+        $b->body = $this->body;
+        $b->notes = $this->notes;
+        $b->save();
+        $this->clear();
 
     }
     public function destroy()
     {
 
+        Bank::find($this->hidden_id)->delete();
 
-       Bank::find( $this->hidden_id)->delete();
-
-        $this->clear() ;
+        $this->clear();
 
     }
 

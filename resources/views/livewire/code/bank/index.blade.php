@@ -7,14 +7,26 @@
     @section('style')
     <style>
         * {
-            font-weight: bold
+            font-weight: bold;
+
         }
 
+
+        input {
+
+            font-size: 22px;
+        }
+        textarea
+         {
+
+padding: 5px  !important;
+
+            font-size: 18px !important;
+        }
 
         select option {
             font-size: 1.2rem;
         }
-
 
     </style>
     @endsection
@@ -49,6 +61,7 @@
 
 
                         </select>
+                        @error('lang_id') <span class="error text-danger fw-bold">{{ $message }}</span> @enderror
 
                         <!-- name -->
 
@@ -78,8 +91,8 @@
                     <label class="col-sm-3 form-label">Body :</label>
                     <div class="col-sm-9">
                         <div class="form-floating">
-                            <textarea class="form-control fw-bold" wire:model="body"
-                            style="height: 150px"></textarea>
+                            <textarea class="form-control fw-bold"
+                            wire:model="body" style="height: 150px"></textarea>
 
                         </div>
 
@@ -99,7 +112,7 @@
 
                 </div>
 
-                <div class="row ">
+                <div class="btn-group ">
                     @if ($is_new )
                     <button type="button" class="btn btn-success col-3 me-1" wire:click='store'>Save</button>
 
@@ -108,6 +121,7 @@
                     <button type="button" class="btn btn-danger col-3 me-1" wire:click='destroy'>Delete</button>
 
                     @endif
+                    <button type="button" class="btn btn-secondary col-3 me-1" wire:click='clear'>Clear</button>
 
                 </div>
             </div>
@@ -133,7 +147,9 @@
                             <th scope="row">{{ $item->id }}</th>
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->lang->name }}</td>
-                            <td style="min-width: 320px;
+                            <td style="
+                            width: 320px;
+                           max-width: 320px;
                                         overflow: hidden;
                                         white-space: wrap;
                         ">{{ $item->body }}</td>
