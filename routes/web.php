@@ -32,4 +32,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/code/bank/index', App\Http\Livewire\Code\Bank\Index::class)->name('code.bank.index');
     Route::get('/code/bank/create', App\Http\Livewire\Code\Bank\Create::class)->name('code.bank.create');
+
+Route::get('/backups', App\Http\Livewire\backup\index::class)->name('backups');
+Route::get('/Backup/create', [App\Http\Controllers\BackupController::class, 'create']
+)->name("backups.create");
+Route::get('/Backup/delete/{file_name}', [App\Http\Controllers\BackupController::class, 'delete']
+)->name("backups.delete");
+Route::get('/backups/download/{file_name}', [App\Http\Controllers\BackupController::class, 'download']
+)->name("backups.download");
+
+
 });

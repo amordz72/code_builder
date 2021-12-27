@@ -94,7 +94,9 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{{ route('code.bank.index') }}">Bank All</a></li>
-                  {{--  <li><a class="dropdown-item" href="{{ route('code.bank.create') }}">Bank Create</a></li>
+               
+                    <li><a class="dropdown-item" href="{{ route('backups') }}">Backup</a></li>
+                    {{--  <li><a class="dropdown-item" href="{{ route('code.bank.create') }}">Bank Create</a></li>
                      <li><a class="dropdown-item" href="{{ route('code.bank.edit') }}">Bank Edit</a></li>
                     <li><a class="dropdown-item" href="{{ route('code.bank.show') }}">Bank Show</a></li> --}}
                     <li>
