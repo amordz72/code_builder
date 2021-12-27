@@ -40,12 +40,13 @@ class Index extends Component
     }
     public function bk_onlyDb()
     {
-      
-        try {
-
-            Artisan::call('backup:run --only-db');
+        Artisan::call('backup:run --only-db --disable-notifications');
+        
             $output = Artisan::output();
 
+        try {
+
+          
             return redirect(Route('backups'));
         } catch (Exception $e) {
             Flash::error($e->getMessage());
@@ -57,14 +58,14 @@ class Index extends Component
 
         try {
 
-            Artisan::call('backup:run --only-files');
+            Artisan::call('backup:run --only-files --disable-notifications');
             $output = Artisan::output();
-
-            return redirect(Route('backups'));
+ return redirect(Route('backups'));
+           
         } catch (Exception $e) {
             Flash::error($e->getMessage());
-            return redirect()->back();
-        }
+           
+        } return redirect()->back();
     }
 
     public function loadDbFiles()
