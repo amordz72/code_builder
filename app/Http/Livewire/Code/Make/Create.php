@@ -269,12 +269,46 @@ class Create extends Component
 
         } else if ($this->step == 5) {
             $this->make_model();
-        } else if ($this->step == 6) {
+        }
+         else if ($this->step == 6) {
             $this->get_page_title();
+        }
+         else if ($this->step == 7) {
+            $this->c_project();
         }
 
     }
+public function c_project()
+{
+    $path='';
+if ($this->dir!='') {
+    $path=$this->dir.'/';
+}
 
+    $this->body=
+    "composer create-project laravel/laravel $this->name\n\nhttp://localhost/".$path.
+    "$this->name/public \n\n\n//Env DATABASE\n\nDB_DATABASE=$this->name \n\n\n
+
+";
+
+$this->body.= "\n\n// import\n\nuse Illuminate\Support\Facades\Hash;\nuse Illuminate\Support\Str;\n\n// add data\n \App\Models\User::create([\n            \"name\" => 'name',\n            \"email\" => 'dzamor72@gmail.com',\n            'password' => Hash::make('12345678'),\n          ]);\n\n\n//DatabaseSeeder\n\n \$this->call([\n            mySeeder::class,\n        ]);";
+
+
+$this->body.= "config/app.php  &&  livewire.php\n\n\n   // 'asset_url' => env('ASSET_URL', null),\n   'asset_url' => env(\"APP_URL\"),\n'asset' => env(\"APP_URL\"),\n\n\n// app.plade\n\n    <title>{{ config('app.name', 'Laravel') }} | @yield('title','Site')</title>\n\n   <!-- Styles -->\n    <link href=\"{{ asset('css/app.css') }}\" rel=\"stylesheet\">\n\n\n<!-- Scripts -->\n    <script src=\"{{ asset('js/app.js') }}\" defer></script>";
+
+$this->body.= "
+
+//laravel/ui
+
+composer require laravel/ui\n\nphp artisan ui bootstrap\n\nphp artisan ui bootstrap --auth\n\nphp artisan ui vue --auth\n\nnpm install && npm run dev";
+
+
+$this->body.= "
+
+//foreignId
+
+\$table->foreignId('project_id')->constrained(\"projects\", \"id\")\n            ->onDelete('cascade');";
+}
     public function make_model()
     {
         $this->step_text = 'Make Model';
@@ -301,6 +335,9 @@ class Create extends Component
         }
 
         $this->body = str_replace("\$", "\\$", $str);
+
+
+        $this->body = str_replace('"', '\\"',  $this->body);
         $this->body = str_replace("\n", "\\n", $this->body);
         $this->body = "\$this->body= \"" . $this->body . "\";";
 

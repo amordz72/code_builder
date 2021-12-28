@@ -41,11 +41,11 @@
                 <div class="row mb-3">
 
                     <label class="form-label col-sm-3 fw-bold">Code</label>
-           
+
                     <div class="col-sm-9 fw-bold">
-                        <select class="form-select" wire:model='step'
-                         wire:change='make_livewire_component' wire:text='$step_text'>
+                        <select class="form-select" wire:model='step' wire:change='make_livewire_component' wire:text='$step_text'>
                             <option selected class="fw-bold">Select Menu</option>
+                            <option value="7">Create Project</option>
                             <option value="1">Create Component</option>
                             <option value="2">Route</option>
                             <option value="3">Extends Code</option>
