@@ -19,9 +19,9 @@ class CreateBanksTable extends Migration
             $table->text('body')->nullable();
             $table->string('notes')->nullable();
             $table->string('tag')->nullable();
-          
+
             $table->foreignId('lang_id')->constrained("langs", "id")
-            ->onDelete('cascade');
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
