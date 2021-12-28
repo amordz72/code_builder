@@ -20,7 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/code/project/create', App\Http\Livewire\Code\Project\Create::class)->name('code.project.create');
     Route::get('/code/project/edit/{id?}', App\Http\Livewire\Code\Project\Edit::class)->name('code.project.edit');
     Route::get('/code/project/show/{id?}', App\Http\Livewire\Code\Project\Show::class)->name('code.project.show');
-    
+
 
 
 
@@ -41,5 +41,5 @@ Route::get('/Backup/delete/{file_name}', [App\Http\Controllers\BackupController:
 Route::get('/backups/download/{file_name}', [App\Http\Controllers\BackupController::class, 'download']
 )->name("backups.download");
 
-
+Route::get('/code/form/create', App\Http\Livewire\Code\Form\Create::class)->name('code.form.create');
 });
