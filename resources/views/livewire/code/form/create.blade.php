@@ -33,6 +33,9 @@
                             <label for="staticEmail" class="col-sm-12 col-form-label">Column:</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control " wire:model='col_name'>
+                                @error('col_name') <span class="error text-danger fw-bold">{{ $message }}</span>
+                                @enderror
+
                             </div>
                         </div>
                     </div>
@@ -107,6 +110,8 @@
                                 <option>uuid</option>
                                 <option>year</option>
                             </select>
+                            @error('col_type') <span class="error text-danger fw-bold">{{ $message }}</span> @enderror
+
                         </div>
                     </div>
                     <!--  -->
@@ -115,6 +120,9 @@
                             <label for="staticEmail" class="col-sm-12 col-form-label">Length:</label>
                             <div class="col-sm-12">
                                 <input type="number" class="form-control " wire:model='col_lenght'>
+                                @error('col_lenght') <span class="error text-danger fw-bold">{{ $message }}</span>
+                                @enderror
+
                             </div>
                         </div>
                     </div>
@@ -162,7 +170,7 @@
 
                 <div class="form-groub  ">
                     <button class="btn btn-primary me-md-2 text-dark
-                     text-white fw-bold" wire:click='add'>Add</button>
+                     text-white fw-bold" wire:click='add'>{{ $mode }}</button>
 
                 </div>
             </div>
@@ -177,18 +185,41 @@
                             <th scope="col">#</th>
                             <th scope="col">column</th>
                             <th scope="col">type</th>
+                            <th scope="col">Sel</th>
+                            <th scope="col">If</th>
                             <th scope="col">Length</th>
                             <th scope="col">Default</th>
                             <th scope="col"> DEFINED Val</th>
                             <th scope="col">Index</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-light">
 
-                        @foreach ($cols as $item)
+                        @foreach ($cols as $key=> $item)
                         <tr>
+
+                            {{-- <td scop='row'>{{ $key+1}}</td> --}}
+                            <td scop='row'>{{  $item['col_id']}}</td>
                             <td scop='row'>{{ $item['name'] }}</td>
                             <td scop='row'>{{ $item['type'] }}</td>
+                            <td scop='row'>{{ $item['sel'] }}</td>
+                            <td scop='row'>{{ $item['if'] }}</td>
+                            <td scop='row'>{{ $item['lenght'] }}</td>
+                            <td scop='row'>{{ $item['def'] }}</td>
+                            <td scop='row'>{{ $item['def_enter'] }}</td>
+                            <td scop='row'>{{ $item['index'] }}</td>
+
+                            <td scop='row'>
+
+                                <button wire:click='edit({{  $item['col_id']}})'
+                                class="btn btn-sm btn-info">edit</button>
+
+                                <button wire:click='del({{  $item['col_id']}})'
+                                 class="btn btn-sm btn-info">Del</button>
+
+                            </td>
+
 
                         </tr>
                         @endforeach
