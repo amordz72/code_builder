@@ -17,7 +17,10 @@ public $proj_name='';
     public $cols = [];
     public $dataType = [];
     public $min_data_type = true;
+    public $proj_name = '';
     public $tbl_name = '';
+    public $tbl_p_name = '';
+    public $code_save = '';
 
     public $dir = '';
     public $body = '';
@@ -50,11 +53,11 @@ public $proj_name='';
 
             "col_id" => $ide,
             "name" => $this->col_name,
-            "type" => $this->col_sel,
-            "sel" => $this->col_if,
-            "if" => $this->col_type,
+            "type" => $this->col_type,
             "sel" => $this->col_sel,
             "if" => $this->col_if,
+            "sel" => $this->col_sel,
+
             "lenght" => $this->col_lenght,
 
             "def" => $this->col_def,
@@ -146,32 +149,67 @@ public $proj_name='';
     }
     public function save_cols()
     {
-
+        if ($this->proj_name === '') {
+            session()->flash('proj_name_e', 'proj_name empty');
+            return;
+        }
+        if ($this->tbl_name === '') {
+            session()->flash('tbl_name', 'tbl_name empty');
+            return;
+        }
         //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
 
-        $str = "";
-        Storage::put($str."cols/uuuuuuuuu" . '.txt', $this->body);
+        $str = $this->proj_name.'//'. $this->tbl_name.'//cols';
+        Storage::put($str . '.json', json_encode( $this->cols));
 
     }
+    public function restore_cols()
+    {
+        if ($this->proj_name === '') {
+            session()->flash('proj_name_e', 'proj_name empty');
+            return;
+        }
+        if ($this->tbl_name === '') {
+            session()->flash('tbl_name', 'tbl_name empty');
+            return;
+        }
+        $this->cols= array();
+        //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
 
+        $str = $this->proj_name.'//'. $this->tbl_name.'//cols.json';
+       // Storage::put($str . '.json', json_encode( $this->cols));
+   $s=  Storage::disk('local')->get($str);
+   $this->cols=   json_decode($s, true);
+    }
 
+    //تحويل_من كود_الى_نص
+    public function get_str($str = '')
+    {
+        if ($str == '') {
+            $str = $this->body;
+        }
 
- //تحويل_من كود_الى_نص
- public function get_str($str = '')
- {
-     if ($str == '') {
-         $str = $this->body;
-     }
+        $this->body = str_replace("\$", "\\$", $str);
 
-     $this->body = str_replace("\$", "\\$", $str);
+        $this->body = str_replace('"', '\\"', $this->body);
+        $this->body = str_replace("\n", "\\n", $this->body);
+        //   $this->body = str_replace("\\", "\\\\", $this->body);
+        $this->body = "\$this->body= \"" . $this->body . "\";";
 
-     $this->body = str_replace('"', '\\"', $this->body);
-     $this->body = str_replace("\n", "\\n", $this->body);
-     //   $this->body = str_replace("\\", "\\\\", $this->body);
-     $this->body = "\$this->body= \"" . $this->body . "\";";
+        //   $this->body = "  if (\$str == '') {\n \$str  =\$this->body ;\n\n        }";
+    }
+    public function t()
+    {
 
-     //   $this->body = "  if (\$str == '') {\n \$str  =\$this->body ;\n\n        }";
- }
+    }
+    public function form_c()
+    {
+        if ($this->tbl_name === '') {
+            session()->flash('tbl_name', 'tbl_name empty');
+            return;
+        }
+        $this->code_save='form_create';
 
+    }
 
 }

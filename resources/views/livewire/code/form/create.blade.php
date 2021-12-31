@@ -15,6 +15,9 @@
 
     <div class="container-fluid mt-3 ltr fw-bold">
         <div class="row  ">
+
+
+
             <div class=" gap-2 d-md-flex flex-column justify-content-md-start mb-2  col-md-5">
                 <div class="row">
                     <!-- proj_name -->
@@ -23,6 +26,7 @@
                             <label for="tableName" class="col-sm-5  form-label">ProjName :</label>
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" wire:model='proj_name'>
+                                <span class="text-danger fw-bold">{{session('proj_name_e') }}</span>
                             </div>
                         </div>
                     </div>
@@ -32,6 +36,7 @@
                             <label for="tableName" class="col-sm-5  form-label">TableName :</label>
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" wire:model='tbl_name'>
+                                <span class="text-danger fw-bold">{{session('tbl_name_e') }}</span>
                             </div>
                         </div>
                     </div>
@@ -49,18 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3  mt-4">
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" wire:model='col_sel'>
-                            <label class="form-check-label" for="inlineCheckbox1">Sel</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" wire:model='col_if'>
-                            <label class="form-check-label" for="inlineCheckbox2">If</label>
-                        </div>
-
-                    </div>
 
                     <!-- type -->
                     <div class="col-5">
@@ -70,7 +64,7 @@
                                 <select class="   form-select" wire:model='col_type'>
                                     <option value="">Select</option>
                                     @foreach ($dataType as $item)
-                                    <option>{{$item->name }}</option>
+                                    <option value="{{$item->name}}">{{$item->name }}</option>
                                     @endforeach
 
                                 </select>
@@ -83,7 +77,22 @@
 
                         </div>
                     </div>
-                    <!--  -->
+                    <!-- tbl_p_name -->
+                    @if ($col_type=='foreignId')
+                    <div class="col-sm-3">
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-12 col-form-label">Table Parent</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control " wire:model='tbl_p_name'>
+                                @error('tbl_p_name') <span class="error text-danger fw-bold">{{ $message }}</span>
+                                @enderror
+
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
+                    <!-- Length -->
                     <div class="col-sm-3">
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-12 col-form-label">Length:</label>
@@ -133,34 +142,51 @@
                                     </option>
                                 </select>
                             </div>
+
+
+
                         </div>
+
+
                     </div>
                 </form>
+     <div class="my-2">
+                            <input class="form-check-input" type="checkbox" wire:model='col_sel'>
+                            <label class="form-check-label me-5" for="inlineCheckbox1">Sel</label>
 
+                            <input class="form-check-input" type="checkbox" wire:model='col_if'>
+                            <label class="form-check-label" for="inlineCheckbox2">If</label>
+
+                        </div>
                 <div class="form-groub  ">
-<div class="mb-2">
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-        <label class="form-check-label" for="inlineCheckbox1">Bootstrap</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-        <label class="form-check-label" for="inlineCheckbox2">Tailwin</label>
-      </div>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-        <label class="form-check-label" for="inlineCheckbox1">Livewire</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-        <label class="form-check-label" for="inlineCheckbox2">Controller</label>
-      </div>
-</div>
+                    <div class="mb-2">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1">Bootstrap</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2">Tailwin</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1">Livewire</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2">Controller</label>
+                        </div>
+                    </div>
                     <!---->
-                     <button class="btn btn-primary me-md-1 text-dark
-                     text-white fw-bold" wire:click='add'>Model Code</button>
-                     <button class="btn btn-primary me-md-1 text-dark
-                     text-white fw-bold" wire:click='add'>Crud Code</button>
+                    <button class="btn btn-primary me-md-1 text-dark
+                     text-white fw-bold" wire:click='model_c'>Model Code</button>
+                    <button class="btn btn-warning me-md-1 text-black
+                    fw-bold" wire:click='crud_c'>Crud Code</button>
+                    <button class="btn btn-info me-md-1 text-dark
+                    border-rounded fw-bold" wire:click='migrate_c'>Migrate Code</button>
+
+                    <button class="btn btn-outline-info me-md-1 text-dark
+                    border-rounded fw-bold" wire:click='form_c' >Form Code</button>
 
                 </div>
             </div>
@@ -171,6 +197,7 @@
 
 
                     <button class="btn  btn-info fw-bold" wire:click='save_cols'>Save Columns</button>
+                    <button class="btn  btn-info fw-bold" wire:click='restore_cols'>Restore Columns</button>
 
                     <button type="button" class="btn btn-primary" wire:click='get_str'>Get Str</button>
                     <button type="button" class="btn btn-primary" wire:click='clear()'>Clear</button>
