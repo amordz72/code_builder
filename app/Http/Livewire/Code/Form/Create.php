@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Code\Form;
 
+use App\Models\DataType;
 use Livewire\Component;
 
 class Create extends Component
@@ -13,6 +14,8 @@ public $proj_name='';
  */
     public $mode = 'add';
     public $cols = [];
+    public $dataType = [];
+    public $min_data_type = true;
 
     public $h_id = 0;
     public $col_id = 1;
@@ -55,8 +58,8 @@ public $proj_name='';
         }
 
         $this->clear();
-        usort($this->cols);
-     //ksort($this->cols);
+        sort($this->cols);
+        //ksort($this->cols);)(
 
         /*  $this->cols[] = ["name" => "rabeh", "type" => "id"];
     $j=json_encode( $this->cols[0]);
@@ -99,9 +102,24 @@ public $proj_name='';
         // 'col_lenght' => 'required',
 
     ];
+    public function update($id, $col_name, $value)
+    {
+        foreach ($this->cols as $key => $value) {
 
+            if ($this->cols[$key]["col_id"] == $id) {
+
+                $this->cols[$key][$col_name] = $value;
+
+            }}
+    }
     public function render()
     {
+
+        if ($this->min_data_type) {
+            $this->dataType = DataType()::where('most', $this->min_data_type)->get();
+        } else {
+            $this->dataType = DataType()::all();
+        }
 
         //Create Render method
         return view('livewire.code.form.create', ['title' => 'Create Form'])

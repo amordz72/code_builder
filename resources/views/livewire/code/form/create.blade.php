@@ -45,6 +45,12 @@
                             <label for="cbx_dataType" class="col-12 form-label"> Type :</label>
                             <select class=" col-sm-12  form-select" wire:model='col_type'>
                                 <option value="">Select</option>
+
+                        
+
+                                <option>id</option>
+                                <option>increments</option>
+                                <option>integer</option>
                                 <option>bigIncrements</option>
                                 <option>bigInteger</option>
                                 <option>binary</option>
@@ -200,11 +206,17 @@
                         <tr>
 
                             {{-- <td scop='row'>{{ $key+1}}</td> --}}
-                            <td scop='row'>{{  $item['col_id']}}</td>
+                            <td scop='row'>{{ $item['col_id']}}</td>
                             <td scop='row'>{{ $item['name'] }}</td>
                             <td scop='row'>{{ $item['type'] }}</td>
-                            <td scop='row'>{{ $item['sel'] }}</td>
-                            <td scop='row'>{{ $item['if'] }}</td>
+                            <td scop='row'>
+                                <input class="form-check-input" type="checkbox" {{ ($item['sel'])==1?'checked':'' }}>
+
+                            </td>
+                            <td scop='row'>
+                                <input class="form-check-input" type="checkbox" {{ ($item['if'])==1?'checked':'' }}>
+
+                            </td>
                             <td scop='row'>{{ $item['lenght'] }}</td>
                             <td scop='row'>{{ $item['def'] }}</td>
                             <td scop='row'>{{ $item['def_enter'] }}</td>
@@ -212,11 +224,11 @@
 
                             <td scop='row'>
 
-                                <button wire:click='edit({{  $item['col_id']}})'
-                                class="btn btn-sm btn-info">edit</button>
+                                <button wire:click='edit({{$item[' col_id']}})'
+                                    class="btn btn-sm btn-info">edit</button>
 
-                                <button wire:click='del({{  $item['col_id']}})'
-                                 class="btn btn-sm btn-info">Del</button>
+                                <button wire:click='del({{  $item[' col_id']}})'
+                                    class="btn btn-sm btn-info">Del</button>
 
                             </td>
 
