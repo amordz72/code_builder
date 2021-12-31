@@ -304,24 +304,24 @@ composer require laravel/ui\n\nphp artisan ui bootstrap\n\nphp artisan ui bootst
 
         }
 
-        $this->body = "<?php\n\nnamespace App\Http\Livewire\Code\\".ucfirst($this->name).";\n\n
-    use App\Models\\".ucfirst( $this->name).";\nuse Livewire\Component;\n\nclass Create extends Component\n{\n\n\n
+        $this->body = "<?php\n\nnamespace App\Http\Livewire\Code\\" . ucfirst($this->name) . ";\n\n
+    use App\Models\\" . ucfirst($this->name) . ";\nuse Livewire\Component;\n\nclass Create extends Component\n{\n\n\n
         public \$is_new = true;\n public \$hidden_id = 0;\n public \$$this->name = array();\n\n
 
  public \$name = '';\n\n
 
         public function render()\n    {\n
-                  \$".$this->name."s =  ".ucfirst( $this->name)."::paginate(5);\n
+                  \$" . $this->name . "s =  " . ucfirst($this->name) . "::paginate(5);\n
 
 
 
                      \n\n\n    }\n\n\n    protected \$rules = [\n\n
-                          'name' => 'required|min:2|unique:".$this->name."s,name',\n
+                          'name' => 'required|min:2|unique:" . $this->name . "s,name',\n
                             \n\n    ];\n    protected \$messages = [\n
                                'name.required' => 'This Row Is Required',\n\n
                                ];\n\n    public function create()\n    {\n\n    }\n\n
                                  public function store()\n    {\n        \$this->validate();\n
-                                     ".ucfirst( $this->name)."::create([\n            \"name\" => \$this->name,\n           \n\n        ]);\n        \$this->clear();\n    }\n\n    public function show(\$id)\n    {\n\n    }\n\n    public function edit(\$id)\n    {\n        \$this->hidden_id = \$id;\n        \$pr =  ".ucfirst( $this->name)."::find(\$this->hidden_id);\n        \$this->name =  \$pr->name;\n    \n\n        \n\n    }\n\n    public function update()\n    {\n        \$pr =  ".ucfirst( $this->name)."::find(\$this->hidden_id);\n        \$this->clear();\n    }\n\n    public function destroy()\n    {\n        \$pr =  ".ucfirst( $this->name)."::find(\$this->hidden_id)->delete();\n        \$this->clear();\n    }\n    public function clear()\n    {\n        \$this->new = true;\n        \$this->hidden_id = 0;\n        \$this->name = '';\n       \n\n    }\n}\n";
+                                     " . ucfirst($this->name) . "::create([\n            \"name\" => \$this->name,\n           \n\n        ]);\n        \$this->clear();\n    }\n\n    public function show(\$id)\n    {\n\n    }\n\n    public function edit(\$id)\n    {\n        \$this->hidden_id = \$id;\n        \$pr =  " . ucfirst($this->name) . "::find(\$this->hidden_id);\n        \$this->name =  \$pr->name;\n    \n\n        \n\n    }\n\n    public function update()\n    {\n        \$pr =  " . ucfirst($this->name) . "::find(\$this->hidden_id);\n        \$this->clear();\n    }\n\n    public function destroy()\n    {\n        \$pr =  " . ucfirst($this->name) . "::find(\$this->hidden_id)->delete();\n        \$this->clear();\n    }\n    public function clear()\n    {\n        \$this->new = true;\n        \$this->hidden_id = 0;\n        \$this->name = '';\n       \n\n    }\n}\n";
     }
 
     public function make_model()
@@ -353,7 +353,7 @@ composer require laravel/ui\n\nphp artisan ui bootstrap\n\nphp artisan ui bootst
 
         $this->body = str_replace('"', '\\"', $this->body);
         $this->body = str_replace("\n", "\\n", $this->body);
-     //   $this->body = str_replace("\\", "\\\\", $this->body);
+        //   $this->body = str_replace("\\", "\\\\", $this->body);
         $this->body = "\$this->body= \"" . $this->body . "\";";
 
         //   $this->body = "  if (\$str == '') {\n \$str  =\$this->body ;\n\n        }";
