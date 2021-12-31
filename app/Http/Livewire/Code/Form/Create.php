@@ -116,9 +116,9 @@ public $proj_name='';
     {
 
         if ($this->min_data_type) {
-            $this->dataType = DataType()::where('most', $this->min_data_type)->get();
+            $this->dataType = DataType::where('most', $this->min_data_type)->get();
         } else {
-            $this->dataType = DataType()::all();
+            $this->dataType = DataType::all();
         }
 
         //Create Render method
