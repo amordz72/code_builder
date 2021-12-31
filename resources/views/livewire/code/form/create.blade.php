@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <form class="form row">
-                    <div class="col-4">
+                    <div class="col-md-4">
                         <!-- column -->
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-12 col-form-label">Column:</label>
@@ -39,23 +39,42 @@
                             </div>
                         </div>
                     </div>
+<div class="col-sm-3  mt-4">
+
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox"  wire:model='col_sel'>
+        <label class="form-check-label" for="inlineCheckbox1">Sel</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox"  wire:model='col_if'>
+        <label class="form-check-label" for="inlineCheckbox2">If</label>
+      </div>
+
+</div>
+
                     <!-- type -->
                     <div class="col-5">
                         <div class="row">
                             <label for="cbx_dataType" class="col-12 form-label"> Type :</label>
-                            <select class=" col-sm-12  form-select" wire:model='col_type'>
-                                <option value="">Select</option>
+                            <div class="col-sm-10">
+                                <select class="   form-select" wire:model='col_type'>
+                                    <option value="">Select</option>
+                                    @foreach ($dataType as $item)
+                                    <option>{{$item->name }}</option>
+                                    @endforeach
 
+                                </select>
+                            </div>
 
-
-                     
-                            </select>
+                            <div class="col-sm-2">
+                                <input type="checkbox" wire:model='min_data_type'>
+                            </div>
                             @error('col_type') <span class="error text-danger fw-bold">{{ $message }}</span> @enderror
 
                         </div>
                     </div>
                     <!--  -->
-                    <div class="col-3">
+                    <div class="col-sm-3">
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-12 col-form-label">Length:</label>
                             <div class="col-sm-12">
@@ -115,6 +134,9 @@
                 </div>
             </div>
             <div class="mb-3 col-md-7  ">
+                <div class="my-1">
+                    <button class="btn btn-sm btn-info fw-bold" wire:click='save_cols'>Save Columns</button>
+                </div>
                 <textarea class="form-control fw-bold" id="code_body" cols="12" wire:model='body'></textarea>
             </div>
 
@@ -158,11 +180,9 @@
 
                             <td scop='row'>
 
-                                <button wire:click='edit({{$item[' col_id']}})'
-                                    class="btn btn-sm btn-info">edit</button>
+                                <button wire:click="edit({{$item['col_id']}})" class="btn btn-sm btn-info">edit</button>
 
-                                <button wire:click='del({{  $item[' col_id']}})'
-                                    class="btn btn-sm btn-info">Del</button>
+                                <button wire:click="del({{  $item['col_id']}})" class="btn btn-sm btn-info">Del</button>
 
                             </td>
 

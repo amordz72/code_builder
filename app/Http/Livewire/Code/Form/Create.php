@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Code\Form;
 
 use App\Models\DataType;
 use Livewire\Component;
+use Storage;
 
 class Create extends Component
 {
@@ -16,11 +17,17 @@ public $proj_name='';
     public $cols = [];
     public $dataType = [];
     public $min_data_type = true;
+    public $tbl_name = '';
+
+    public $dir = '';
+    public $body = '';
 
     public $h_id = 0;
     public $col_id = 1;
-    public $tbl_name = '';
+
     public $col_name = '';
+    public $col_sel = true;
+    public $col_if = false;
     public $col_type = '';
     public $col_lenght = '255';
     public $col_def = '';
@@ -43,9 +50,11 @@ public $proj_name='';
 
             "col_id" => $ide,
             "name" => $this->col_name,
-            "type" => $this->col_type,
-            "sel" => 1,
-            "if" => 0,
+            "type" => $this->col_sel,
+            "sel" => $this->col_if,
+            "if" => $this->col_type,
+            "sel" => $this->col_sel,
+            "if" => $this->col_if,
             "lenght" => $this->col_lenght,
 
             "def" => $this->col_def,
@@ -77,9 +86,12 @@ public $proj_name='';
 
                 $this->col_name = $this->cols[$key]["name"];
                 $this->col_type = $this->cols[$key]["type"];
+                $this->col_if = $this->cols[$key]["if"];
+                $this->col_def = $this->cols[$key]["def"];
                 $this->col_lenght = $this->cols[$key]["lenght"];
                 $this->col_type = $this->cols[$key]["type"];
-                $this->col_def = $this->cols[$key]["def"];
+                $this->col_sel = $this->cols[$key]["sel"];
+
                 $this->col_def_enter = $this->cols[$key]["def_enter"];
                 $this->col_index = $this->cols[$key]["index"];
                 unset($this->cols[$key]);
@@ -102,16 +114,7 @@ public $proj_name='';
         // 'col_lenght' => 'required',
 
     ];
-    public function update($id, $col_name, $value)
-    {
-        foreach ($this->cols as $key => $value) {
 
-            if ($this->cols[$key]["col_id"] == $id) {
-
-                $this->cols[$key][$col_name] = $value;
-
-            }}
-    }
     public function render()
     {
 
@@ -140,6 +143,15 @@ public $proj_name='';
         $this->col_def_enter = "";
         $this->col_index = "none";
         $this->mode = 'add';
+    }
+    public function save_cols()
+    {
+
+        //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
+
+        $str = "";
+        Storage::put($str."cols/uuuuuuuuu" . '.txt', $this->body);
+
     }
 
 }
