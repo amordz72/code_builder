@@ -17,6 +17,8 @@ public $proj_name='';
     public $cols = [];
     public $dataType = [];
     public $min_data_type = true;
+
+    public $class_cols = '';
     public $proj_name = '';
     public $tbl_name = '';
     public $tbl_p_name = '';
@@ -43,11 +45,21 @@ public $proj_name='';
         if ($this->col_def != 'USER_DEFINED') {
             $this->col_def_enter = '';
         }
-        if ($this->mode != 'add') {
-            $ide = $this->h_id;
+
+        if ($this->mode == 'add') {
+            if (count($this->cols) > 0) {
+
+                $ide = max($this->cols)['col_id'] + 1;
+
+            }
+
         } else {
-            $ide = $this->col_id;
+
+            $ide = $this->h_id;
         }
+        /*else {
+
+        }*/
 
         $this->cols[] = [
 
@@ -134,8 +146,24 @@ public $proj_name='';
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
-    }
+        $app_path = storage_path('app');
+        $file_path = storage_path('app/file.txt');
 
+        $str = $app_path . "/" . $this->proj_name . '//' . $this->tbl_name . '//cols.json';
+
+        if (file_exists($str)) {
+
+            $this->class_cols = 'bg-info';
+
+        } else {
+            $this->class_cols = 'bg-danger';
+        }
+    }
+    public function ch()
+    {
+
+        //  dd($str);
+    }
     public function clear()
     {
         $this->col_name = "";
@@ -159,8 +187,8 @@ public $proj_name='';
         }
         //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
 
-        $str = $this->proj_name.'//'. $this->tbl_name.'//cols';
-        Storage::put($str . '.json', json_encode( $this->cols));
+        $str = $this->proj_name . '//' . $this->tbl_name . '//cols.json';
+        Storage::put($str, json_encode($this->cols));
 
     }
     public function restore_cols()
@@ -173,13 +201,13 @@ public $proj_name='';
             session()->flash('tbl_name', 'tbl_name empty');
             return;
         }
-        $this->cols= array();
+        $this->cols = array();
         //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
 
-        $str = $this->proj_name.'//'. $this->tbl_name.'//cols.json';
-       // Storage::put($str . '.json', json_encode( $this->cols));
-   $s=  Storage::disk('local')->get($str);
-   $this->cols=   json_decode($s, true);
+        $str = $this->proj_name . '//' . $this->tbl_name . '//cols.json';
+        // Storage::put($str . '.json', json_encode( $this->cols));
+        $s = Storage::disk('local')->get($str);
+        $this->cols = json_decode($s, true);
     }
 
     //تحويل_من كود_الى_نص
@@ -208,7 +236,7 @@ public $proj_name='';
             session()->flash('tbl_name', 'tbl_name empty');
             return;
         }
-        $this->code_save='form_create';
+        $this->code_save = 'form_create';
 
     }
 

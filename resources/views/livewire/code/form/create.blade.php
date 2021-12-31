@@ -25,7 +25,8 @@
                         <div class="mb-2 row">
                             <label for="tableName" class="col-sm-5  form-label">ProjName :</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" wire:model='proj_name'>
+<input type="text" class="form-control fw-bold {{ $class_cols }}"
+                                    wire:model='proj_name' wire:change='ch'>
                                 <span class="text-danger fw-bold">{{session('proj_name_e') }}</span>
                             </div>
                         </div>
@@ -150,14 +151,14 @@
 
                     </div>
                 </form>
-     <div class="my-2">
-                            <input class="form-check-input" type="checkbox" wire:model='col_sel'>
-                            <label class="form-check-label me-5" for="inlineCheckbox1">Sel</label>
+                <div class="my-2">
+                    <input class="form-check-input" type="checkbox" wire:model='col_sel'>
+                    <label class="form-check-label me-5" for="inlineCheckbox1">Sel</label>
 
-                            <input class="form-check-input" type="checkbox" wire:model='col_if'>
-                            <label class="form-check-label" for="inlineCheckbox2">If</label>
+                    <input class="form-check-input" type="checkbox" wire:model='col_if'>
+                    <label class="form-check-label" for="inlineCheckbox2">If</label>
 
-                        </div>
+                </div>
                 <div class="form-groub  ">
                     <div class="mb-2">
                         <div class="form-check form-check-inline">
@@ -186,7 +187,7 @@
                     border-rounded fw-bold" wire:click='migrate_c'>Migrate Code</button>
 
                     <button class="btn btn-outline-info me-md-1 text-dark
-                    border-rounded fw-bold" wire:click='form_c' >Form Code</button>
+                    border-rounded fw-bold" wire:click='form_c'>Form Code</button>
 
                 </div>
             </div>
