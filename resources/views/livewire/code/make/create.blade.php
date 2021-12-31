@@ -74,7 +74,7 @@
                 <button type="button" class="btn btn-primary" wire:click='get_str'>Get Str</button>
                 <button type="button" class="btn btn-primary" wire:click='clear()'>Clear</button>
                 <button type="button" class="btn btn-primary" onclick='copy()'>Copy</button>
-                <button type="button" class="btn btn-primary" wire:click='save_file()'>Save File</button>
+<button type="button" class="btn btn-primary" wire:click='save_file()'>Save File</button>
 
             </div>
 
@@ -89,7 +89,8 @@
             <h3 class="text-center"><span> Code</span> </h3>
 
             <div class="form-floating">
-                <textarea class="form-control fw-bold m-2 fs-5" placeholder="Code here" wire:model='body' style="height: 300px" id="myInput"></textarea>
+<textarea class="form-control fw-bold m-2 fs-5"
+ placeholder="Code here" wire:model='body' style="height: 300px" id="myInput"></textarea>
 
             </div>
 
@@ -104,6 +105,7 @@
             var copyText = document.getElementById('myInput')
             copyText.select();
             document.execCommand('copy')
+
             console.log('Copied Text')
         }
 
