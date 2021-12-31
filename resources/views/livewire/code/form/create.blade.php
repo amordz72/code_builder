@@ -46,75 +46,9 @@
                             <select class=" col-sm-12  form-select" wire:model='col_type'>
                                 <option value="">Select</option>
 
-                        
 
-                                <option>id</option>
-                                <option>increments</option>
-                                <option>integer</option>
-                                <option>bigIncrements</option>
-                                <option>bigInteger</option>
-                                <option>binary</option>
-                                <option>boolean</option>
-                                <option>char</option>
-                                <option>dateTimeTz</option>
-                                <option>dateTime</option>
-                                <option>date</option>
-                                <option>decimal</option>
-                                <option>double</option>
-                                <option>enum</option>
-                                <option>float</option>
-                                <option>foreignId</option>
-                                <option>foreignIdFor</option>
-                                <option>foreignUuid</option>
-                                <option>geometryCollection</option>
-                                <option>geometry</option>
-                                <option>id</option>
-                                <option>increments</option>
-                                <option>integer</option>
-                                <option>ipAddress</option>
-                                <option>json</option>
-                                <option>jsonb</option>
-                                <option>lineString</option>
-                                <option>longText</option>
-                                <option>macAddress</option>
-                                <option>mediumIncrements</option>
-                                <option>mediumInteger</option>
-                                <option>mediumText</option>
-                                <option>morphs</option>
-                                <option>multiLineString</option>
-                                <option>multiPoint</option>
-                                <option>multiPolygon</option>
-                                <option>nullableMorphs</option>
-                                <option>nullableTimestamps</option>
-                                <option>nullableUuidMorphs</option>
-                                <option>point</option>
-                                <option>polygon</option>
-                                <option>rememberToken</option>
-                                <option>set</option>
-                                <option>smallIncrements</option>
-                                <option>smallInteger</option>
-                                <option>softDeletesTz</option>
-                                <option>softDeletes</option>
-                                <option>string</option>
-                                <option>text</option>
-                                <option>timeTz</option>
-                                <option>time</option>
-                                <option>timestampTz</option>
-                                <option>timestamp</option>
-                                <option>timestampsTz</option>
-                                <option>timestamps</option>
-                                <option>tinyIncrements</option>
-                                <option>tinyInteger</option>
-                                <option>tinyText</option>
-                                <option>unsignedBigInteger</option>
-                                <option>unsignedDecimal</option>
-                                <option>unsignedInteger</option>
-                                <option>unsignedMediumInteger</option>
-                                <option>unsignedSmallInteger</option>
-                                <option>unsignedTinyInteger</option>
-                                <option>uuidMorphs</option>
-                                <option>uuid</option>
-                                <option>year</option>
+
+                     
                             </select>
                             @error('col_type') <span class="error text-danger fw-bold">{{ $message }}</span> @enderror
 
