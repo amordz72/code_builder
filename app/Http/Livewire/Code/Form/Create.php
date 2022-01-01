@@ -34,6 +34,7 @@ public $proj_name='';
 
     public $class_cols = '';
     public $class_proj = '';
+    public $hasMany = '';
 
     public $proj_name = '';
     public $tbl_name = '';
@@ -212,6 +213,7 @@ public $proj_name='';
         $this->col_def_enter = "";
         $this->col_index = "none";
         $this->tbl_p_name = "";
+        $this->hasMany = "";
         $this->mode = 'add';
 
     }
@@ -299,7 +301,8 @@ public $proj_name='';
 
         $tbl_col_fk = '';
         $tbl_p_names = '';
-        $uc_tbl_name = "";
+        $uc_tbl_p_name = "";
+        $uc_tbl_name = ucfirst( $this->tbl_name);
 
         foreach ($this->cols as $key => $value) {
             if ($value['sel'] == true) {
@@ -307,12 +310,28 @@ public $proj_name='';
 
                 if ($value['type'] == 'foreignId') {
                     $tbl_col_fk = $value['name'];
-                    $uc_tbl_name = ucfirst($value['tbl_p_name']);
+                    $uc_tbl_p_name = ucfirst($value['tbl_p_name']);
                 }
                 if ($value['tbl_p_name'] != '') {
                     $tbl_p_names .= "
-          public function {$value['tbl_p_name']}()\n    {\n        return \$this->hasOne({$uc_tbl_name}::class, 'id','{$value['name']}');
-        }\n\n\n   ";
+          public function {$value['tbl_p_name']}() : HasOne\n    {\n
+                 return \$this->hasOne({$uc_tbl_p_name}::class,'{$value['name']}, 'id'');
+        }
+//Copy This In Model : {$uc_tbl_p_name}
+/*
+لجلب كل البيانات
+{$uc_tbl_name}s
+الى
+{$uc_tbl_p_name}
+*/
+     public function {$this->tbl_name}s(): HasMany
+{
+    return \$this->hasMany({$uc_tbl_name}::class, '{$this->tbl_name}_id', 'id');
+}
+\n\n
+
+        \n   ";
+
                 }
 
             }
@@ -327,6 +346,7 @@ public $proj_name='';
         ];\n\n
 
         {$tbl_p_names}\n
+
           \n}\n";
 
     }
