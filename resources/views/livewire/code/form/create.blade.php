@@ -25,8 +25,8 @@
                         <div class="mb-2 row">
                             <label for="tableName" class="col-sm-5  form-label">ProjName :</label>
                             <div class="col-sm-7">
-<input type="text" class="form-control fw-bold {{ $class_cols }}"
-                                    wire:model='proj_name' wire:change='ch'>
+                                <input type="text" class="form-control fw-bold {{ $class_cols }}" wire:model='proj_name'
+                                    wire:change='ch'>
                                 <span class="text-danger fw-bold">{{session('proj_name_e') }}</span>
                             </div>
                         </div>
@@ -193,17 +193,39 @@
             </div>
             <div class="mb-3 col-md-7  ">
                 <div class="my-1">
+
+                    <select wire:model=step class="form-select-sm col-2 fw-bold">
+                        <option value="">select mode</option>
+
+                        @foreach ($mode_code as $item)
+                        <option>{{ $item['name'] }}</option>
+                        @endforeach
+
+                    </select>
+
+
+
+                    @if ($step=='cols')
+
                     <button class="btn btn-primary me-md-1 text-dark
                     text-white fw-bold" wire:click='add'>{{ $mode }}</button>
 
 
-                    <button class="btn  btn-info fw-bold" wire:click='save_cols'>Save Columns</button>
-                    <button class="btn  btn-info fw-bold" wire:click='restore_cols'>Restore Columns</button>
+
+
+
+                    @elseif($step=='model')
+
+
+
+                    @endif
+  <button class="btn  btn-info fw-bold" wire:click='save'>Save</button>
+                    <button class="btn  btn-info fw-bold" wire:click='restore'>Restore</button>
 
                     <button type="button" class="btn btn-primary" wire:click='get_str'>Get Str</button>
                     <button type="button" class="btn btn-primary" wire:click='clear()'>Clear</button>
                     <button type="button" class="btn btn-primary" onclick='copy()'>Copy</button>
-                    <button type="button" class="btn btn-primary" wire:click='save_file()'>Save File</button>
+                    {{-- <button type="button" class="btn btn-primary" wire:click='save_file()'>Save File</button> --}}
 
 
                 </div>

@@ -14,7 +14,21 @@ public $proj_id='';
 public $proj_name='';
  */
     public $mode = 'add';
+    public $mode_code = [
+[
+    "id"=>"1",
+    "name"=>"cols",
+],
+[
+    "id"=>"2",
+    "name"=>"model",
+],
+
+    ];
+     public $step = '';
+
     public $cols = [];
+
     public $dataType = [];
     public $min_data_type = true;
 
@@ -46,12 +60,15 @@ public $proj_name='';
             $this->col_def_enter = '';
         }
 
-        if ($this->mode == 'add') {
-            if (count($this->cols) > 0) {
+        if ($this->mode == 'add'&&count($this->cols) > 0) {
+          /*  if (count($this->cols) > 0) {}else {
+
+                    $ide = $this->h_id;
+                }*/
 
                 $ide = max($this->cols)['col_id'] + 1;
 
-            }
+
 
         } else {
 
@@ -149,7 +166,10 @@ public $proj_name='';
         $app_path = storage_path('app');
         $file_path = storage_path('app/file.txt');
 
-        $str = $app_path . "/" . $this->proj_name . '//' . $this->tbl_name . '//cols.json';
+
+        $str ="form_c/". $this->proj_name . '/' . $this->tbl_name.'/'.$this->step.".json" ;
+
+        $str = $app_path . "/" .  $str ;
 
         if (file_exists($str)) {
 
@@ -175,7 +195,7 @@ public $proj_name='';
         $this->col_index = "none";
         $this->mode = 'add';
     }
-    public function save_cols()
+    public function save()
     {
         if ($this->proj_name === '') {
             session()->flash('proj_name_e', 'proj_name empty');
@@ -187,11 +207,11 @@ public $proj_name='';
         }
         //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
 
-        $str = $this->proj_name . '//' . $this->tbl_name . '//cols.json';
+        $str ="form_c/". $this->proj_name . '/' . $this->tbl_name.'/'.$this->step.".json" ;
         Storage::put($str, json_encode($this->cols));
 
     }
-    public function restore_cols()
+    public function restore()
     {
         if ($this->proj_name === '') {
             session()->flash('proj_name_e', 'proj_name empty');
@@ -204,8 +224,8 @@ public $proj_name='';
         $this->cols = array();
         //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
 
-        $str = $this->proj_name . '//' . $this->tbl_name . '//cols.json';
-        // Storage::put($str . '.json', json_encode( $this->cols));
+        $str ="form_c/". $this->proj_name . '/' . $this->tbl_name.'/'.$this->step.".json" ;
+
         $s = Storage::disk('local')->get($str);
         $this->cols = json_decode($s, true);
     }
