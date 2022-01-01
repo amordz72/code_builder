@@ -31,7 +31,11 @@
 
                                 <span class="text-danger fw-bold">{{session('proj_name_e') }}</span>
                             </div>
-                            <button class="btn btn-sm btn-outline-info col-1">+</button>
+
+
+
+
+
                         </div>
                     </div>
                     <!-- tbl_name -->
@@ -50,12 +54,13 @@
                         <!-- column -->
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-12 col-form-label">Column:</label>
-                            <div class="col-sm-12">
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control " wire:model='col_name'>
                                 @error('col_name') <span class="error text-danger fw-bold">{{ $message }}</span>
                                 @enderror
 
                             </div>
+
                         </div>
                     </div>
 
@@ -137,11 +142,11 @@
                                 <select id="Index" class="form-select" wire:model='col_index'>
                                     <option value="none">---</option>
                                     <!--v-if-->
-                                    <option title="Unique"> UNIQUE </option>
-                                    <option title="Fulltext">
+                                    <option value="Unique"> UNIQUE </option>
+                                    <option value="Fulltext">
                                         FULLTEXT
                                     </option>
-                                    <option title="Spatial">
+                                    <option value="Spatial">
                                         SPATIAL
                                     </option>
                                 </select>
@@ -209,27 +214,30 @@
                     </select>
 
 
-
                     @if ($step=='cols')
 
-                    <button class="btn btn-primary me-md-1 text-dark
-                    text-white fw-bold" wire:click='add'>{{ $mode }}</button>
+                    <button class="btn btn-md btn-outline-info  fw-bold" wire:click='add'>{{ $mode }}
+                    </button>
+
+
+
+                    <button class="btn  btn-info fw-bold me-1" wire:click='restore_cols'>Restore Cols</button>
 
 
 
 
-
-                    @elseif($step=='model')
-
-
-
-                    @endif
-                    <button class="btn  btn-info fw-bold" wire:click='save'>Save</button>
+                    @else
                     <button class="btn  btn-info fw-bold" wire:click='restore'>Restore</button>
 
-                    <button type="button" class="btn btn-primary" wire:click='get_str'>Get Str</button>
-                    <button type="button" class="btn btn-primary" wire:click='clear()'>Clear</button>
-                    <button type="button" class="btn btn-primary" onclick='copy()'>Copy</button>
+                    @endif
+ <button class="btn  btn-success fw-bold" wire:click='save'>Save</button>
+
+
+
+                    <button type="button" class="btn btn-danger" wire:click='get_str'>Get Str</button>
+
+                    <button type="button" class="btn btn-warning" onclick='copy()'>Copy</button>
+                    <button type="button" class="btn btn-secondary yext-white" wire:click='clear()'>Clear</button>
                     {{-- <button type="button" class="btn btn-primary" wire:click='save_file()'>Save File</button> --}}
 
 

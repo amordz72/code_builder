@@ -110,6 +110,7 @@ public $proj_name='';
         $this->clear();
         sort($this->cols);
 
+     //   $this->body = json_encode($this->cols);
     }
     public function edit($id)
     {
@@ -227,12 +228,41 @@ public $proj_name='';
             session()->flash('tbl_name', 'tbl_name empty');
             return;
         }
-        //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
-        try {
-            $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
+
+        $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
+        if ($this->step == 'cols') {
             Storage::put($str, json_encode($this->cols));
+        } else {
+            Storage::put($str,json_encode( $this->body));
+        }
+
+    }
+    public function restore_cols()
+    {
+        if ($this->proj_name === '') {
+            session()->flash('proj_name_e', 'proj_name empty');
+            return;
+        }
+        if ($this->tbl_name === '') {
+            session()->flash('tbl_name', 'tbl_name empty');
+            return;
+        }
+        $this->cols = array();
+        //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
+
+        $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
+
+        try {
+            $s = Storage::disk('local')->get($str);
+
+            if ($this->step != 'cols') {
+                $this->body = json_decode($s, true);
+            }
+
+            $this->cols = json_decode($s, true);
+
         } catch (\Throwable $th) {
-//dd($th);
+            //dd($th);
         }
 
     }
@@ -251,15 +281,11 @@ public $proj_name='';
 
         $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
 
-        try {
-            $s = Storage::disk('local')->get($str);
-            $this->cols = json_decode($s, true);
-        } catch (\Throwable $th) {
-            //dd($th);
-        }
+        $s = Storage::disk('local')->get($str);
+
+        $this->body = json_decode($s, true);
 
     }
-
     //تحويل_من كود_الى_نص
     public function get_str($str = '')
     {
@@ -302,7 +328,7 @@ public $proj_name='';
         $tbl_col_fk = '';
         $tbl_p_names = '';
         $uc_tbl_p_name = "";
-        $uc_tbl_name = ucfirst( $this->tbl_name);
+        $uc_tbl_name = ucfirst($this->tbl_name);
 
         foreach ($this->cols as $key => $value) {
             if ($value['sel'] == true) {
@@ -348,7 +374,7 @@ public $proj_name='';
         {$tbl_p_names}\n
 
           \n}\n";
-
+        //   $this->body = json_encode($this->body);
     }
 
 }
