@@ -18,31 +18,34 @@
 
 
 
-            <div class=" gap-2 d-md-flex flex-column justify-content-md-start mb-2  col-md-5">
+            <div class=" gap-2 d-md-flex flex-column justify-content-md-start mb-1  col-md-5">
                 <div class="row">
                     <!-- proj_name -->
                     <div class="col-sm-6">
                         <div class="mb-2 row">
-                            <label for="tableName" class="col-sm-5  form-label">ProjName :</label>
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control fw-bold {{ $class_cols }}" wire:model='proj_name'
+                            <label for="tableName" class="col-sm-4  form-label">ProjName</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control fw-bold {{ $class_proj }}" wire:model='proj_name'
                                     wire:change='ch'>
+
+
                                 <span class="text-danger fw-bold">{{session('proj_name_e') }}</span>
                             </div>
+                            <button class="btn btn-sm btn-outline-info col-1">+</button>
                         </div>
                     </div>
                     <!-- tbl_name -->
                     <div class="col-sm-6">
                         <div class="mb-2 row">
-                            <label for="tableName" class="col-sm-5  form-label">TableName :</label>
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control" wire:model='tbl_name'>
+                            <label for="tableName" class="col-sm-4  form-label">TableName:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control {{ $class_cols }}" wire:model='tbl_name'>
                                 <span class="text-danger fw-bold">{{session('tbl_name_e') }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <form class="form row">
+                <div class="form row">
                     <div class="col-md-4">
                         <!-- column -->
                         <div class="form-group row">
@@ -150,7 +153,7 @@
 
 
                     </div>
-                </form>
+                </div>
                 <div class="my-2">
                     <input class="form-check-input" type="checkbox" wire:model='col_sel'>
                     <label class="form-check-label me-5" for="inlineCheckbox1">Sel</label>
@@ -191,6 +194,7 @@
 
                 </div>
             </div>
+            <!-- step -->
             <div class="mb-3 col-md-7  ">
                 <div class="my-1">
 
@@ -219,7 +223,7 @@
 
 
                     @endif
-  <button class="btn  btn-info fw-bold" wire:click='save'>Save</button>
+                    <button class="btn  btn-info fw-bold" wire:click='save'>Save</button>
                     <button class="btn  btn-info fw-bold" wire:click='restore'>Restore</button>
 
                     <button type="button" class="btn btn-primary" wire:click='get_str'>Get Str</button>
@@ -231,7 +235,7 @@
                 </div>
                 <textarea class="form-control fw-bold" id="code_body" cols="12" wire:model='body'></textarea>
             </div>
-
+            <!-- table -->
             <div class="mt-1 row">
                 <table class="table table-dark table-hover table-sm table-responsive">
                     <thead>
@@ -272,7 +276,8 @@
 
                             <td scop='row'>
 
-                                <button wire:click="edit({{$item['col_id']}})" class="btn btn-sm btn-info">edit</button>
+                                <button wire:click="edit({{$item['col_id']}})" class="btn btn-sm btn-info" {{
+                                    ($mode)!='add' ?'disabled':'' }}>edit</button>
 
                                 <button wire:click="del({{  $item['col_id']}})" class="btn btn-sm btn-info">Del</button>
 

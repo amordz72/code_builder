@@ -15,17 +15,17 @@ public $proj_name='';
  */
     public $mode = 'add';
     public $mode_code = [
-[
-    "id"=>"1",
-    "name"=>"cols",
-],
-[
-    "id"=>"2",
-    "name"=>"model",
-],
+        [
+            "id" => "1",
+            "name" => "cols",
+        ],
+        [
+            "id" => "2",
+            "name" => "model",
+        ],
 
     ];
-     public $step = '';
+    public $step = '';
 
     public $cols = [];
 
@@ -33,6 +33,8 @@ public $proj_name='';
     public $min_data_type = true;
 
     public $class_cols = '';
+    public $class_proj = '';
+
     public $proj_name = '';
     public $tbl_name = '';
     public $tbl_p_name = '';
@@ -60,19 +62,21 @@ public $proj_name='';
             $this->col_def_enter = '';
         }
 
-        if ($this->mode == 'add'&&count($this->cols) > 0) {
-          /*  if (count($this->cols) > 0) {}else {
+        if ($this->mode == 'add' && count($this->cols) > 0) {
+            /*  if (count($this->cols) > 0) {}else {
 
-                    $ide = $this->h_id;
-                }*/
+            $ide = $this->h_id;
+            }*/
 
-                $ide = max($this->cols)['col_id'] + 1;
-
-
+            $ide = max($this->cols)['col_id'] + 1;
 
         } else {
 
             $ide = $this->h_id;
+
+            if ($ide == 0) {
+                $ide = 1;
+            }
         }
         /*else {
 
@@ -164,12 +168,11 @@ public $proj_name='';
     {
         $this->validateOnly($propertyName);
         $app_path = storage_path('app');
-        $file_path = storage_path('app/file.txt');
+      //  $file_path = storage_path('app/file.txt');
 
+        $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
 
-        $str ="form_c/". $this->proj_name . '/' . $this->tbl_name.'/'.$this->step.".json" ;
-
-        $str = $app_path . "/" .  $str ;
+        $str = $app_path . "/" . $str;
 
         if (file_exists($str)) {
 
@@ -178,6 +181,15 @@ public $proj_name='';
         } else {
             $this->class_cols = 'bg-danger';
         }
+
+        if (file_exists($app_path . "//form_c//" . $this->proj_name. "//")) {
+            $this->class_proj = 'bg-info';
+
+        } else {
+            $this->class_proj = 'bg-danger';
+
+        }
+
     }
     public function ch()
     {
@@ -188,12 +200,15 @@ public $proj_name='';
     {
         $this->col_name = "";
         $this->col_type = "";
+        $this->sel = true;
+        $this->if = false;
         $this->col_lenght = "255";
         $this->col_type = "";
         $this->col_def = "";
         $this->col_def_enter = "";
         $this->col_index = "none";
         $this->mode = 'add';
+
     }
     public function save()
     {
@@ -207,7 +222,7 @@ public $proj_name='';
         }
         //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
 
-        $str ="form_c/". $this->proj_name . '/' . $this->tbl_name.'/'.$this->step.".json" ;
+        $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
         Storage::put($str, json_encode($this->cols));
 
     }
@@ -224,7 +239,7 @@ public $proj_name='';
         $this->cols = array();
         //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
 
-        $str ="form_c/". $this->proj_name . '/' . $this->tbl_name.'/'.$this->step.".json" ;
+        $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
 
         $s = Storage::disk('local')->get($str);
         $this->cols = json_decode($s, true);
@@ -257,6 +272,31 @@ public $proj_name='';
             return;
         }
         $this->code_save = 'form_create';
+
+    }
+
+    public function model_c()
+    {
+        if ($this->tbl_name === '') {
+            session()->flash('tbl_name', 'tbl_name empty');
+            return;
+        }
+        $this->code_save = 'model';
+        $cols_model='';
+foreach ($this->cols as $key => $value) {
+   if ($value['sel']== true ) {
+    $cols_model.="'".$value['name']."',\n";
+   }
+}
+
+
+        $this->body= " <?php\n\nnamespace App\Models;\n\n
+       use Illuminate\Database\Eloquent\Factories\HasFactory;\nuse Illuminate\Database\Eloquent\Model;\n\nclass Bank extends Model\n{\n    use HasFactory;\n
+
+        protected \$table='{$this->tbl_name}s';
+        protected \$fillable = [\n
+        $cols_model
+        ];\n\n    public function Lang()\n    {\n        return \$this->hasOne(Lang::class, 'id','lang_id');\n    }\n\n\n    \n}\n";
 
     }
 
