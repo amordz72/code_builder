@@ -312,7 +312,7 @@ public $proj_name='';
                 if ($value['tbl_p_name'] != '') {
                     $tbl_p_names .= "
           public function {$value['tbl_p_name']}()\n    {\n        return \$this->hasOne({$uc_tbl_name}::class, 'id','{$value['name']}');
-          ";
+        }\n\n\n   ";
                 }
 
             }
@@ -327,7 +327,7 @@ public $proj_name='';
         ];\n\n
 
         {$tbl_p_names}\n
-          }\n\n\n    \n}\n";
+          \n}\n";
 
     }
 
