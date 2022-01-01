@@ -173,11 +173,12 @@
                             <label class="form-check-label" for="inlineCheckbox2">Tailwin</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                            <input class="form-check-input" type="checkbox" wire:model='fw_livewire'>
                             <label class="form-check-label" for="inlineCheckbox1">Livewire</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <input class="form-check-input" type="checkbox" wire:model='fw_laravel'>
+
                             <label class="form-check-label" for="inlineCheckbox2">Controller</label>
                         </div>
                     </div>
@@ -249,6 +250,7 @@
                             <th scope="col">Default</th>
                             <th scope="col"> DEFINED Val</th>
                             <th scope="col">Index</th>
+                            <th scope="col">Table Parent</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -273,6 +275,7 @@
                             <td scop='row'>{{ $item['def'] }}</td>
                             <td scop='row'>{{ $item['def_enter'] }}</td>
                             <td scop='row'>{{ $item['index'] }}</td>
+                            <td scop='row'>{{ $item['tbl_p_name'] }}</td>
 
                             <td scop='row'>
 

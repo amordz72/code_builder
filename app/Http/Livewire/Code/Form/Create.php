@@ -55,6 +55,9 @@ public $proj_name='';
     public $col_def_enter = '';
     public $col_index = 'none';
 
+    public $fw_livewire = true;
+    public $fw_laravel = false;
+
     public function add()
     {
         $this->validate();
@@ -96,6 +99,7 @@ public $proj_name='';
             "def" => $this->col_def,
             "def_enter" => $this->col_def_enter,
             "index" => $this->col_index,
+            "tbl_p_name" => $this->tbl_p_name,
 
         ];
         if ($this->mode == 'add') {
@@ -104,12 +108,6 @@ public $proj_name='';
 
         $this->clear();
         sort($this->cols);
-        //ksort($this->cols);)(
-
-        /*  $this->cols[] = ["name" => "rabeh", "type" => "id"];
-    $j=json_encode( $this->cols[0]);
-    $j2=json_decode( $j);
-    dd( $j2->name); */
 
     }
     public function edit($id)
@@ -130,6 +128,12 @@ public $proj_name='';
 
                 $this->col_def_enter = $this->cols[$key]["def_enter"];
                 $this->col_index = $this->cols[$key]["index"];
+
+                if ($this->cols[$key]["tbl_p_name"] != '') {
+                    $this->tbl_p_name = $this->cols[$key]["tbl_p_name"];
+
+                }
+
                 unset($this->cols[$key]);
             }
         }
@@ -168,7 +172,7 @@ public $proj_name='';
     {
         $this->validateOnly($propertyName);
         $app_path = storage_path('app');
-      //  $file_path = storage_path('app/file.txt');
+        //  $file_path = storage_path('app/file.txt');
 
         $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
 
@@ -182,7 +186,7 @@ public $proj_name='';
             $this->class_cols = 'bg-danger';
         }
 
-        if (file_exists($app_path . "//form_c//" . $this->proj_name. "//")) {
+        if (file_exists($app_path . "//form_c//" . $this->proj_name . "//")) {
             $this->class_proj = 'bg-info';
 
         } else {
@@ -207,6 +211,7 @@ public $proj_name='';
         $this->col_def = "";
         $this->col_def_enter = "";
         $this->col_index = "none";
+        $this->tbl_p_name = "";
         $this->mode = 'add';
 
     }
@@ -221,9 +226,12 @@ public $proj_name='';
             return;
         }
         //Storage::put($this->name . "//" . $this->step . "_" . $this->step_text . '.txt', $this->body);
-
-        $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
-        Storage::put($str, json_encode($this->cols));
+        try {
+            $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
+            Storage::put($str, json_encode($this->cols));
+        } catch (\Throwable $th) {
+//dd($th);
+        }
 
     }
     public function restore()
@@ -241,8 +249,13 @@ public $proj_name='';
 
         $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
 
-        $s = Storage::disk('local')->get($str);
-        $this->cols = json_decode($s, true);
+        try {
+            $s = Storage::disk('local')->get($str);
+            $this->cols = json_decode($s, true);
+        } catch (\Throwable $th) {
+            //dd($th);
+        }
+
     }
 
     //تحويل_من كود_الى_نص
@@ -282,21 +295,39 @@ public $proj_name='';
             return;
         }
         $this->code_save = 'model';
-        $cols_model='';
-foreach ($this->cols as $key => $value) {
-   if ($value['sel']== true ) {
-    $cols_model.="'".$value['name']."',\n";
-   }
-}
+        $cols_model = '';
 
+        $tbl_col_fk = '';
+        $tbl_p_names = '';
+        $uc_tbl_name = "";
 
-        $this->body= " <?php\n\nnamespace App\Models;\n\n
+        foreach ($this->cols as $key => $value) {
+            if ($value['sel'] == true) {
+                $cols_model .= "'" . $value['name'] . "',\n";
+
+                if ($value['type'] == 'foreignId') {
+                    $tbl_col_fk = $value['name'];
+                    $uc_tbl_name = ucfirst($value['tbl_p_name']);
+                }
+                if ($value['tbl_p_name'] != '') {
+                    $tbl_p_names .= "
+          public function {$value['tbl_p_name']}()\n    {\n        return \$this->hasOne({$uc_tbl_name}::class, 'id','{$value['name']}');
+          ";
+                }
+
+            }
+        }
+
+        $this->body = " <?php\n\nnamespace App\Models;\n\n
        use Illuminate\Database\Eloquent\Factories\HasFactory;\nuse Illuminate\Database\Eloquent\Model;\n\nclass Bank extends Model\n{\n    use HasFactory;\n
 
         protected \$table='{$this->tbl_name}s';
         protected \$fillable = [\n
         $cols_model
-        ];\n\n    public function Lang()\n    {\n        return \$this->hasOne(Lang::class, 'id','lang_id');\n    }\n\n\n    \n}\n";
+        ];\n\n
+
+        {$tbl_p_names}\n
+          }\n\n\n    \n}\n";
 
     }
 
