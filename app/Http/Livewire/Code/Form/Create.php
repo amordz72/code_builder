@@ -22,6 +22,16 @@ public $proj_name='';
         [
             "id" => "2",
             "name" => "model",
+        ]
+        ,
+        [
+            "id" => "3",
+            "name" => "project",
+        ],
+
+        [
+            "id" => "4",
+            "name" => "table",
         ],
 
     ];
@@ -56,8 +66,10 @@ public $proj_name='';
     public $col_def_enter = '';
     public $col_index = 'none';
 
-    public $fw_livewire = true;
+    public $fw_bootstrap = true;
     public $fw_laravel = false;
+    public $fw_livewire = true;
+    public $fw_tailwin = false;
 
     public function add()
     {
@@ -110,7 +122,7 @@ public $proj_name='';
         $this->clear();
         sort($this->cols);
 
-     //   $this->body = json_encode($this->cols);
+        //   $this->body = json_encode($this->cols);
     }
     public function edit($id)
     {
@@ -165,6 +177,16 @@ public $proj_name='';
         } else {
             $this->dataType = DataType::all();
         }
+        // ($fw_bootstrap)?$fw_tailwin=false:$fw_tailwin=true
+        // if ($this->fw_bootstrap == false && $this->fw_tailwin = false) {
+        //     $this->fw_tailwin = true;
+        // }
+        // if ($this->fw_bootstrap == false && $this->fw_tailwin = true) {
+        //     $this->fw_bootstrap = true;
+        // }
+        // else if ($this->fw_bootstrap){
+        //     $this->fw_tailwin=false;
+        // }
 
         //Create Render method
         return view('livewire.code.form.create', ['title' => 'Create Form'])
@@ -220,20 +242,35 @@ public $proj_name='';
     }
     public function save()
     {
+
+
+         if ($this->step == 'project') {
+            $str = "form_c//last_project.json";
+          Storage::put($str, json_decode($this->proj_name));
+
+        }
+        else if ($this->step == 'table') {
+            $str = "form_c/" . $this->proj_name . "/tables.json";
+
+          Storage::put($str, json_decode($this->tbl_name));
+
+        }
+
+
         if ($this->proj_name === '') {
             session()->flash('proj_name_e', 'proj_name empty');
             return;
         }
-        if ($this->tbl_name === '') {
-            session()->flash('tbl_name', 'tbl_name empty');
+ if ($this->tbl_name === '') {
+            session()->flash('tbl_name_e', 'tbl_name empty');
             return;
         }
 
         $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
         if ($this->step == 'cols') {
             Storage::put($str, json_encode($this->cols));
-        } else {
-            Storage::put($str,json_encode( $this->body));
+        }  else {
+            Storage::put($str, json_encode($this->body));
         }
 
     }
@@ -244,7 +281,7 @@ public $proj_name='';
             return;
         }
         if ($this->tbl_name === '') {
-            session()->flash('tbl_name', 'tbl_name empty');
+            session()->flash('tbl_name_e', 'tbl_name empty');
             return;
         }
         $this->cols = array();
@@ -268,6 +305,14 @@ public $proj_name='';
     }
     public function restore()
     {
+
+        if ($this->step == 'project') {
+            $str = "form_c/last_project.json";
+           $this->proj_name   =json_decode( Storage::disk('local')->get($str));
+           // = Storage::put($str, json_encode());
+            return;
+        }
+
         if ($this->proj_name === '') {
             session()->flash('proj_name_e', 'proj_name empty');
             return;
@@ -282,9 +327,9 @@ public $proj_name='';
         $str = "form_c/" . $this->proj_name . '/' . $this->tbl_name . '/' . $this->step . ".json";
 
         $s = Storage::disk('local')->get($str);
-
         $this->body = json_decode($s, true);
 
+        /* */
     }
     //تحويل_من كود_الى_نص
     public function get_str($str = '')

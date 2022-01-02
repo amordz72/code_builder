@@ -18,23 +18,18 @@
 
 
 
-            <div class=" gap-2 d-md-flex flex-column justify-content-md-start mb-1  col-md-5">
+            <div class=" gap-2 d-md-flex flex-column justify-content-md-start mb-1  col-md-6">
                 <div class="row">
                     <!-- proj_name -->
                     <div class="col-sm-6">
                         <div class="mb-2 row">
                             <label for="tableName" class="col-sm-4  form-label">ProjName</label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control fw-bold {{ $class_proj }}" wire:model='proj_name'
-                                    wire:change='ch'>
-
+                                    wire:change='ch' id="proj_name">
 
                                 <span class="text-danger fw-bold">{{session('proj_name_e') }}</span>
                             </div>
-
-
-
-
 
                         </div>
                     </div>
@@ -170,11 +165,11 @@
                 <div class="form-groub  ">
                     <div class="mb-2">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                            <input class="form-check-input" type="checkbox" wire:model='fw_bootstrap'>
                             <label class="form-check-label" for="inlineCheckbox1">Bootstrap</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <input class="form-check-input" type="checkbox" wire:model='fw_tailwin'>
                             <label class="form-check-label" for="inlineCheckbox2">Tailwin</label>
                         </div>
                         <div class="form-check form-check-inline">
@@ -198,10 +193,13 @@
                     <button class="btn btn-outline-info me-md-1 text-dark
                     border-rounded fw-bold" wire:click='form_c'>Form Code</button>
 
+                    <button class="btn btn-outline-info me-md-1 mt-1 text-dark
+                    border-rounded fw-bold" wire:click='form_c'>New Project</button>
+
                 </div>
             </div>
             <!-- step -->
-            <div class="mb-3 col-md-7  ">
+            <div class="mb-3 col-md-6  ">
                 <div class="my-1">
 
                     <select wire:model=step class="form-select-sm col-2 fw-bold">
@@ -227,10 +225,10 @@
 
 
                     @else
-                    <button class="btn  btn-info fw-bold" wire:click='restore'>Restore</button>
+                    <button class="btn  btn-info fw-bold" wire:click='restore' id="btn_restor">Restore</button>
 
                     @endif
- <button class="btn  btn-success fw-bold" wire:click='save'>Save</button>
+                    <button class="btn  btn-success fw-bold" wire:click='save'>Save</button>
 
 
 
@@ -312,6 +310,19 @@
             document.execCommand('copy')
             console.log('Copied Text')
         }
+
+       document.getElementById('proj_name').addEventListener('change', function  () {
+ localStorage.setItem("proj_name", this.value);//
+
+ /* document.getElementById('btn_restor').addEventListener('click', function  () {
+    document.getElementById('proj_name').value= localStorage.getItem("proj_name");//
+
+        });*/
+
+
+
+
+
 
     </script>
 </div>
