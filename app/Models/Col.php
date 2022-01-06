@@ -9,13 +9,25 @@ class Col extends Model
 {
     use HasFactory;
 
+    protected $table = 'cols';
+    protected $fillable = [
 
+        'id',
+        'name',
+        'type',
+        'length',
+        'sel',
+        'if',
+        'index',
+        'default',
+        'hidden',
+        'parent',
+        'rel_type',
 
-
-
+    ];
 
     public function tbl(): HasOne
     {
-        return $this->hasOne(Tbl::class,'tbl_id', 'id');
+        return $this->hasOne(Tbl::class, 'tbl_id', 'id');
     }
 }

@@ -64,12 +64,16 @@
 
 
 
-    <script type="text/javascript">
+
+  <script type="text/javascript">
         window.livewire.on('Project_Store', () => {
             $('#projectModal').modal('hide');
         });
         window.livewire.on('Tbl_Store', () => {
             $('#tableModal').modal('hide');
+        });
+        window.livewire.on('Tbl_Store', () => {
+            $('#colsModal').modal('hide');
         });
     </script>
 

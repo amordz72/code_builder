@@ -16,10 +16,19 @@ class CreateColsTable extends Migration
         Schema::create('cols', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('type');
+            $table->string('length');
+            $table->string('sel');
+            $table->string('if');
+            $table->string('hidden');
+            $table->string('index');
+            $table->string('default');
+            $table->string('parent');
+            $table->string('rel_type');
             $table->foreignId('tbl_id')->constrained("tbls", "id")
             ->onDelete('cascade');
 
-          
+
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Code\Strapi;
 use App\Models\Project;
 use App\Models\Strapi;
 use App\Models\Tbl;
+use App\Models\Col;
 use Livewire\Component;
 
 class Create extends Component
@@ -94,7 +95,8 @@ class Create extends Component
     }
 
     //Project
-    private function resetInputFields_Project(){
+    private function resetInputFields_Project()
+    {
         $this->proj_name = '';
 
     }
@@ -105,7 +107,7 @@ class Create extends Component
         Project::create([
             'name' => $this->proj_name,
             'db' => $this->db,
-            'url'=>$this->url,
+            'url' => $this->url,
         ]);
 
         session()->flash('message', 'Project Created Successfully.');
@@ -115,7 +117,23 @@ class Create extends Component
         $this->emit('Project_Store'); // Close model to using to jquery
 
     }
- public function Store_Tbl()
+    public function Store_cols()
+    {
+
+        Col::create([
+            'name' => $this->tbl_name,
+            'project_id' => $this->proj_id,
+
+        ]);
+
+        session()->flash('message', 'Table Created Successfully.');
+
+        $this->tbl_name = '';
+
+        $this->emit('Tbl_Store'); // Close model to using to jquery
+
+    }
+    public function Store_Tbl()
     {
 
         Tbl::create([
@@ -126,7 +144,7 @@ class Create extends Component
 
         session()->flash('message', 'Table Created Successfully.');
 
-        $this->tbl_name='';
+        $this->tbl_name = '';
 
         $this->emit('Tbl_Store'); // Close model to using to jquery
 
