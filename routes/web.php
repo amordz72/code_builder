@@ -43,3 +43,4 @@ Route::get('/backups/download/{file_name}', [App\Http\Controllers\BackupControll
 
 Route::get('/code/form/create', App\Http\Livewire\Code\Form\Create::class)->name('code.form.create');
 });
+Route::get('/code/strapi/create', App\Http\Livewire\Code\Strapi\Create::class)->name('code.strapi.create');
