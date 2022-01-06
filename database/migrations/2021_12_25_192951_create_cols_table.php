@@ -18,9 +18,9 @@ class CreateColsTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->string('length');
-            $table->string('sel');
-            $table->string('if');
-            $table->string('hidden');
+            $table->boolean('sel');
+            $table->boolean('if');
+            $table->boolean('hidden');
             $table->string('index');
             $table->string('default');
             $table->string('parent');

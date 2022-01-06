@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProjectsTable extends Migration
 {
-  
+
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
@@ -14,6 +14,8 @@ class CreateProjectsTable extends Migration
             $table->string('name');
             $table->string('db')->nullable();
             $table->string('url')->nullable();
+            $table->string('css_fw')->nullable();
+            $table->string('code_fw')->nullable();
             $table->timestamps();
         });
     }
