@@ -3,6 +3,10 @@
 namespace App\Http\Livewire\Code\Strapi;
 
 use App\Models\Strapi;
+use App\Models\Project;
+use App\Models\Tbl;
+use App\Models\Col;
+
 use Livewire\Component;
 
 class Create extends Component
@@ -11,12 +15,17 @@ class Create extends Component
     public $is_new = true;
     public $hidden_id = 0;
     public $strapi = array();
+    public $projs = array();
+    public $proj_id = 0;
 
+    public $tbls = array();
+ public $tbl_id = 0;
     public $name = '';
 
     public function render()
     {
-
+        $this->projs = Project::all();
+        $this->tbls = Tbl::where('project_id',  $this->proj_id)->get();
         $strapis = Strapi::paginate(5);
         return view('livewire.code.strapi.create', ['title' => 'Strapi Form'])
         ->extends('layouts.app');
