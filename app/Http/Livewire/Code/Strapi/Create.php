@@ -9,6 +9,7 @@ use Livewire\Component;
 
 class Create extends Component
 {
+    public $updateMode = false;
 
     public $is_new = true;
     public $hidden_id = 0;
@@ -16,6 +17,8 @@ class Create extends Component
     public $projs = array();
     public $proj_id = 0;
     public $proj_name = "";
+    public $db = "";
+    public $url = "";
 
     public $tbls = array();
     public $tbl_id = 0;
@@ -88,4 +91,34 @@ class Create extends Component
         $this->name = '';
 
     }
+
+    //Project
+    private function resetInputFields_Project(){
+        $this->proj_name = '';
+
+    }
+    public function store_project()
+    {
+        // $validatedDate = $this->validate([
+        //     'name' => 'required',
+        //     'db' => 'required',
+        //     'url',
+
+        // ]);
+
+        Project::create([
+            'name' => $this->proj_name,
+            'db' => $this->db,
+            'url'=>$this->url,
+        ]);
+
+        session()->flash('message', 'Project Created Successfully.');
+
+        $this->resetInputFields_Project();
+
+        $this->emit('Project_Store'); // Close model to using to jquery
+
+    }
+
+
 }

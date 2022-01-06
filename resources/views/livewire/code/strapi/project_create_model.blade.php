@@ -14,16 +14,32 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body row">
-                <label for="" class="form-label fw-bold  col-2">Name :</label>
-                <div class="col-10">
+                <label for="" class="form-label fw-bold  col-md-2">Name :</label>
+                <div class="col-md-10">
 
                     <input type="text" class="form-control" wire:model='proj_name'>
+                </div>
+            </div>
+            <!-- db -->
+            <div class="modal-body row">
+                <label for="" class="form-label fw-bold  col-md-2">Db :</label>
+                <div class="col-md-10">
+
+                    <input type="text" class="form-control" wire:model='db'>
+                </div>
+            </div>
+            <!-- url -->
+            <div class="modal-body row">
+                <label for="" class="form-label fw-bold  col-md-2">Url :</label>
+                <div class="col-md-10">
+
+                    <input type="text" class="form-control" wire:model='url'>
                 </div>
             </div>
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" wire:click='store_project'>Save changes</button>
             </div>
         </div>
     </div>
