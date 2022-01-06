@@ -22,6 +22,7 @@ class Create extends Component
 
     public $tbls = array();
     public $tbl_id = 0;
+    public $tbl_name = '';
     public $name = '';
 
     public function render()
@@ -97,14 +98,9 @@ class Create extends Component
         $this->proj_name = '';
 
     }
+
     public function store_project()
     {
-        // $validatedDate = $this->validate([
-        //     'name' => 'required',
-        //     'db' => 'required',
-        //     'url',
-
-        // ]);
 
         Project::create([
             'name' => $this->proj_name,
@@ -119,6 +115,21 @@ class Create extends Component
         $this->emit('Project_Store'); // Close model to using to jquery
 
     }
+ public function Store_Tbl()
+    {
 
+        Tbl::create([
+            'name' => $this->tbl_name,
+            'project_id' => $this->proj_id,
+
+        ]);
+
+        session()->flash('message', 'Table Created Successfully.');
+
+        $this->tbl_name='';
+
+        $this->emit('Tbl_Store'); // Close model to using to jquery
+
+    }
 
 }

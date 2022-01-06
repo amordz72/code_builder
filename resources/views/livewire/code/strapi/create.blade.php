@@ -26,13 +26,24 @@
 
                 </div>
                 <!-- tbls -->
-                <select wire:model='tbl_id' class="form-select">
-                    <option value="">select</option>
-                    @foreach ($tbls as $item)
-                    <option value="{{ $item ->id}}">{{ $item ->name}}</option>
-                    @endforeach
 
-                </select>
+                <div class="row">
+                    <label for="" class="form-label fw-bold  col-md-3">Table :</label>
+                    <div class="col-md-7">
+                        <select wire:model='tbl_id' class="form-select">
+                            <option value="">select</option>
+                            @foreach ($tbls as $item)
+                            <option value="{{ $item ->id}}">{{ $item ->name}}</option>
+                            @endforeach
+
+                        </select>
+                    </div>
+                    @if ($proj_id>0)
+
+                    @include('livewire.code.strapi.table_create_model')
+                    @endif
+
+                </div>
             </div>
 
         </div>
@@ -40,9 +51,9 @@
         <div class="col-8">
             @if (session()->has('message'))
             <div class="alert alert-success" style="margin-top:30px;">x
-              {{ session('message') }}
+                {{ session('message') }}
             </div>
-        @endif
+            @endif
 
 
         </div>
@@ -56,6 +67,9 @@
     <script type="text/javascript">
         window.livewire.on('Project_Store', () => {
             $('#projectModal').modal('hide');
+        });
+        window.livewire.on('Tbl_Store', () => {
+            $('#tableModal').modal('hide');
         });
     </script>
 

@@ -9,8 +9,13 @@ class Tbl extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'project_id',
+        
+    ];
 
-    
+
     public function project(): HasOne
     {
         return $this->hasOne(Project::class,'project_id', 'id');
