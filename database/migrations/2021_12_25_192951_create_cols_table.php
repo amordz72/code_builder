@@ -17,14 +17,15 @@ class CreateColsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('type');
-            $table->string('length');
-            $table->boolean('sel');
-            $table->boolean('if');
-            $table->boolean('hidden');
-            $table->string('index');
-            $table->string('default');
-            $table->string('parent');
-            $table->string('rel_type');
+            $table->string('length')->nullable();
+            $table->boolean('sel')->default(0);
+            $table->boolean('if')->default(0);
+            $table->boolean('hidden')->default(0);
+            $table->string('index')->nullable();
+            $table->string('default')->nullable();
+            $table->string('parent')->nullable();
+            $table->string('rel_type')->nullable();
+            
             $table->foreignId('tbl_id')->constrained("tbls", "id")
             ->onDelete('cascade');
 

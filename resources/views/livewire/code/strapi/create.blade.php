@@ -48,7 +48,7 @@
 
         </div>
         <!-- c8 -->
-        <div class="col-8">
+        <div class="col-8" style="background: #eee">
             @if (session()->has('message'))
             <div class="alert alert-success" style="margin-top:30px;">x
                 {{ session('message') }}
@@ -72,7 +72,7 @@
         window.livewire.on('Tbl_Store', () => {
             $('#tableModal').modal('hide');
         });
-        window.livewire.on('Tbl_Store', () => {
+        window.livewire.on('cols_Store', () => {
             $('#colsModal').modal('hide');
         });
     </script>
