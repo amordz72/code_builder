@@ -1,11 +1,14 @@
-
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-info text-dark col-2"
+ data-bs-toggle="modal" wire:click='clear'
+ data-bs-target="#colsModal_u"
+  hidden>
+    New
+</button>
 
 <!-- Modal Column -->
-<div class="modal fade" wire:ignore.self id="colsUpdateModal"
- tabindex="-1" aria-labelledby="exampleModalLabel"
-     aria-hidden="true"{{-- --}}
-
-    >
+<div class="modal fade" wire:ignore.self id="colsModal_u" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -19,7 +22,7 @@
                 <!-- tps -->
                 <div class="col-md-10">
 
-                    <ul class="nav nav-tabs" id="myTabCols" role="tablist">
+                    <ul class="nav nav-tabs" id="myTabCols_u" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
                                 type="button" role="tab" aria-controls="home" aria-selected="true">
@@ -68,14 +71,14 @@
                                 </div>
                             </div>
                             <!-- e:row-if -->
-                            <!-- s:row-c_hidden -->
-                            <div class="row mt-3 mb-2">
-                                <label for="" class="form-label col-3">Hidden :</label>
-                                <div class="col-9">
-                                    <input type="checkbox" class="form-check" wire:model='c_hidden'>
-                                </div>
-                            </div>
-                            <!-- e:row-c_hidden -->
+                                       <!-- s:row-c_hidden -->
+                                       <div class="row mt-3 mb-2">
+                                        <label for="" class="form-label col-3">Hidden :</label>
+                                        <div class="col-9">
+                                            <input type="checkbox" class="form-check" wire:model='c_hidden'>
+                                        </div>
+                                    </div>
+                                    <!-- e:row-c_hidden -->
                             <!-- s:row-len -->
                             <div class="row mt-3 mb-2">
                                 <label for="" class="form-label col-3">Lenght :</label>
@@ -181,7 +184,7 @@
 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
- <button type="button" class="btn btn-primary" wire:click='update_col()'>Edit </button>
+<button type="button" class="btn btn-primary" wire:click='update_col()'>Save </button>
 
             </div>
         </div>

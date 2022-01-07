@@ -183,8 +183,13 @@
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
+@if ($is_new)
 <button type="button" class="btn btn-primary" wire:click='store_col()'>Save </button>
+@else
+<button type="button" class="btn btn-primary" wire:click='update_col()'>Update </button>
+@endif
+<button type="button" class="btn btn-secondary"  wire:click='clear()'>Clear</button>
+
 
             </div>
         </div>

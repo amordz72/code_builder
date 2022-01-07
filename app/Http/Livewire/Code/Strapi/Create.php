@@ -137,18 +137,19 @@ class Create extends Component
     {
         $pr = Col::find($this->col_hiddenId);
 
-           $p->name = $this->c_name;
-             $p->type = $this->c_type;
-             $p->sel = $this->c_sel;
-             $p->if = $this->c_if;
-             $p->lenght = $this->c_lenght;
-             $p->index = $this->c_index;
-             $p->parent = $this->c_parent;
-             $p->default = $this->c_default;
-             $p->rel_type = $this->rel_type;
-             $p->tbl_id = $this->tbl_id;
+             $pr->name = $this->c_name;
+             $pr->type = $this->c_type;
+             $pr->sel = $this->c_sel;
+             $pr->if = $this->c_if;
+             $pr->lenght = $this->c_lenght;
+             $pr->index = $this->c_index;
+             $pr->parent = $this->c_parent;
+             $pr->default = $this->c_default;
+             $pr->rel_type = $this->rel_type;
+             $pr->tbl_id = $this->tbl_id;
 
 
+             $this->emit('cols_updated'); // Close model to using to js
 
         $this->clear(); //
     }
@@ -158,14 +159,14 @@ class Create extends Component
 // $pr = Strapi::find($this->hidden_id)->delete();
         // $this->clear();
     }
-    public function destroy_col()
+    public function destroy_col($id)
     {
 
-        $pr = Col::find($this->hidden_id)->delete();
+        $pr = Col::find($id)->delete();
     }
     public function clear()
     {
-        $this->new = true;
+        $this->is_new = true;
         $this->hidden_id = 0;
 
     }

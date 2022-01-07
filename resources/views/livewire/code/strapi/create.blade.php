@@ -46,7 +46,7 @@
                 </div>
                 <div>
                     @include('livewire.code.strapi.cols_create_model')
-                    @include('livewire.code.strapi.cols_update_model')
+                    {{-- @include('livewire.code.strapi.cols_update_model') --}}
                 </div>
             </div>
 
@@ -120,16 +120,14 @@
 
 
                                 <td>
-                                    <input type="button" value="Edit"
-                                    class="btn btn-sm btn-warning fw-bold"
-                                     wire:click="edit({{ $col->id }})"
-                                     data-bs-toggle="modal" data-bs-target="#colsUpdateModal">
+                                    <input type="button" value="Edit" class="btn btn-sm btn-warning fw-bold"
+                                        wire:click="edit({{ $col->id }})" data-bs-toggle="modal"
+                                        data-bs-target="#colsModal">
 
-                                    <input type="button" value="Del"
-                                    class="btn btn-sm btn-danger fw-bold"
-                                    wire:click="destroy_col({{ $col->id }})">
+                                    <input type="button" value="Del" class="btn btn-sm btn-danger fw-bold"
+                                        wire:click="destroy_col({{ $col->id }})">
 
-                                    </td>
+                                </td>
 
                             </tr>
                             @endforeach
@@ -153,32 +151,38 @@
 
 
     <script type="text/javascript">
-     window.livewire.on('Project_Store', () => {
+        window.livewire.on('Project_Store', () => {
             $('#projectModal').modal('hide');
         });
         window.livewire.on('Tbl_Store', () => {
             $('#tableModal').modal('hide');
         });
-        window.livewire.on('cols_Store', () => {
-            $('#colsModal').modal('hide');
-        }); /*  */
+
+        window.livewire.on('cols_stored', () => {
+            var myModal = document.getElementById('myModal')
+            myModal.hide()
+})
+         ;
+
+         
 
 
 
 
+      var firstTabEl_u = document.querySelector('#myTabCols_u li:last-child a')
+    var firstTab_u = new bootstrap.Tab(firstTabEl_u)
+
+    firstTab_u.show()
 
 
-    </script>
 
-    <script>
         var firstTabEl = document.querySelector('#myTabCols li:last-child a')
     var firstTab = new bootstrap.Tab(firstTabEl)
 
     firstTab.show()
-        var myTabCols_u = document.querySelector('#myTabCols_u li:last-child a')
-    var firstTab = new bootstrap.Tab(myTabCols_u)
 
-    firstTab.show()
+
+
 
 
     </script>
