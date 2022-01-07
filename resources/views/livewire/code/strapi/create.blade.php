@@ -44,6 +44,9 @@
                     @endif
 
                 </div>
+                <div>
+                    @include('livewire.code.strapi.cols_create_model')
+                </div>
             </div>
 
         </div>
@@ -55,6 +58,34 @@
             </div>
             @endif
 
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                        type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                        type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages"
+                        type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings"
+                        type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                </div>
+                <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">profile</div>
+                <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">messages</div>
+                <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">settings</div>
+            </div>
+
 
         </div>
 
@@ -65,7 +96,7 @@
 
 
 
-  <script type="text/javascript">
+    <script type="text/javascript">
         window.livewire.on('Project_Store', () => {
             $('#projectModal').modal('hide');
         });
@@ -75,7 +106,22 @@
         window.livewire.on('cols_Store', () => {
             $('#colsModal').modal('hide');
         });
+
+
+
+        var firstTabEl = document.querySelector('#myTab li:last-child a')
+                var firstTab = new bootstrap.Tab(firstTabEl)
+
+                firstTab.show()
+
+
     </script>
 
+<script>
+    var firstTabEl = document.querySelector('#myTabCols li:last-child a')
+    var firstTab = new bootstrap.Tab(firstTabEl)
+
+    firstTab.show()
+  </script>
 
 </div>
