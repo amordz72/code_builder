@@ -91,6 +91,7 @@
                                 <th scope="col">If</th>
                                 <th scope="col">Lenght</th>
                                 <th scope="col">Index</th>
+                                <th scope="col">Default</th>
                                 <th scope="col">Parent</th>
                                 <th scope="col">Rel Type</th>
 
@@ -111,6 +112,7 @@
                                 <td>{{ $col->if }}</td>
                                 <td>{{ $col->lenght }}</td>
                                 <td>{{ $col->index }}</td>
+                                <td>{{ $col->default }}</td>
                                 <td>{{ $col->parent }}</td>
 
                                 <td>{{ $col->rel_type }}</td>
@@ -151,7 +153,7 @@
 
 
     <script type="text/javascript">
-        window.livewire.on('Project_Store', () => {
+     window.livewire.on('Project_Store', () => {
             $('#projectModal').modal('hide');
         });
         window.livewire.on('Tbl_Store', () => {
@@ -159,7 +161,7 @@
         });
         window.livewire.on('cols_Store', () => {
             $('#colsModal').modal('hide');
-        });
+        }); /*  */
 
 
 
@@ -173,6 +175,12 @@
     var firstTab = new bootstrap.Tab(firstTabEl)
 
     firstTab.show()
+        var myTabCols_u = document.querySelector('#myTabCols_u li:last-child a')
+    var firstTab = new bootstrap.Tab(myTabCols_u)
+
+    firstTab.show()
+
+
     </script>
 
 </div>

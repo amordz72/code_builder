@@ -23,6 +23,7 @@ class Col extends Model
         'hidden',
         'parent',
         'rel_type',
+        'tbl_id',
 
     ];
 

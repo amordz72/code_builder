@@ -49,6 +49,7 @@ class Create extends Component
     public $c_if = false;
     public $c_lenght = '';
     public $c_index = '';
+    public $c_default = '';
     public $c_parent = '';
     public $c_hidden = false;
 
@@ -143,6 +144,7 @@ class Create extends Component
              $p->lenght = $this->c_lenght;
              $p->index = $this->c_index;
              $p->parent = $this->c_parent;
+             $p->default = $this->c_default;
              $p->rel_type = $this->rel_type;
              $p->tbl_id = $this->tbl_id;
 
@@ -191,11 +193,20 @@ class Create extends Component
         $this->emit('Project_Store'); // Close model to using to jquery
 
     }
-    public function store_cols()
+    public function store_col()
     {
 
         Col::create([
             'name' => $this->c_name,
+            'type' => $this->c_type,
+            'sel' => $this->c_sel,
+            'if' => $this->c_if,
+            'lenght' => $this->c_lenght,
+            'index' => $this->c_index,
+            'default' => $this->c_default,
+            'hidden' => $this->c_hidden,
+            'parent' => $this->c_parent,
+            'rel_type' => $this->rel_type,
             'tbl_id' => $this->tbl_id,
 
         ]);
