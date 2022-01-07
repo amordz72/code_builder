@@ -46,6 +46,7 @@
                 </div>
                 <div>
                     @include('livewire.code.strapi.cols_create_model')
+                    @include('livewire.code.strapi.cols_update_model')
                 </div>
             </div>
 
@@ -86,6 +87,15 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Type</th>
+                                <th scope="col">Sel</th>
+                                <th scope="col">If</th>
+                                <th scope="col">Lenght</th>
+                                <th scope="col">Index</th>
+                                <th scope="col">Default</th>
+                                <th scope="col">Parent</th>
+                                <th scope="col">Rel Type</th>
+
+                                <th scope="col">Action</th>
 
                             </tr>
                         </thead>
@@ -98,6 +108,28 @@
 
                                 <td>{{ $col->name }}</td>
                                 <td>{{ $col->type }}</td>
+                                <td>{{ $col->sel }}</td>
+                                <td>{{ $col->if }}</td>
+                                <td>{{ $col->lenght }}</td>
+                                <td>{{ $col->index }}</td>
+                                <td>{{ $col->default }}</td>
+                                <td>{{ $col->parent }}</td>
+
+                                <td>{{ $col->rel_type }}</td>
+
+
+
+                                <td>
+                                    <input type="button" value="Edit"
+                                    class="btn btn-sm btn-warning fw-bold"
+                                     wire:click="edit({{ $col->id }})"
+                                     data-bs-toggle="modal" data-bs-target="#colsUpdateModal">
+
+                                    <input type="button" value="Del"
+                                    class="btn btn-sm btn-danger fw-bold"
+                                    wire:click="destroy_col({{ $col->id }})">
+
+                                    </td>
 
                             </tr>
                             @endforeach
@@ -121,7 +153,7 @@
 
 
     <script type="text/javascript">
-        window.livewire.on('Project_Store', () => {
+     window.livewire.on('Project_Store', () => {
             $('#projectModal').modal('hide');
         });
         window.livewire.on('Tbl_Store', () => {
@@ -129,14 +161,11 @@
         });
         window.livewire.on('cols_Store', () => {
             $('#colsModal').modal('hide');
-        });
+        }); /*  */
 
 
 
-        var firstTabEl = document.querySelector('#myTab li:last-child a')
-                var firstTab = new bootstrap.Tab(firstTabEl)
 
-                firstTab.show()
 
 
     </script>
@@ -146,6 +175,12 @@
     var firstTab = new bootstrap.Tab(firstTabEl)
 
     firstTab.show()
+        var myTabCols_u = document.querySelector('#myTabCols_u li:last-child a')
+    var firstTab = new bootstrap.Tab(myTabCols_u)
+
+    firstTab.show()
+
+
     </script>
 
 </div>

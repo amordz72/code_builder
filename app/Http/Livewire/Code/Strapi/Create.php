@@ -27,29 +27,31 @@ class Create extends Component
     public $tbl_name = '';
     public $tbl_names = '';
     public $model_name = '';
-  public function ch_name()
-  {
-      $t='';
-      if ( $this->tbl_name=='category') {
-        $t='categories';
-      }else {
-        $t=$this->tbl_name;
-      }
+    public function ch_name()
+    {
+        $t = '';
+        if ($this->tbl_name == 'category') {
+            $t = 'categories';
+        } else {
+            $t = $this->tbl_name;
+        }
 
-    $this->tbl_names= $t;
-    $this->model_name=ucfirst($this->tbl_name) ;
-  }
-
-
+        $this->tbl_names = $t;
+        $this->model_name = ucfirst($this->tbl_name);
+    }
 
     //columns
     public $cols = array();
+    public $col_hiddenId = 0;
     public $c_name = '';
-    public $c_type= '';
-    public $c_sel= '';
-    public $c_if= '';
-    public $c_lenght= '';
-    public $c_parent= '';
+    public $c_type = '';
+    public $c_sel = true;
+    public $c_if = false;
+    public $c_lenght = '';
+    public $c_index = '';
+    public $c_default = '';
+    public $c_parent = '';
+    public $c_hidden = false;
 
     public $rel_type = '';
 
@@ -68,7 +70,7 @@ class Create extends Component
         if ($this->mostOnly) {
             $this->dataType = DataType::where("most", "1")->get();
         } else {
-            $this->dataType = DataType::orderBy('id','asc')->get();
+            $this->dataType = DataType::orderBy('id', 'asc')->get();
         }
 
         return view('livewire.code.strapi.create', ['title' => 'Strapi Form'])
@@ -109,9 +111,20 @@ class Create extends Component
 
     public function edit($id)
     {
-        $this->hidden_id = $id;
-        $pr = Strapi::find($this->hidden_id);
-        $this->name = $pr->name;
+        $this->col_hiddenId = $id;
+        $this->is_new = false;
+
+        $pr = Col::find($id);
+
+        $this->c_name = $pr->name;
+        $this->c_type = $pr->type;
+        $this->c_sel = $pr->sel;
+        $this->c_if = $pr->if;
+        $this->c_lenght = $pr->lenght;
+        $this->c_default = $pr->default;
+        $this->c_hidden = $pr->hidden;
+        $this->c_parent = $pr->parent;
+        $this->rel_type = $pr->rel_type;
 
     }
 
@@ -120,17 +133,40 @@ class Create extends Component
         $pr = Strapi::find($this->hidden_id);
         $this->clear();
     }
+    public function update_col()
+    {
+        $pr = Col::find($this->col_hiddenId);
+
+           $p->name = $this->c_name;
+             $p->type = $this->c_type;
+             $p->sel = $this->c_sel;
+             $p->if = $this->c_if;
+             $p->lenght = $this->c_lenght;
+             $p->index = $this->c_index;
+             $p->parent = $this->c_parent;
+             $p->default = $this->c_default;
+             $p->rel_type = $this->rel_type;
+             $p->tbl_id = $this->tbl_id;
+
+
+
+        $this->clear(); //
+    }
 
     public function destroy()
     {
-        $pr = Strapi::find($this->hidden_id)->delete();
-        $this->clear();
+// $pr = Strapi::find($this->hidden_id)->delete();
+        // $this->clear();
+    }
+    public function destroy_col()
+    {
+
+        $pr = Col::find($this->hidden_id)->delete();
     }
     public function clear()
     {
         $this->new = true;
         $this->hidden_id = 0;
-        $this->name = '';
 
     }
 
@@ -157,20 +193,29 @@ class Create extends Component
         $this->emit('Project_Store'); // Close model to using to jquery
 
     }
-    public function Store_cols()
+    public function store_col()
     {
 
         Col::create([
-            'name' => $this->tbl_name,
-            'project_id' => $this->proj_id,
+            'name' => $this->c_name,
+            'type' => $this->c_type,
+            'sel' => $this->c_sel,
+            'if' => $this->c_if,
+            'lenght' => $this->c_lenght,
+            'index' => $this->c_index,
+            'default' => $this->c_default,
+            'hidden' => $this->c_hidden,
+            'parent' => $this->c_parent,
+            'rel_type' => $this->rel_type,
+            'tbl_id' => $this->tbl_id,
 
         ]);
 
-        session()->flash('message', 'Table Created Successfully.');
+        session()->flash('message', 'Col Created Successfully.');
 
-        $this->tbl_name = '';
+        $this->c_name = '';
 
-        $this->emit('Tbl_Store'); // Close model to using to jquery
+        $this->emit('Col_Store'); // Close model to using to jquery
 
     }
     public function Store_Tbl()
