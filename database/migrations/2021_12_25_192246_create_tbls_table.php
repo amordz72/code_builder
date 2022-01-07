@@ -16,6 +16,8 @@ class CreateTblsTable extends Migration
         Schema::create('tbls', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('names')->nullable();
+            $table->string('model')->nullable();
             $table->foreignId('project_id')->constrained("projects", "id")
             ->onDelete('cascade');
 

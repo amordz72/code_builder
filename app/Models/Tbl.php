@@ -11,8 +11,10 @@ class Tbl extends Model
 
     protected $fillable = [
         'name',
+        'names',
+        'model',
         'project_id',
-        
+
     ];
 
 

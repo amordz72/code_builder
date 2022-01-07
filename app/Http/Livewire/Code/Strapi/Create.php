@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Code\Strapi;
 
+use App\Models\Col;
+use App\Models\DataType;
 use App\Models\Project;
 use App\Models\Strapi;
 use App\Models\Tbl;
-use App\Models\Col;
 use Livewire\Component;
 
 class Create extends Component
@@ -20,17 +21,56 @@ class Create extends Component
     public $proj_name = "";
     public $db = "";
     public $url = "";
-
+//table
     public $tbls = array();
     public $tbl_id = 0;
     public $tbl_name = '';
-    public $name = '';
+    public $tbl_names = '';
+    public $model_name = '';
+  public function ch_name()
+  {
+      $t='';
+      if ( $this->tbl_name=='category') {
+        $t='categories';
+      }else {
+        $t=$this->tbl_name;
+      }
+
+    $this->tbl_names= $t;
+    $this->model_name=ucfirst($this->tbl_name) ;
+  }
+
+
+
+    //columns
+    public $cols = array();
+    public $c_name = '';
+    public $c_type= '';
+    public $c_sel= '';
+    public $c_if= '';
+    public $c_lenght= '';
+    public $c_parent= '';
+
+    public $rel_type = '';
+
+    //dataType
+    public $mostOnly = true;
+    public $dataType = array();
 
     public function render()
     {
         $this->projs = Project::all();
+
         $this->tbls = Tbl::where('project_id', $this->proj_id)->get();
+        $this->cols = Col::where('tbl_id', $this->tbl_id)->get();
         $strapis = Strapi::paginate(5);
+
+        if ($this->mostOnly) {
+            $this->dataType = DataType::where("most", "1")->get();
+        } else {
+            $this->dataType = DataType::orderBy('id','asc')->get();
+        }
+
         return view('livewire.code.strapi.create', ['title' => 'Strapi Form'])
             ->extends('layouts.app');
     }

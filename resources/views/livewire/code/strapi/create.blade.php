@@ -61,11 +61,11 @@
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
-                        type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                        type="button" role="tab" aria-controls="home" aria-selected="true">Columns</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                        type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+                        type="button" role="tab" aria-controls="profile" aria-selected="false">Code</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages"
@@ -79,7 +79,31 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <!-- table cols -->
+                    <table class="table  table-hover table-bordered ">
+                        <thead class=" table-dark ">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Type</th>
 
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach ($cols as $key=> $col)
+
+                            <tr>
+                                <th scope="row">{{ $key }}</th>
+
+                                <td>{{ $col->name }}</td>
+                                <td>{{ $col->type }}</td>
+
+                            </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
                 </div>
                 <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">profile</div>
                 <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">messages</div>
@@ -117,11 +141,11 @@
 
     </script>
 
-<script>
-    var firstTabEl = document.querySelector('#myTabCols li:last-child a')
+    <script>
+        var firstTabEl = document.querySelector('#myTabCols li:last-child a')
     var firstTab = new bootstrap.Tab(firstTabEl)
 
     firstTab.show()
-  </script>
+    </script>
 
 </div>
