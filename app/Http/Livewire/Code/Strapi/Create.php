@@ -54,6 +54,8 @@ class Create extends Component
     public $c_parent = '';
     public $c_hidden = false;
     public $rel_type = '';
+    public $c_childs = '';
+    public $c_childs_arr = array();
 
     //dataType
     public $mostOnly = true;

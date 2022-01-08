@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 
 
 
@@ -61,25 +61,21 @@
 
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
-                        type="button" role="tab" aria-controls="home" aria-selected="true">Columns</button>
+                    <button class="nav-link active" id="home_home-tab" data-bs-toggle="tab" data-bs-target="#home_id" type="button" role="tab" aria-controls="home_id" aria-selected="true">Columns</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                        type="button" role="tab" aria-controls="profile" aria-selected="false">Code</button>
+                    <button class="nav-link" id="home_profile-tab" data-bs-toggle="tab" data-bs-target="#profile_id" type="button" role="tab" aria-controls="profile_id" aria-selected="false">Code</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages"
-                        type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+                    <button class="nav-link" id="home_messages-tab" data-bs-toggle="tab" data-bs-target="#messages_id" type="button" role="tab" aria-controls="messages_id" aria-selected="false">Messages</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings"
-                        type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
+                    <button class="nav-link" id="home_settings-tab" data-bs-toggle="tab" data-bs-target="#settings_id" type="button" role="tab" aria-controls="settings_id" aria-selected="false">Settings</button>
                 </li>
             </ul>
 
             <div class="tab-content">
-                <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="tab-pane active" id="home_id" role="tabpanel" aria-labelledby="home_home-tab">
                     <!-- table cols -->
                     <table class="table  table-hover table-bordered ">
                         <thead class=" table-dark ">
@@ -115,8 +111,8 @@
                                 <td>{{ $col->index }}</td>
                                 <td>{{ $col->default }}</td>
                                 <td>{{ $col->default_v }}</td>
-                                 <td>{{ $col->parent }}</td>
-                               
+                                <td>{{ $col->parent }}</td>
+
 
 
                                 <td>{{ $col->rel_type }}</td>
@@ -124,12 +120,9 @@
 
 
                                 <td>
-                                    <input type="button" value="Edit" class="btn btn-sm btn-warning fw-bold"
-                                        wire:click="edit({{ $col->id }})" data-bs-toggle="modal"
-                                        data-bs-target="#colsModal">
+                                    <input type="button" value="Edit" class="btn btn-sm btn-warning fw-bold" wire:click="edit({{ $col->id }})" data-bs-toggle="modal" data-bs-target="#colsModal">
 
-                                    <input type="button" value="Del" class="btn btn-sm btn-danger fw-bold"
-                                        wire:click="destroy_col({{ $col->id }})">
+                                    <input type="button" value="Del" class="btn btn-sm btn-danger fw-bold" wire:click="destroy_col({{ $col->id }})">
 
                                 </td>
 
@@ -139,9 +132,9 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">profile</div>
-                <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">messages</div>
-                <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">settings</div>
+                <div class="tab-pane" id="profile_id" role="tabpanel" aria-labelledby="home_profile-tab">profile</div>
+                <div class="tab-pane" id="messages_id" role="tabpanel" aria-labelledby="home_messages-tab">messages</div>
+                <div class="tab-pane" id="settings_id" role="tabpanel" aria-labelledby="home_settings-tab">settings</div>
             </div>
 
 
@@ -165,29 +158,24 @@
         window.livewire.on('cols_stored', () => {
             var myModal = document.getElementById('myModal')
             myModal.hide()
-})
-         ;
+        });
 
 
 
 
 
 
-      var firstTabEl_u = document.querySelector('#myTabCols_u li:last-child a')
-    var firstTab_u = new bootstrap.Tab(firstTabEl_u)
+        var firstTabEl_u = document.querySelector('#myTabCols_u li:last-child a')
+        var firstTab_u = new bootstrap.Tab(firstTabEl_u)
 
-    firstTab_u.show()
+        firstTab_u.show()
 
 
 
         var firstTabEl = document.querySelector('#myTabCols li:last-child a')
-    var firstTab = new bootstrap.Tab(firstTabEl)
+        var firstTab = new bootstrap.Tab(firstTabEl)
 
-    firstTab.show()
-
-
-
-
+        firstTab.show()
 
     </script>
 

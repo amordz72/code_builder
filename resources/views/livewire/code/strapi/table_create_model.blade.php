@@ -1,5 +1,6 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-info text-dark col-2" data-bs-toggle="modal"
+<button type="button" class="btn btn-sm  btn-outline-info text-dark col-2"
+ data-bs-toggle="modal"
     data-bs-target="#tableModal">
     New
 </button>
@@ -10,7 +11,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New Table</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- name -->
