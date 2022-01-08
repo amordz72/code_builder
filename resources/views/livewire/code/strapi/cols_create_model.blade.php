@@ -1,8 +1,6 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-info text-dark col-2"
- data-bs-toggle="modal" wire:click='clear'
- data-bs-target="#colsModal"
- >
+<button type="button" class="btn btn-outline-info text-dark col-2" data-bs-toggle="modal" wire:click='clear'
+    data-bs-target="#colsModal">
     New
 </button>
 
@@ -71,19 +69,20 @@
                                 </div>
                             </div>
                             <!-- e:row-if -->
-                                       <!-- s:row-c_hidden -->
-                                       <div class="row mt-3 mb-2">
-                                        <label for="" class="form-label col-3">Hidden :</label>
-                                        <div class="col-9">
-                                            <input type="checkbox" class="form-check" wire:model='c_hidden'>
-                                        </div>
-                                    </div>
-                                    <!-- e:row-c_hidden -->
+                            <!-- s:row-c_hidden -->
+                            <div class="row mt-3 mb-2">
+                                <label for="" class="form-label col-3">Hidden :</label>
+                                <div class="col-9">
+                                    <input type="checkbox" class="form-check" wire:model='c_hidden'>
+                                </div>
+                            </div>
+                            <!-- e:row-c_hidden -->
                             <!-- s:row-len -->
                             <div class="row mt-3 mb-2">
                                 <label for="" class="form-label col-3">Lenght :</label>
                                 <div class="col-9">
-                                    <input type="number" class="form-control" wire:model='c_lenght'>
+                                    <input type="number" class="form-control" wire:model='c_length'>
+
                                 </div>
                             </div>
                             <!-- e:row-len -->
@@ -91,8 +90,8 @@
                         <!-- tap type -->
                         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-                            <select class="form-select form-select-lg my-2"
-                             aria-label=".form-select-lg example" wire:model='c_type'>
+                            <select class="form-select form-select-lg my-2" aria-label=".form-select-lg example"
+                                wire:model='c_type'>
                                 <option selected>Open this select menu</option>
 
                                 @foreach ($dataType as $item)
@@ -103,8 +102,7 @@
                             </select>
 
                             <div class="form-check form-check-inline ">
-                                <input class="form-check-input" type="checkbox" value="true"
-                                 wire:model='mostOnly'>
+                                <input class="form-check-input" type="checkbox" value="true" wire:model='mostOnly'>
 
                                 <label class="form-check-label" for="inlineCheckbox1">
                                     {{ ($mostOnly) ?'Most Data Type':'All Data Type'}}
@@ -124,8 +122,7 @@
 
                         </div>
 
-                        <div class="tab-pane" id="messages" role="tabpanel"
-                         aria-labelledby="messages-tab">
+                        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
 
 
                             <!-- tbls -->
@@ -148,8 +145,7 @@
 
                             </div>
 
-                            <select class="form-select form-select-lg my-2"
-                             wire:model='c_index'>
+                            <select class="form-select form-select-lg my-2" wire:model='c_index'>
 
                                 <option selected value="">Open this select menu</option>
 
@@ -158,8 +154,7 @@
 
 
                             </select>
-                            <select class="form-select form-select-lg my-2"
-                             wire:model='rel_type'>
+                            <select class="form-select form-select-lg my-2" wire:model='rel_type'>
 
                                 <option selected value="">Open this select menu</option>
                                 <option value="hasOne">One To One(ex:(user)</option>
@@ -183,12 +178,12 @@
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-@if ($is_new)
-<button type="button" class="btn btn-primary" wire:click='store_col()'>Save </button>
-@else
-<button type="button" class="btn btn-primary" wire:click='update_col()'>Update </button>
-@endif
-<button type="button" class="btn btn-secondary"  wire:click='clear()'>Clear</button>
+                @if ($is_new)
+                <button type="button" class="btn btn-primary" wire:click='store_col()'>Save </button>
+                @else
+                <button type="button" class="btn btn-primary" wire:click='update_col()'>Update </button>
+                @endif
+                <button type="button" class="btn btn-secondary" wire:click='clear_col()'>Clear</button>
 
 
             </div>

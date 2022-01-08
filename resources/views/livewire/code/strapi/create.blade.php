@@ -8,7 +8,7 @@
 
 
         <!-- c4 -->
-        <div class="col-4">
+        <div class="col-3">
             <div class="div  fw-bold text-blak ">
                 <!-- projs -->
                 <div class="row">
@@ -52,7 +52,7 @@
 
         </div>
         <!-- c8 -->
-        <div class="col-8" style="background: #eee">
+        <div class="col-9" style="background: #eee">
             @if (session()->has('message'))
             <div class="alert alert-success" style="margin-top:30px;">x
                 {{ session('message') }}
@@ -92,6 +92,7 @@
                                 <th scope="col">Lenght</th>
                                 <th scope="col">Index</th>
                                 <th scope="col">Default</th>
+                                <th scope="col">Default Value</th>
                                 <th scope="col">Parent</th>
                                 <th scope="col">Rel Type</th>
 
@@ -110,11 +111,13 @@
                                 <td>{{ $col->type }}</td>
                                 <td>{{ $col->sel }}</td>
                                 <td>{{ $col->if }}</td>
-                                <td>{{ $col->lenght }}</td>
+                                <td>{{ $col->length }}</td>
                                 <td>{{ $col->index }}</td>
                                 <td>{{ $col->default }}</td>
-                                <td>{{ $col->parent }}</td>
+                                <td>{{ $col->default_v }}</td>
+                                <td>{{ $col->length }}</td>
 
+      <td>{{ $col->parent }}</td>
                                 <td>{{ $col->rel_type }}</td>
 
 
@@ -164,7 +167,7 @@
 })
          ;
 
-         
+
 
 
 

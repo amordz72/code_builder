@@ -20,6 +20,7 @@ class Col extends Model
         'if',
         'index',
         'default',
+        'default_v',
         'hidden',
         'parent',
         'rel_type',

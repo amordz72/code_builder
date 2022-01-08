@@ -23,6 +23,7 @@ class CreateColsTable extends Migration
             $table->boolean('hidden')->default(0);
             $table->string('index')->nullable();
             $table->string('default')->nullable();
+            $table->string('default_v')->nullable();
             $table->string('parent')->nullable();
             $table->string('rel_type')->nullable();
 
