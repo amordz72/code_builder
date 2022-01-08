@@ -64,7 +64,9 @@
                     <button class="nav-link active" id="home_home-tab" data-bs-toggle="tab" data-bs-target="#home_id" type="button" role="tab" aria-controls="home_id" aria-selected="true">Columns</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="home_profile-tab" data-bs-toggle="tab" data-bs-target="#profile_id" type="button" role="tab" aria-controls="profile_id" aria-selected="false">Code</button>
+                    <button class="nav-link" id="home_profile-tab" data-bs-toggle="tab" data-bs-target="#profile_id" type="button" role="tab" aria-controls="profile_id" aria-selected="false">
+                        
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="home_messages-tab" data-bs-toggle="tab" data-bs-target="#messages_id" type="button" role="tab" aria-controls="messages_id" aria-selected="false">Messages</button>

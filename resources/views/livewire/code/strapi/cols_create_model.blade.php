@@ -1,8 +1,11 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-info btn-sm text-dark col-2" data-bs-toggle="modal" wire:click='clear'
+@if ($tbl_id!='')
+<button type="button" class="btn btn-info btn-md text-dark fw-bold mt-3" data-bs-toggle="modal" wire:click='clear'
     data-bs-target="#colsModal">
-    New
+    New Column
 </button>
+@endif
+
 
 <!-- Modal Column -->
 <div class="modal fade" wire:ignore.self id="colsModal" tabindex="-1" aria-labelledby="colsModal_lbl"
