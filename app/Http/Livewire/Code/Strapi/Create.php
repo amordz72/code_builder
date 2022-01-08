@@ -67,6 +67,19 @@ class Create extends Component
         $this->projs = Project::all();
 
         $this->tbls = Tbl::where('project_id', $this->proj_id)->get();
+try {
+     $this->tbl_name=Tbl::
+         where('id','=',  $this->tbl_id)->where('project_id', '=', $this->proj_id )->get()[0]->name;
+
+} catch (\Throwable $th) {
+    //throw $th;
+}
+         //
+
+
+        //all()dd( $this->body);
+
+
         $this->cols = Col::where('tbl_id', $this->tbl_id)->get();
         $strapis = Strapi::paginate(5);
 
@@ -131,11 +144,13 @@ class Create extends Component
 
     }
 
-    public function update()
+    public function updated()
     {
-        $pr = Strapi::find($this->hidden_id);
-        $this->clear();
+       // $pr = Strapi::find($this->hidden_id);
+        //$this->clear();
+
     }
+
     public function update_col()
     {
         $pr = Col::find($this->col_hiddenId);
@@ -258,27 +273,49 @@ class Create extends Component
 
     public function code_model()
     {
+
+        $cols='';
+        $parent='';
+        $childs='';
+foreach ($this->cols as $key => $value) {
+ $cols.="'$value->name',\n";
+
+if ($value->type=='foreignId') {
+    $parent.="
+    public function $value->parent()
+    {\n
+      return \$this->hasOne(".ucfirst($value->parent)."::class, 'id','".$value->parent."_id');\n
+ }\n
+    ";
+}
+
+}
+
+
         $this->body = "
 <?php
 namespace App\Models;\n\n
 use Illuminate\Database\Eloquent\Factories\
 HasFactory;\nuse Illuminate\Database\Eloquent\Model;\n\n
 
-class {$this->tbl_name} extends Model
+class ".ucfirst($this->tbl_name)." extends Model
     {
            use HasFactory;\n
             protected \$table = 'codes';
             \n
             protected \$fillable = [
-                    'lw',
+                $cols
                  ];
 
-public function Lang()\n    {\n
-                                return \$this->hasOne(Lang::class, 'id','lang_id');\n
-                                }\n  public function tbls(): HasMany\n    {\n
-                                           return \$this->hasMany(Tbl::class,
-                                           'project_id', 'id');\n    }
-                                           \n}
+$parent
+
+public function tbls(): HasMany
+   {\n
+ return \$this->hasMany(Tbl::class,'project_id', 'id');\n
+
+ }
+
+ \n}
                                            \n";
     }
 

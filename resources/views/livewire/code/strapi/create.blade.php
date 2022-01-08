@@ -48,7 +48,8 @@
                 <div class="row mt-3">
                     <label for="" class="col-3">Table :</label>
                     <div class="col-9">
-                        <input type="text" class="form-control" wire:model='tbl_name' id="txt_tbl_name">
+                        <input type="text" class="form-control"
+                        wire:model='tbl_name' id="txt_tbl_name">
                     </div>
                 </div>
                 <div>
@@ -81,19 +82,12 @@
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link"
-                    id="home_profile-tab" data-bs-toggle="tab"
-                    data-bs-target="#profile_id" type="button"
-                    role="tab" aria-controls="profile_id"
-                     aria-selected="false">Code
+                    <button class="nav-link" id="home_profile-tab" data-bs-toggle="tab" data-bs-target="#profile_id" type="button" role="tab" aria-controls="profile_id" aria-selected="false">Code
 
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="home_messages-tab"
-                     data-bs-toggle="tab" data-bs-target="#messages_id"
-                     type="button" role="tab" aria-controls="messages_id"
-                     aria-selected="false">Messages</button>
+                    <button class="nav-link" id="home_messages-tab" data-bs-toggle="tab" data-bs-target="#messages_id" type="button" role="tab" aria-controls="messages_id" aria-selected="false">Messages</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="home_settings-tab" data-bs-toggle="tab" data-bs-target="#settings_id" type="button" role="tab" aria-controls="settings_id" aria-selected="false">Settings</button>
@@ -159,22 +153,17 @@
                     </table>
                 </div>
 
-                <div class="tab-pane" id="profile_id" role="tabpanel"
-                aria-labelledby="home_profile-tab">
-                <div class="form-floating">
-                    <textarea class="form-control fw-bold text-dark "
-                    placeholder="Leave a comment here" id="floatingTextarea2"
-                     style="height: 450px;font-size:1.3rem" wire:model='body'></textarea>
-                    {{-- <label for="floatingTextarea2">Code Here ...</label> --}}
+                <div class="tab-pane" id="profile_id" role="tabpanel" aria-labelledby="home_profile-tab">
+                    <div class="form-floating">
+                        <textarea class="form-control fw-bold text-dark " placeholder="Leave a comment here" id="floatingTextarea2" style="height: 450px;font-size:1.3rem" wire:model='body'></textarea>
+                        {{-- <label for="floatingTextarea2">Code Here ...</label> --}}
+                    </div>
                 </div>
-            </div>
 
-                <div class="tab-pane" id="messages_id" role="tabpanel"
-                 aria-labelledby="home_messages-tab">messages
+                <div class="tab-pane" id="messages_id" role="tabpanel" aria-labelledby="home_messages-tab">messages
 
                 </div>
-                <div class="tab-pane" id="settings_id" role="tabpanel"
-                 aria-labelledby="home_settings-tab">settings
+                <div class="tab-pane" id="settings_id" role="tabpanel" aria-labelledby="home_settings-tab">settings
                 </div>
             </div>
 
