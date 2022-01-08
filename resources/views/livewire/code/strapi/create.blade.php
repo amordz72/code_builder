@@ -46,7 +46,15 @@
                 </div>
                 <div>
                     @include('livewire.code.strapi.cols_create_model')
-                    {{-- @include('livewire.code.strapi.cols_update_model') --}}
+
+
+   <div class="btn-group mt-3">
+        <input type="button" class="btn btn-info btn-md me-1" value="Model">
+        <input type="button" class="btn btn-primary btn-md me-1" value="Migration">
+        <input type="button" class="btn btn-danger btn-md me-1" value="Route">
+        {{-- <input type="button" class="btn btn-danger btn-md me-1" value="Route" style="background: rgb(211, 79, 79)"> --}}
+
+    </div>
                 </div>
             </div>
 
@@ -65,7 +73,7 @@
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="home_profile-tab" data-bs-toggle="tab" data-bs-target="#profile_id" type="button" role="tab" aria-controls="profile_id" aria-selected="false">
-                        
+
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
