@@ -47,7 +47,7 @@ class Create extends Component
     public $c_type = '';
     public $c_sel = true;
     public $c_if = false;
-    public $c_lenght = '';
+    public $c_length = 11;
     public $c_index = '';
     public $c_default = '';
     public $c_default_v = '';
@@ -141,7 +141,7 @@ class Create extends Component
         $pr->type = $this->c_type;
         $pr->sel = $this->c_sel;
         $pr->if = $this->c_if;
-        $pr->length = $this->c_lenght;
+        $pr->length = $this->c_length;
         $pr->index = $this->c_index;
         $pr->parent = $this->c_parent;
         $pr->default = $this->c_default;
@@ -179,7 +179,7 @@ class Create extends Component
         $this->c_type = '';
         $this->c_sel = true;
         $this->c_if = false;
-        $this->c_lenght = '';
+        $this->c_length = 11;
         $this->c_index = '';
         $this->c_default = '';
         $this->c_parent = '';
@@ -219,7 +219,7 @@ class Create extends Component
             'type' => $this->c_type,
             'sel' => $this->c_sel,
             'if' => $this->c_if,
-            'lenght' => $this->c_lenght,
+            'length' => $this->c_length,
             'index' => $this->c_index,
             'default' => $this->c_default,
             'hidden' => $this->c_hidden,
@@ -231,7 +231,7 @@ class Create extends Component
 
         session()->flash('message', 'Col Created Successfully.');
 
-        $this->c_name = '';
+        $this->clear_col() ;
 
         $this->emit('Col_Store'); // Close model to using to jquery
 

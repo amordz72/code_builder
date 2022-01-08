@@ -105,7 +105,7 @@
                             @foreach ($cols as $key=> $col)
 
                             <tr>
-                                <th scope="row">{{ $key }}</th>
+                                <th scope="row">{{ $key+1 }}</th>
 
                                 <td>{{ $col->name }}</td>
                                 <td>{{ $col->type }}</td>
@@ -115,9 +115,10 @@
                                 <td>{{ $col->index }}</td>
                                 <td>{{ $col->default }}</td>
                                 <td>{{ $col->default_v }}</td>
-                                <td>{{ $col->length }}</td>
+                                 <td>{{ $col->parent }}</td>
+                               
 
-      <td>{{ $col->parent }}</td>
+
                                 <td>{{ $col->rel_type }}</td>
 
 
