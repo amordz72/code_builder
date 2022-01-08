@@ -24,6 +24,7 @@ class Create extends Component
 //table
     public $tbls = array();
     public $tbl_id = 0;
+    public $body = '';
     public $tbl_name = '';
     public $tbl_names = '';
     public $model_name = '';
@@ -159,7 +160,7 @@ class Create extends Component
 
     public function destroy()
     {
-       // $pr = Strapi::find($this->hidden_id)->delete();
+        // $pr = Strapi::find($this->hidden_id)->delete();
         // $this->clear();
     }
     public function destroy_col($id)
@@ -233,7 +234,7 @@ class Create extends Component
 
         session()->flash('message', 'Col Created Successfully.');
 
-        $this->clear_col() ;
+        $this->clear_col();
 
         $this->emit('Col_Store'); // Close model to using to jquery
 
@@ -253,6 +254,32 @@ class Create extends Component
 
         $this->emit('Tbl_Store'); // Close model to using to jquery
 
+    }
+
+    public function code_model()
+    {
+        $this->body = "
+<?php
+namespace App\Models;\n\n
+use Illuminate\Database\Eloquent\Factories\
+HasFactory;\nuse Illuminate\Database\Eloquent\Model;\n\n
+
+class {$this->tbl_name} extends Model
+    {
+           use HasFactory;\n
+            protected \$table = 'codes';
+            \n
+            protected \$fillable = [
+                    'lw',
+                 ];
+
+public function Lang()\n    {\n
+                                return \$this->hasOne(Lang::class, 'id','lang_id');\n
+                                }\n  public function tbls(): HasMany\n    {\n
+                                           return \$this->hasMany(Tbl::class,
+                                           'project_id', 'id');\n    }
+                                           \n}
+                                           \n";
     }
 
 }

@@ -68,7 +68,7 @@
                                     <a class="dropdown-item" href="{{ route('code.form.create') }}">
                                         {{ __('Create Form') }}</a>
                                 </li>
-                                <li><a class="dropdown-item" href="{{ route('code.strapi.create') }}">Strapi Create</a></li>
+                                <li><a class="dropdown-item" href="{{ route('code.strapi.create') }}">Strapi Create</a></li>@
                             </ul>
                         </li>
                         <!--end dropdown links Make -->

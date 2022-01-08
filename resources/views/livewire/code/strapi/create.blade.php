@@ -22,6 +22,7 @@
 
                         </select>
                     </div>
+
                     @include('livewire.code.strapi.project_create_model')
 
                 </div>
@@ -30,7 +31,7 @@
                 <div class="row">
                     <label for="" class="form-label fw-bold  col-md-3">Table :</label>
                     <div class="col-md-7">
-                        <select wire:model='tbl_id' class="form-select">
+                        <select wire:model='tbl_id' class="form-select" id="cbx_tbl_id">
                             <option value="">select</option>
                             @foreach ($tbls as $item)
                             <option value="{{ $item ->id}}">{{ $item ->name}}</option>
@@ -44,17 +45,24 @@
                     @endif
 
                 </div>
+                <div class="row mt-3">
+                    <label for="" class="col-3">Table :</label>
+                    <div class="col-9">
+                        <input type="text" class="form-control" wire:model='tbl_name' id="txt_tbl_name">
+                    </div>
+                </div>
                 <div>
                     @include('livewire.code.strapi.cols_create_model')
 
 
-   <div class="btn-group mt-3">
-        <input type="button" class="btn btn-info btn-md me-1" value="Model">
-        <input type="button" class="btn btn-primary btn-md me-1" value="Migration">
-        <input type="button" class="btn btn-danger btn-md me-1" value="Route">
-        {{-- <input type="button" class="btn btn-danger btn-md me-1" value="Route" style="background: rgb(211, 79, 79)"> --}}
+                    <div class="btn-group mt-3">
+                        <input type="button" class="btn btn-info btn-md me-1" value="Model" wire:click='code_model'>
+                        <input type="button" class="btn btn-primary btn-md me-1" value="Migration">
+                        <input type="button" class="btn btn-danger btn-md me-1" value="Route">
+                        {{-- <input type="button" class="btn btn-danger btn-md me-1" value="Route"
+                            style="background: rgb(211, 79, 79)"> --}}
 
-    </div>
+                    </div>
                 </div>
             </div>
 
@@ -143,8 +151,14 @@
                     </table>
                 </div>
                 <div class="tab-pane" id="profile_id" role="tabpanel" aria-labelledby="home_profile-tab">profile</div>
-                <div class="tab-pane" id="messages_id" role="tabpanel" aria-labelledby="home_messages-tab">messages</div>
-                <div class="tab-pane" id="settings_id" role="tabpanel" aria-labelledby="home_settings-tab">settings</div>
+                <div class="tab-pane" id="messages_id" role="tabpanel" aria-labelledby="home_messages-tab">messages
+                    <div class="form-floating">
+                        <textarea class="form-control fw-bold text-dark " placeholder="Leave a comment here" id="floatingTextarea2" style="height: 450px;font-size:1.3rem" wire:model='body'></textarea>
+                        {{-- <label for="floatingTextarea2">Code Here ...</label> --}}
+                    </div>
+                </div>
+                <div class="tab-pane" id="settings_id" role="tabpanel" aria-labelledby="home_settings-tab">settings
+                </div>
             </div>
 
 
@@ -157,7 +171,7 @@
 
 
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         window.livewire.on('Project_Store', () => {
             $('#projectModal').modal('hide');
         });
@@ -169,10 +183,6 @@
             var myModal = document.getElementById('myModal')
             myModal.hide()
         });
-
-
-
-
 
 
         var firstTabEl_u = document.querySelector('#myTabCols_u li:last-child a')
@@ -187,6 +197,10 @@
 
         firstTab.show()
 
-    </script>
+
+
+    </script> --}}
+
+
 
 </div>
