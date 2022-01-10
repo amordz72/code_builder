@@ -17,33 +17,24 @@ class Create extends Component
     public $is_new = true;
     public $hidden_id = 0;
     public $strapi = array();
-    public $projs = array();
+    public $body = '';
+    public $model_name = '';
+    public $name_p = '';
+
+    //prroject
     public $proj_id = 0;
+    public $projs = array();
     public $proj_name = "";
     public $db = "";
     public $url = "";
-//table
+    //table
     public $tbls = array();
     public $tbl_childs = array();
     public $tbl_id = 0;
-    public $body = '';
     public $tbl_name = '';
     public $tbl_names = '';
-    public $model_name = '';
+
     public $c_child = '';
-
-    public function ch_name()
-    {
-        $t = '';
-        if ($this->tbl_name == 'category') {
-            $t = 'categories';
-        } else {
-            $t = $this->tbl_name;
-        }
-
-        $this->tbl_names = $t;
-        $this->model_name = ucfirst($this->tbl_name);
-    }
 
     //columns
     public $cols = array();
@@ -68,6 +59,7 @@ class Create extends Component
 
     public function render()
     {
+
         $this->projs = Project::all();
 
         $this->tbls = Tbl::where('project_id', $this->proj_id)->get();
@@ -82,7 +74,15 @@ class Create extends Component
         }
         //
 
-        //all()dd( $this->body);
+        //start-set model and plural
+        if ($this->tbl_name == 'category') {
+            $this->name_p = 'categories';
+        } else {
+            $this->name_p = $this->tbl_name . 's';
+        }
+
+        $this->model_name = ucfirst($this->tbl_name);
+        //end-set model and plural
 
         $this->cols = Col::where('tbl_id', $this->tbl_id)->get();
         $strapis = Strapi::paginate(5);
@@ -295,19 +295,17 @@ class Create extends Component
     ";
             }
 
-
-
         }
-    foreach ($this->tbl_childs as $key => $child) {
+        foreach ($this->tbl_childs as $key => $child) {
 
-                $childs .= "
+            $childs .= "
         public function " . $child->name . "s(): HasMany
         {\n
-      return \$this->hasMany(" . ucfirst($child->name) . "::class,'" . $this->tbl_name. "_id', 'id');\n
+      return \$this->hasMany(" . ucfirst($child->name) . "::class,'" . $this->tbl_name . "_id', 'id');\n
 
       }\n
         ";
-            }
+        }
 
         $this->body = "
 <?php
@@ -318,10 +316,10 @@ HasFactory;\nuse Illuminate\Database\Eloquent\Model;\n\n
 class " . ucfirst($this->tbl_name) . " extends Model
     {
            use HasFactory;\n
-            protected \$table = 'codes';
+            protected \$table = '" . $this->tbl_name . "'s;
             \n
             protected \$fillable = [
-                $cols
+                " . $cols . "
                  ];
 
 $parent
@@ -341,6 +339,11 @@ $childs
     public function destroy_child($id)
     {
         Tbl_child::find($id)->delete();
+    }
+
+    public function setNames()
+    {
+
     }
 
 }

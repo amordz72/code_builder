@@ -1,18 +1,13 @@
 <div class="container-fluid">
 
-
-
     <div class="row">
-
-
-
 
         <!-- c4 -->
         <div class="col-3">
             <div class="div  fw-bold text-blak ">
                 <!-- projs -->
                 <div class="row">
-                    <label for="" class="form-label fw-bold  col-md-3">Project :</label>
+                    <label for="" class="form-label fw-bold  col-md-3">Projects :</label>
                     <div class="col-md-7">
                         <select wire:model='proj_id' class="form-select  mb-2 ">
                             <option value="">select</option>
@@ -29,7 +24,7 @@
                 <!-- tbls -->
 
                 <div class="row">
-                    <label for="" class="form-label fw-bold  col-md-3">Table :</label>
+                    <label for="" class="form-label fw-bold  col-md-3">Tables :</label>
                     <div class="col-md-7">
                         <select wire:model='tbl_id' class="form-select" id="cbx_tbl_id">
                             <option value="">select</option>
@@ -45,11 +40,21 @@
                     @endif
 
                 </div>
+
+                <!-- tbl -->
                 <div class="row mt-3">
                     <label for="" class="col-3">Table :</label>
                     <div class="col-9">
                         <input type="text" class="form-control"
                         wire:model='tbl_name' id="txt_tbl_name">
+                    </div>
+                </div>
+                <!-- name_p  -->
+                <div class="row mt-3">
+                    <label for="" class="col-3">Plural :</label>
+                    <div class="col-9">
+                        <input type="text" class="form-control"
+                        wire:model='name_p' id="txt_tbl_name">
                     </div>
                 </div>
                 <div>
