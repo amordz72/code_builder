@@ -1,5 +1,6 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-sm  btn-outline-info text-dark col-2"
+<button type="button" class="btn btn-sm
+ btn-outline-info text-dark col-2"
  data-bs-toggle="modal"
     data-bs-target="#tableModal">
     New

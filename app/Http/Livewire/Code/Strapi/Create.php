@@ -7,6 +7,7 @@ use App\Models\DataType;
 use App\Models\Project;
 use App\Models\Strapi;
 use App\Models\Tbl;
+use App\Models\Tbl_child;
 use Livewire\Component;
 
 class Create extends Component
@@ -23,11 +24,14 @@ class Create extends Component
     public $url = "";
 //table
     public $tbls = array();
+    public $tbl_childs = array();
     public $tbl_id = 0;
     public $body = '';
     public $tbl_name = '';
     public $tbl_names = '';
     public $model_name = '';
+    public $c_child = '';
+
     public function ch_name()
     {
         $t = '';
@@ -67,18 +71,18 @@ class Create extends Component
         $this->projs = Project::all();
 
         $this->tbls = Tbl::where('project_id', $this->proj_id)->get();
-try {
-     $this->tbl_name=Tbl::
-         where('id','=',  $this->tbl_id)->where('project_id', '=', $this->proj_id )->get()[0]->name;
+        try {
+            $this->tbl_name = Tbl::
+                where('id', '=', $this->tbl_id)
+            // ->where('project_id', '=', $this->proj_id )
+                ->get()[0]->name;
 
-} catch (\Throwable $th) {
-    //throw $th;
-}
-         //
-
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        //
 
         //all()dd( $this->body);
-
 
         $this->cols = Col::where('tbl_id', $this->tbl_id)->get();
         $strapis = Strapi::paginate(5);
@@ -88,6 +92,8 @@ try {
         } else {
             $this->dataType = DataType::orderBy('id', 'asc')->get();
         }
+
+        $this->tbl_childs = Tbl_child::where('tbl_id', $this->tbl_id)->get();
 
         return view('livewire.code.strapi.create', ['title' => 'Strapi Form'])
             ->extends('layouts.app');
@@ -146,7 +152,7 @@ try {
 
     public function updated()
     {
-       // $pr = Strapi::find($this->hidden_id);
+        // $pr = Strapi::find($this->hidden_id);
         //$this->clear();
 
     }
@@ -274,23 +280,34 @@ try {
     public function code_model()
     {
 
-        $cols='';
-        $parent='';
-        $childs='';
-foreach ($this->cols as $key => $value) {
- $cols.="'$value->name',\n";
+        $cols = '';
+        $parent = '';
+        $childs = '';
+        foreach ($this->cols as $key => $value) {
+            $cols .= "'$value->name',\n";
 
-if ($value->type=='foreignId') {
-    $parent.="
+            if ($value->type == 'foreignId') {
+                $parent .= "
     public function $value->parent()
     {\n
-      return \$this->hasOne(".ucfirst($value->parent)."::class, 'id','".$value->parent."_id');\n
+      return \$this->hasOne(" . ucfirst($value->parent) . "::class, 'id','" . $value->name . "');\n
  }\n
     ";
-}
+            }
 
-}
 
+
+        }
+    foreach ($this->tbl_childs as $key => $child) {
+
+                $childs .= "
+        public function " . $child->name . "s(): HasMany
+        {\n
+      return \$this->hasMany(" . ucfirst($child->name) . "::class,'" . $this->tbl_name. "_id', 'id');\n
+
+      }\n
+        ";
+            }
 
         $this->body = "
 <?php
@@ -298,7 +315,7 @@ namespace App\Models;\n\n
 use Illuminate\Database\Eloquent\Factories\
 HasFactory;\nuse Illuminate\Database\Eloquent\Model;\n\n
 
-class ".ucfirst($this->tbl_name)." extends Model
+class " . ucfirst($this->tbl_name) . " extends Model
     {
            use HasFactory;\n
             protected \$table = 'codes';
@@ -309,14 +326,21 @@ class ".ucfirst($this->tbl_name)." extends Model
 
 $parent
 
-public function tbls(): HasMany
-   {\n
- return \$this->hasMany(Tbl::class,'project_id', 'id');\n
-
- }
+$childs
 
  \n}
                                            \n";
+    }
+    public function store_child()
+    {
+        Tbl_child::create([
+            "name" => $this->c_child,
+            "tbl_id" => $this->tbl_id,
+        ]);
+    }
+    public function destroy_child($id)
+    {
+        Tbl_child::find($id)->delete();
     }
 
 }

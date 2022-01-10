@@ -1,15 +1,13 @@
 <!-- Button trigger modal -->
 @if ($tbl_id!='')
-<button type="button" class="btn btn-info btn-md text-dark fw-bold mt-3" data-bs-toggle="modal" wire:click='clear'
-    data-bs-target="#colsModal">
+<button type="button" class="btn btn-info btn-sm text-dark fw-bold mt-3" data-bs-toggle="modal" wire:click='clear' data-bs-target="#colsModal">
     New Column
 </button>
 @endif
 
 
 <!-- Modal Column -->
-<div class="modal fade" wire:ignore.self id="colsModal" tabindex="-1" aria-labelledby="colsModal_lbl"
-    aria-hidden="true">
+<div class="modal fade" wire:ignore.self id="colsModal" tabindex="-1" aria-labelledby="colsModal_lbl" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -25,24 +23,19 @@
 
                     <ul class="nav nav-tabs" id="myTabCols" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
-                                type="button" role="tab" aria-controls="home" aria-selected="true">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
                                 Data
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                type="button" role="tab" aria-controls="profile" aria-selected="false">Type</button>
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Type</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages"
-                                type="button" role="tab" aria-controls="messages" aria-selected="false">Parent
+                            <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Parent
                                 Table</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings"
-                                type="button" role="tab" aria-controls="settings"
-                                aria-selected="false">Children</button>
+                            <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Children</button>
                         </li>
                     </ul>
 
@@ -88,8 +81,7 @@
                             <div class="row  mb-2">
                                 <label for="" class="form-label col-2">Type :</label>
                                 <div class="col-10">
-                                    <select class="form-select form-select-lg my-2" aria-label=".form-select-lg example"
-                                        wire:model='c_type'>
+                                    <select class="form-select form-select-lg my-2" aria-label=".form-select-lg example" wire:model='c_type'>
                                         <option selected>Open this select menu</option>
 
                                         @foreach ($dataType as $item)
@@ -139,7 +131,7 @@
 
                             <!-- Parent -->
                             <div class="row mt-5">
-                                <label for="" class="form-label fw-bold   col-md-3">Table :</label>
+                                <label for="" class="form-label fw-bold col-md-3">Table :</label>
                                 <div class="col-md-7">
                                     <select wire:model='c_parent' class="form-select">
                                         <option value="">select</option>
@@ -193,11 +185,11 @@
 
                         </div>
                         <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                            <!-- Parent -->
-                            <div class="row mt-5">
-                                <label for="" class="form-label fw-bold mt-3  col-md-3">Table :</label>
+                            <!-- childs -->
+                            <div class="row mt-5 mb-2">
+                                <label for="" class="form-label fw-bold  col-md-3">Child :</label>
                                 <div class="col-md-7">
-                                    <select wire:model='c_parent' class="form-select">
+                                    <select wire:model='c_child' class="form-select">
                                         <option value="">select</option>
                                         @foreach ($tbls as $item)
                                         <option value="{{ $item ->name}}">{{ $item ->name}}</option>
@@ -212,11 +204,47 @@
 
                             </div>
 
-                            <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
-                                    wire:model='c_childs'></textarea>
-                                <label for="floatingTextarea">Childrens</label>
+
+
+
+                                    <div class="row">
+                                        <button type="button"
+                                        class="btn btn-info btn-md me-2 col-2"
+wire:click='store_child()'
+                                        >Add</button>
+
+
+                                        <table class="table table-hover">
+
+                                            <thead class=" table-dark">
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="">
+                                                @foreach ($tbl_childs as $key=> $child)
+                                                <tr>
+                                                    <td scope="row">{{ $key+1 }}</td>
+
+                                                    <td scope="row">{{ $child->name }}</td>
+                                                    <td scope="row">
+                                                        <input type="button"
+                                                         class="btn btn-danger" value="Del"
+                                                         wire:click='destroy_child({{ $child->id }})'>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+
+                                            </tbody>
+                                        </table>
+
+
+
                             </div>
+
+
                         </div>
                     </div>
 
