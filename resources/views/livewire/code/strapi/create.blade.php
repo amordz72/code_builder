@@ -45,16 +45,14 @@
                 <div class="row mt-3">
                     <label for="" class="col-3">Table :</label>
                     <div class="col-9">
-                        <input type="text" class="form-control"
-                        wire:model='tbl_name' id="txt_tbl_name">
+                        <input type="text" class="form-control" wire:model='tbl_name' id="txt_tbl_name">
                     </div>
                 </div>
                 <!-- name_p  -->
                 <div class="row mt-3">
                     <label for="" class="col-3">Plural :</label>
                     <div class="col-9">
-                        <input type="text" class="form-control"
-                        wire:model='name_p' id="txt_tbl_name">
+                        <input type="text" class="form-control" wire:model='name_p' id="txt_tbl_name">
                     </div>
                 </div>
                 <div>
@@ -110,12 +108,14 @@
                                 <th scope="col">Type</th>
                                 <th scope="col">Sel</th>
                                 <th scope="col">If</th>
-                                <th scope="col">Lenght</th>
+                                <th scope="col">Len</th>
                                 <th scope="col">Index</th>
                                 <th scope="col">Default</th>
-                                <th scope="col">Default Value</th>
+                                <th scope="col">Value</th>
                                 <th scope="col">Parent</th>
-                                <th scope="col">Rel Type</th>
+                                     <th scope="col">RelType</th>
+                                       <th scope="col">Childs</th>
+                         
 
                                 <th scope="col">Action</th>
 
@@ -137,10 +137,16 @@
                                 <td>{{ $col->default }}</td>
                                 <td>{{ $col->default_v }}</td>
                                 <td>{{ $col->parent }}</td>
-
-
-
                                 <td>{{ $col->rel_type }}</td>
+
+ <td>
+                                @foreach ($tbl_childs as $ch)
+                               
+                                    {{ $ch->name }} <span class="text-danger">//</span>
+                               
+                                @endforeach
+ </td>
+
 
 
 

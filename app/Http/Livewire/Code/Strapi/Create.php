@@ -62,7 +62,11 @@ class Create extends Component
 
         $this->projs = Project::all();
 
+     //   $this->tbls = Tbl::where('project_id', $this->proj_id)->get();
         $this->tbls = Tbl::where('project_id', $this->proj_id)->get();
+        
+       
+
         try {
             $this->tbl_name = Tbl::
                 where('id', '=', $this->tbl_id)

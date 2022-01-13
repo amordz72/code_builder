@@ -26,4 +26,8 @@ class Tbl extends Model
     {
         return $this->hasMany(Tbl::class, 'tbl_id', 'id');
     }
+    public function tables(): HasMany
+    {
+        return $this->hasMany(Tbl_child::class, 'tbl_id', 'id');
+    }
 }
