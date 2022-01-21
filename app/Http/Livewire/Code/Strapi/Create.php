@@ -62,10 +62,8 @@ class Create extends Component
 
         $this->projs = Project::all();
 
-     //   $this->tbls = Tbl::where('project_id', $this->proj_id)->get();
+        //   $this->tbls = Tbl::where('project_id', $this->proj_id)->get();
         $this->tbls = Tbl::where('project_id', $this->proj_id)->get();
-        
-       
 
         try {
             $this->tbl_name = Tbl::
@@ -280,13 +278,24 @@ class Create extends Component
         $this->emit('Tbl_Store'); // Close model to using to jquery
 
     }
+    public function tbl_plu()
+    {
+        $tbl_plu = '';
+        if ($this->tbl_name == 'category') {
+            $tbl_plu = 'categories';
+        } else {
+            $tbl_plu = $this->tbl_name . "s";
+        }
+        return $tbl_plu;
 
+    }
     public function code_model()
     {
 
         $cols = '';
         $parent = '';
         $childs = '';
+
         foreach ($this->cols as $key => $value) {
             $cols .= "'$value->name',\n";
 
@@ -320,7 +329,7 @@ HasFactory;\nuse Illuminate\Database\Eloquent\Model;\n\n
 class " . ucfirst($this->tbl_name) . " extends Model
     {
            use HasFactory;\n
-            protected \$table = '" . $this->tbl_name . "'s;
+            protected \$table = '" . $this->tbl_plu() . "';
             \n
             protected \$fillable = [
                 " . $cols . "
