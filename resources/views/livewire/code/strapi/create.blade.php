@@ -70,6 +70,7 @@
                 </div>
             </div>
 
+         
         </div>
         <!-- c8 -->
         <div class="col-9" style="background: #eee">
@@ -113,9 +114,9 @@
                                 <th scope="col">Default</th>
                                 <th scope="col">Value</th>
                                 <th scope="col">Parent</th>
-                                     <th scope="col">RelType</th>
-                                       <th scope="col">Childs</th>
-                         
+                                <th scope="col">RelType</th>
+                                <th scope="col">Childs</th>
+
 
                                 <th scope="col">Action</th>
 
@@ -139,13 +140,13 @@
                                 <td>{{ $col->parent }}</td>
                                 <td>{{ $col->rel_type }}</td>
 
- <td>
-                                @foreach ($tbl_childs as $ch)
-                               
+                                <td>
+                                    @foreach ($tbl_childs as $ch)
+
                                     {{ $ch->name }} <span class="text-danger">//</span>
-                               
-                                @endforeach
- </td>
+
+                                    @endforeach
+                                </td>
 
 
 
