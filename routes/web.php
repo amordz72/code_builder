@@ -44,3 +44,13 @@ Route::get('/backups/download/{file_name}', [App\Http\Controllers\BackupControll
 Route::get('/code/form/create', App\Http\Livewire\Code\Form\Create::class)->name('code.form.create');
 });
 Route::get('/code/strapi/create', App\Http\Livewire\Code\Strapi\Create::class)->name('code.strapi.create');
+
+
+
+/*test*/
+
+Route::get('/test/category/index', App\Http\Livewire\Test\Category\Index::class)->name('test.category.index');
+Route::get('/test/category/create', App\Http\Livewire\Test\Category\Create::class)->name('test.category.create');
+Route::get('/test/category/edit/{id?}', App\Http\Livewire\Test\Category\Edit::class)->name('test.category.edit');
+Route::get('/test/category/show/{id?}', App\Http\Livewire\Test\Category\Show::class)->name('test.category.show');
+

@@ -278,27 +278,25 @@ class Create extends Component
         $this->emit('Tbl_Store'); // Close model to using to jquery
 
     }
-    public function tbl_plu($name='')
+    public function tbl_plu($name = '')
     {
-        if ($name=='') {
-           $tbl_plu = '';
-        if ($this->tbl_name == 'category') {
-            $tbl_plu = 'categories';
+        if ($name == '') {
+            $tbl_plu = '';
+            if ($this->tbl_name == 'category') {
+                $tbl_plu = 'categories';
+            } else {
+                $tbl_plu = $this->tbl_name . "s";
+            }
+            return $tbl_plu;
         } else {
-            $tbl_plu = $this->tbl_name . "s";
+            $tbl_plu = '';
+            if ($name == 'category') {
+                $tbl_plu = 'categories';
+            } else {
+                $tbl_plu = $name . "s";
+            }
+            return $tbl_plu;
         }
-        return $tbl_plu;
-        } else {
-             $tbl_plu = '';
-        if ($name == 'category') {
-            $tbl_plu = 'categories';
-        } else {
-            $tbl_plu = $name . "s";
-        }
-        return $tbl_plu;
-        }
-
-
 
     }
     public function code_model()
@@ -313,18 +311,18 @@ class Create extends Component
 
             if ($value->type == 'foreignId' && $value->rel_type == 'hasOne') {
                 $parent .= "
-    public function $value->parent()
-    {\n
-      return \$this->hasOne(" . ucfirst($value->parent) . "::class, 'id','" . $value->name . "');\n
- }\n
-    ";
+        public function $value->parent()
+        {\n
+        return \$this->hasOne(" . ucfirst($value->parent) . "::class, 'id','" . $value->name . "');\n
+        }\n
+            ";
             }
             if ($value->type == 'foreignId' && $value->rel_type == 'belongsToMany') {
                 $parent .= "
-                public function ".$this->tbl_plu($value->parent )."()
+                public function " . $this->tbl_plu($value->parent) . "()
                 {\n
                   return \$this->belongsToMany(" . ucfirst($value->parent) .
-                   "::class, 'id','" . $value->name . "');\n
+                "::class, 'id','" . $value->name . "');\n
              }\n
                 ";
             }
@@ -342,13 +340,13 @@ class Create extends Component
         }
 
         $this->body = "
-<?php
-namespace App\Models;\n\n
-use Illuminate\Database\Eloquent\Factories\
-HasFactory;\nuse Illuminate\Database\Eloquent\Model;\n\n
+        <?php
+        namespace App\Models;\n\n
+        use Illuminate\Database\Eloquent\Factories\
+        HasFactory;\nuse Illuminate\Database\Eloquent\Model;\n\n
 
-class " . ucfirst($this->tbl_name) . " extends Model
-    {
+        class " . ucfirst($this->tbl_name) . " extends Model
+            {
            use HasFactory;\n
             protected \$table = '" . $this->tbl_plu() . "';
             \n
@@ -356,11 +354,11 @@ class " . ucfirst($this->tbl_name) . " extends Model
                 " . $cols . "
                  ];
 
-$parent
+        $parent
 
-$childs
+        $childs
 
- \n}
+        \n}
                                            \n";
     }
     public function store_child()
@@ -375,6 +373,22 @@ $childs
         Tbl_child::find($id)->delete();
     }
 
+    public function code_migration()
+    {
+        $tbl_plu=$this->tbl_plu();
+        $uc_tbl_plurer=ucfirst(  $this->tbl_plu());
+        $cols='';
+
+
+        $this->body= "<?php\n\nuse Illuminate\Database\Migrations\Migration;\nuse Illuminate\Database\Schema\Blueprint;\nuse Illuminate\Support\Facades\Schema;\n\nclass
+        Create".$uc_tbl_plurer."Table extends Migration\n{\n\n    public function up()\n    {\n
+            Schema::create('".$this->tbl_plu()."', function (Blueprint \$table) {\n
+                \$table->id();\n
+                \$table->timestamps();\n
+            });\n    }\n\n   \n    public function down()\n    {\n
+                Schema::dropIfExists('".$this->tbl_plu()."');\n    }\n}\n";
+
+            }
     public function setNames()
     {
 
