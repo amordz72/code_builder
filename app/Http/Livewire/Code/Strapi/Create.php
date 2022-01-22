@@ -278,15 +278,27 @@ class Create extends Component
         $this->emit('Tbl_Store'); // Close model to using to jquery
 
     }
-    public function tbl_plu()
+    public function tbl_plu($name='')
     {
-        $tbl_plu = '';
+        if ($name=='') {
+           $tbl_plu = '';
         if ($this->tbl_name == 'category') {
             $tbl_plu = 'categories';
         } else {
             $tbl_plu = $this->tbl_name . "s";
         }
         return $tbl_plu;
+        } else {
+             $tbl_plu = '';
+        if ($name == 'category') {
+            $tbl_plu = 'categories';
+        } else {
+            $tbl_plu = $name . "s";
+        }
+        return $tbl_plu;
+        }
+
+
 
     }
     public function code_model()
@@ -299,13 +311,22 @@ class Create extends Component
         foreach ($this->cols as $key => $value) {
             $cols .= "'$value->name',\n";
 
-            if ($value->type == 'foreignId') {
+            if ($value->type == 'foreignId' && $value->rel_type == 'hasOne') {
                 $parent .= "
     public function $value->parent()
     {\n
       return \$this->hasOne(" . ucfirst($value->parent) . "::class, 'id','" . $value->name . "');\n
  }\n
     ";
+            }
+            if ($value->type == 'foreignId' && $value->rel_type == 'belongsToMany') {
+                $parent .= "
+                public function ".$this->tbl_plu($value->parent )."()
+                {\n
+                  return \$this->belongsToMany(" . ucfirst($value->parent) .
+                   "::class, 'id','" . $value->name . "');\n
+             }\n
+                ";
             }
 
         }
