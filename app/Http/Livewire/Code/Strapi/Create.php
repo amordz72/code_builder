@@ -381,8 +381,9 @@ class Create extends Component
 //  \$table->id();\n
         foreach ($this->cols as $key => $value) {
             if ($value->type == "foreignId") {
-                $cols .= "\$table->" . $value->type . "('" . $value->name . "')->constrained(\"" .$this->tbl_plu($value->parent ) . "\", \"id\")
- ->onDelete('cascade');\n";
+                $cols .= "\$table->" . $value->type . "('" .
+                 $value->name . "')->constrained(\"" . $this->tbl_plu($value->parent) . "\", \"id\")
+                    ->onDelete('cascade');\n";
             } else {
                 $cols .= "\$table->" . $value->type . "('" . $value->name . "');\n";
 
