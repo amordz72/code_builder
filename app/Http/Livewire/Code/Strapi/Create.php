@@ -375,20 +375,30 @@ class Create extends Component
 
     public function code_migration()
     {
-        $tbl_plu=$this->tbl_plu();
-        $uc_tbl_plurer=ucfirst(  $this->tbl_plu());
-        $cols='';
-
-
-        $this->body= "<?php\n\nuse Illuminate\Database\Migrations\Migration;\nuse Illuminate\Database\Schema\Blueprint;\nuse Illuminate\Support\Facades\Schema;\n\nclass
-        Create".$uc_tbl_plurer."Table extends Migration\n{\n\n    public function up()\n    {\n
-            Schema::create('".$this->tbl_plu()."', function (Blueprint \$table) {\n
-                \$table->id();\n
-                \$table->timestamps();\n
-            });\n    }\n\n   \n    public function down()\n    {\n
-                Schema::dropIfExists('".$this->tbl_plu()."');\n    }\n}\n";
+        $tbl_plu = $this->tbl_plu();
+        $uc_tbl_plurer = ucfirst($this->tbl_plu());
+        $cols = '';
+//  \$table->id();\n
+        foreach ($this->cols as $key => $value) {
+            if ($value->type == "foreignId") {
+                $cols .= "\$table->" . $value->type . "('" . $value->name . "')->constrained(\"" .$this->tbl_plu($value->parent ) . "\", \"id\")
+ ->onDelete('cascade');\n";
+            } else {
+                $cols .= "\$table->" . $value->type . "('" . $value->name . "');\n";
 
             }
+
+        }
+        $this->body = "<?php\n\nuse Illuminate\Database\Migrations\Migration;\nuse Illuminate\Database\Schema\Blueprint;\nuse Illuminate\Support\Facades\Schema;\n\nclass
+        Create" . $uc_tbl_plurer . "Table extends Migration\n{\n\n    public function up()\n    {\n
+            Schema::create('" . $this->tbl_plu() . "', function (Blueprint \$table) {\n
+
+                 $cols
+                \$table->timestamps();\n
+            });\n    }\n\n   \n    public function down()\n    {\n
+                Schema::dropIfExists('" . $this->tbl_plu() . "');\n    }\n}\n";
+
+    }
     public function setNames()
     {
 
