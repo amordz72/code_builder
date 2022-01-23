@@ -142,11 +142,14 @@
                                 <td>{{ $col->rel_type }}</td>
 
                                 <td>
-                                    @foreach ($tbl_childs as $ch)
+                                    @if ($col->name=="id")
+                                         @foreach ($tbl_childs as $ch)
 
                                     {{ $ch->name }} <span class="text-danger">//</span>
 
                                     @endforeach
+                                    @endif
+
                                 </td>
 
 
