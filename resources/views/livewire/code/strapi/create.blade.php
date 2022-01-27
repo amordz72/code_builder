@@ -61,8 +61,7 @@
 
                     <div class="btn-group mt-3">
                         <input type="button" class="btn btn-info btn-md me-1" value="Model" wire:click='code_model'>
-                        <input type="button" class="btn btn-primary btn-md me-1" value="Migration"
-                        wire:click='code_migration'>
+                        <input type="button" class="btn btn-primary btn-md me-1" value="Migration" wire:click='code_migration'>
                         <input type="button" class="btn btn-danger btn-md me-1" value="Route">
                         {{-- <input type="button" class="btn btn-danger btn-md me-1" value="Route"
                             style="background: rgb(211, 79, 79)"> --}}
@@ -143,7 +142,7 @@
 
                                 <td>
                                     @if ($col->name=="id")
-                                         @foreach ($tbl_childs as $ch)
+                                    @foreach ($tbl_childs as $ch)
 
                                     {{ $ch->name }} <span class="text-danger">//</span>
 

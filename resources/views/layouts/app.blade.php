@@ -116,40 +116,7 @@
                     </li>
                     <!--end dropdown links Bank -->
 
-                    <!--start dropdown links Post -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Post
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('stor.post.index') }}">Post All</a></li>
-                            <li><a class="dropdown-item" href="{{ route('stor.post.create') }}">Post Create</a></li>
-                            <li><a class="dropdown-item" href="{{ route('stor.post.edit') }}">Post Edit</a></li>
-                            <li><a class="dropdown-item" href="{{ route('stor.post.show') }}">Post Show</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <!--end dropdown links Post -->
-                    <!--start dropdown links Category -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Category
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('test.category.index') }}">Category All</a></li>
-                            <li><a class="dropdown-item" href="{{ route('test.category.create') }}">Category Create</a></li>
-                            <li><a class="dropdown-item" href="{{ route('test.category.edit') }}">Category Edit</a></li>
-                            <li><a class="dropdown-item" href="{{ route('test.category.show') }}">Category Show</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <!--end dropdown links Category -->
+        
 
 
 
