@@ -340,14 +340,7 @@ class Create extends Component
         }
 
         $this->body = "
-        <?php
-        namespace App\Models;\n\n
-        use Illuminate\Database\Eloquent\Factories\
-        HasFactory;\nuse Illuminate\Database\Eloquent\Model;\n\n
 
-        class " . ucfirst($this->tbl_name) . " extends Model
-            {
-           use HasFactory;\n
             protected \$table = '" . $this->tbl_plu() . "';
             \n
             protected \$fillable = [
@@ -358,8 +351,8 @@ class Create extends Component
 
         $childs
 
-        \n}
-                                           \n";
+        \n";
+
     }
     public function store_child()
     {
@@ -382,7 +375,7 @@ class Create extends Component
         foreach ($this->cols as $key => $value) {
             if ($value->type == "foreignId") {
                 $cols .= "\$table->" . $value->type . "('" .
-                 $value->name . "')->constrained(\"" . $this->tbl_plu($value->parent) . "\", \"id\")
+                $value->name . "')->constrained(\"" . $this->tbl_plu($value->parent) . "\", \"id\")
                     ->onDelete('cascade');\n";
             } else {
                 $cols .= "\$table->" . $value->type . "('" . $value->name . "');\n";
@@ -390,14 +383,10 @@ class Create extends Component
             }
 
         }
-        $this->body = "<?php\n\nuse Illuminate\Database\Migrations\Migration;\nuse Illuminate\Database\Schema\Blueprint;\nuse Illuminate\Support\Facades\Schema;\n\nclass
-        Create" . $uc_tbl_plurer . "Table extends Migration\n{\n\n    public function up()\n    {\n
-            Schema::create('" . $this->tbl_plu() . "', function (Blueprint \$table) {\n
-
-                 $cols
-                \$table->timestamps();\n
-            });\n    }\n\n   \n    public function down()\n    {\n
-                Schema::dropIfExists('" . $this->tbl_plu() . "');\n    }\n}\n";
+        $this->body = "
+         $cols
+ \$table->timestamps();\n
+           ";
 
     }
     public function setNames()

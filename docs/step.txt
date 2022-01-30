@@ -10,6 +10,7 @@ $theme-colors: (
   "dark":       $dark
 );
 php artisan migrate:fresh --seed
+php artisan make:livewire code/coverter
 
 use Storage;
 
