@@ -393,5 +393,78 @@ class Create extends Component
     {
 
     }
+    //تحويل_من كود_الى_نص
+    public function get_str($str = '')
+    {
+        if ($str == '') {
+            $str = $this->body;
+        }
 
+        $this->body = str_replace("\$", "\\$", $str);
+
+        $this->body = str_replace('"', '\\"', $this->body);
+        //$this->body = str_replace("\n", "\\n", $this->body);
+        //   $this->body = str_replace("\\", "\\\\", $this->body);
+        $this->body = "\$this->body= \"" . $this->body . "\";";
+
+        //   $this->body = "  if (\$str == '') {\n \$str  =\$this->body ;\n\n        }";
+    }
+    //dashboard moder
+    public function code_dashboard($strn = '')
+    {
+        if ($strn == '') {
+            $strn = $this->body;
+        }
+/*
+        $strn= str_replace("\$", "\\$", $strn);
+
+        $strn= str_replace('"', '\\"',  $strn);
+        //$this->body = str_replace("\n", "\\n", $this->body);
+
+        foreach($strn as $line) {
+
+        }*/
+        $separator = "\r\n";
+        $line = strtok($strn, $separator);
+        $vn = strtok($strn, $separator);
+
+        while ($line !== false) {
+            # do something with $line
+            $vn = strtok( $separator );
+
+        }
+    $this->body =  $vn;
+     //   $this->body = "\$this->body= \"" . $strn . "\";";
+
+    }
+    function css() {
+        $v='';
+        foreach(preg_split("/((\r?\n)|(\r\n?))/", $this->body) as $line){
+
+            if (strpos($line,'link href') !== false) {
+             $v.=$line ."\n";
+            }
+            if (strpos($line,'link rel') !== false) {
+             $v.=$line ."\n";
+            }
+
+
+
+        }
+        $this->body=$v;
+    }
+    function js() {
+        $v='';
+        foreach(preg_split("/((\r?\n)|(\r\n?))/", $this->body) as $line){
+
+        
+            if (strpos($line,'script src') !== false) {
+             $v.=$line ."\n";
+            }
+
+
+
+        }
+        $this->body=$v;
+    }
 }

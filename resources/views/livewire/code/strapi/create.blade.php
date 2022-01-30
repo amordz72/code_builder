@@ -59,10 +59,15 @@
                     @include('livewire.code.strapi.cols_create_model')
 
 
-                    <div class="btn-group mt-3">
+                    <div class="  mt-3">
                         <input type="button" class="btn btn-info btn-md me-1" value="Model" wire:click='code_model'>
                         <input type="button" class="btn btn-primary btn-md me-1" value="Migration" wire:click='code_migration'>
                         <input type="button" class="btn btn-danger btn-md me-1" value="Route">
+                        <button type="button" class="btn btn-danger" wire:click='get_str'>Get Str</button><br>
+                        <button type="button" class="btn btn-info mt-2" wire:click='css'>css</button>
+                        <button type="button" class="btn btn-info mt-2" wire:click='js'>js</button>
+                        <button type="button" class="btn btn-info mt-2" wire:click='replace'>replace</button>
+
                         {{-- <input type="button" class="btn btn-danger btn-md me-1" value="Route"
                             style="background: rgb(211, 79, 79)"> --}}
 
